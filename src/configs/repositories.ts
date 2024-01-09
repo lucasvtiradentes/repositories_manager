@@ -10,13 +10,15 @@ export type TRepoTuple = [TCategoryInfo, TRepositorySSH]
 
 const github_repos = [
   [CATEGORIES.utils, `${github_ssh}/repositories_syncer.git`],
-  [CATEGORIES.open_source, `${github_ssh}/ticktick-api-lvt.git`],
+  [CATEGORIES.utils, `${github_ssh}/linux_reminder.git`],
+  [CATEGORIES.personal, `${github_ssh}/my_accounts.git`],
   [CATEGORIES.utils, `${github_ssh}/linux_setup.git`],
+  [CATEGORIES.utils, `${github_ssh}/repository-utils.git`],
+  [CATEGORIES.open_source, `${github_ssh}/ticktick-api-lvt.git`],
   [CATEGORIES.utils, `${github_ssh}/dotfiles.git`],
   [CATEGORIES.open_source, `${github_ssh}/container_scheduler.git`],
   [CATEGORIES.open_source_resource, `${github_ssh}/uds_page_actions.git`],
   // [CATEGORIES.personal, `${github_ssh}/my-tutorials.git`],
-  [CATEGORIES.utils, `${github_ssh}/repository-utils.git`],
   [CATEGORIES.open_source_resource, `${github_ssh}/lvt_page_actions.git`],
   [CATEGORIES.utils, `${github_ssh}/development-utils.git`],
   // [CATEGORIES.open_source, `${github_ssh}/page_actions_attacher.git`],
@@ -50,6 +52,7 @@ const github_repos = [
 ] as const satisfies TRepoTuple[]
 
 const lifetracer_repos=[
+  [CATEGORIES.projects, "git@github.com:life-tracer/lifetracer_desktop.git"],
   [CATEGORIES.projects, "git@github.com:life-tracer/lifetracer_backend.git"],
   [CATEGORIES.projects, "git@github.com:life-tracer/lifetracer_frontend.git"],
   [CATEGORIES.projects, "git@github.com:life-tracer/lifetracer_setup.git"]
