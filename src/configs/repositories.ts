@@ -9,6 +9,7 @@ export type TRepoTuple = [TCategoryInfo, TRepositorySSH]
 // GITHUB ======================================================================
 
 const github_repos = [
+  [CATEGORIES.utils, `${github_ssh}/repositories_syncer.git`],
   [CATEGORIES.open_source, `${github_ssh}/ticktick-api-lvt.git`],
   [CATEGORIES.utils, `${github_ssh}/linux_setup.git`],
   [CATEGORIES.utils, `${github_ssh}/dotfiles.git`],

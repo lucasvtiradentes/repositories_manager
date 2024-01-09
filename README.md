@@ -1,7 +1,7 @@
 <a name="TOC"></a>
 
 <h3 align="center">
-  LINUX SETUP
+  REPOSITORIES SYNCER
 </h3>
 
 <a href="#"><img src="./.github/images/divider.png" /></a>
@@ -10,10 +10,23 @@
 
 Effortlessly sync my personal and work repositories on a fresh [Ubuntu](https://ubuntu.com) based instance.
 
+<div align="center">
+  <table>
+    <tr>
+      <th>
+        <a href="#"><img src="./.github/images/demo.png" /></a>
+      </th>
+      <th>
+        <a href="#"><img src="./.github/images/demo_p2.png" /></a>
+      </th>
+    </tr>
+  </table>
+</div>
+
 ## :dart: Features<a href="#TOC"><img align="right" src="./.github/images/up_arrow.png" width="22"></a>
 
-&nbsp;&nbsp;&nbsp;✔️ clone repositories on each specified category;<br>
-&nbsp;&nbsp;&nbsp;✔️ simple way to adjust which repo will be synced, by editing [./src/configs](./src/configs) files.<br>
+&nbsp;&nbsp;&nbsp;✔️ clone repositories on each [specified](./src/configs/categories.ts) category folder;<br>
+&nbsp;&nbsp;&nbsp;✔️ simple way to adjust which repo will be synced, by editing [this file](./src/configs/repositories.ts).<br>
 
 ## :warning: Requirements<a href="#TOC"><img align="right" src="./.github/images/up_arrow.png" width="22"></a>
 
