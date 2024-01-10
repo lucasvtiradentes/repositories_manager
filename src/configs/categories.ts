@@ -30,6 +30,10 @@ export const CATEGORIES = {
 } as const satisfies Record<string, TCategoryInfo>
 
 export const UDS_CATEGORIES = {
+  uds: {
+    name: "uds",
+    path: "/uds"
+  },
   it_works: {
     name: "it_works",
     path: "/uds/it_works"

@@ -10,10 +10,11 @@ export type TRepoTuple = [TCategoryInfo, TRepositorySSH]
 
 const github_repos = [
   [CATEGORIES.utils, `${github_ssh}/repositories_syncer.git`],
+  [CATEGORIES.utils, `${github_ssh}/repository-utils.git`],
+  [UDS_CATEGORIES.uds, `${github_ssh}/uds_utils.git`],
+  [CATEGORIES.utils, `${github_ssh}/linux_setup.git`],
   [CATEGORIES.utils, `${github_ssh}/linux_reminder.git`],
   [CATEGORIES.personal, `${github_ssh}/my_accounts.git`],
-  [CATEGORIES.utils, `${github_ssh}/linux_setup.git`],
-  [CATEGORIES.utils, `${github_ssh}/repository-utils.git`],
   [CATEGORIES.open_source, `${github_ssh}/ticktick-api-lvt.git`],
   [CATEGORIES.utils, `${github_ssh}/dotfiles.git`],
   [CATEGORIES.open_source, `${github_ssh}/container_scheduler.git`],
