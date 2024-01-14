@@ -15,7 +15,7 @@ const github_repos = [
   [CATEGORIES.open_source, `${github_ssh}/linux_reminder.git`],
   [CATEGORIES.personal, `${github_ssh}/my_accounts.git`],
   [CATEGORIES.utils, `${github_ssh}/dotfiles.git`],
-  [UDS_CATEGORIES.uds, `${github_ssh}/uds_utils.git`],
+  [UDS_CATEGORIES.uds_tools, `${github_ssh}/uds_utils.git`],
   [CATEGORIES.utils, `${github_ssh}/repository-utils.git`],
   [CATEGORIES.open_source, `${github_ssh}/ticktick-api-lvt.git`],
   [CATEGORIES.open_source, `${github_ssh}/container_scheduler.git`],

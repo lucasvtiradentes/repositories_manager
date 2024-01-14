@@ -30,9 +30,9 @@ export const CATEGORIES = {
 } as const satisfies Record<string, TCategoryInfo>
 
 export const UDS_CATEGORIES = {
-  uds: {
+  uds_tools: {
     name: "uds",
-    path: "/uds"
+    path: "/uds/tools"
   },
   it_works: {
     name: "it_works",
