@@ -7,21 +7,19 @@ import { GITHUB_REPOS_CONFIGS, SSH_REPOS_CONFIGS } from './configs/repositories.
 import { logger } from './utils/logger.js';
 import { getParsedGithubRepos } from './utils/parse_github_items.js';
 
-// =============================================================================
-
 select({
   message: 'Select an option',
   choices: [
     {
-      name: 'sincronizar repositórios',
+      name: 'download missing repositories',
       value: 'sync_repos',
     },
     {
-      name: 'remover repositórios (sincronizados) não listados',
+      name: 'delete local repositories that are not on configs',
       value: 'remove_sync_not_listed_repos',
     },
     {
-      name: 'mostrar repositórios por categorias',
+      name: 'list configs repositories',
       value: 'shows_repos_by_category',
     }
   ]

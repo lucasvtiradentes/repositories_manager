@@ -1,7 +1,8 @@
+import { CONFIGS } from "../configs/configs";
 import { TConfigsProps, getAllParsedRepos } from "../utils/get_parsed_repos";
 import { getParseExistantRepos } from "../utils/list_local_repos";
 import { logger } from "../utils/logger";
-import { customConsoleLog, standardizeStringArray } from "../utils/utils";
+import { asyncExec, customConsoleLog, standardizeStringArray } from "../utils/utils";
 
 export async function removeSyncedRepositories({allRepos, reposFolder}: TConfigsProps){
   const existantRepos = getParseExistantRepos(reposFolder)
@@ -26,7 +27,19 @@ export async function removeSyncedRepositories({allRepos, reposFolder}: TConfigs
 
     const shouldDelete = allReposStrArr.includes(repo.repository_path) === false
     if (shouldDelete){
-      action = "delete"
+      const curBranch = (await asyncExec(`cd ${repo.repository_path} && git rev-parse --abbrev-ref HEAD`)).stdout
+      const originBranch = `origin/${curBranch}`
+      const hasUnpushedChanges = (await asyncExec(`cd ${repo.repository_path} && git diff --quiet ${curBranch} ${originBranch} || echo "Differences exist"`)).stdout === "Differences exist"
+
+      if (repo.repository === CONFIGS.repo_sync_name) {
+        action = "should not delete the current repo"
+      } else if (hasUnpushedChanges) {
+        action = "should delete but has unpushed changes"
+      } else {
+        action = "delete"
+        await asyncExec(`rm -rf ${repo.repository_path}`)
+      }
+
     } else {
       action = "-"
     }

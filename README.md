@@ -25,8 +25,10 @@ Effortlessly sync my personal and work repositories on a fresh [Ubuntu](https://
 
 ## :dart: Features<a href="#TOC"><img align="right" src="./.github/images/up_arrow.png" width="22"></a>
 
+&nbsp;&nbsp;&nbsp;✔️ shows a terminal menu to select option to perform;<br>
 &nbsp;&nbsp;&nbsp;✔️ clone repositories on each [specified](./src/configs/categories.ts) category folder;<br>
-&nbsp;&nbsp;&nbsp;✔️ simple way to adjust which repo will be synced, by editing [this file](./src/configs/repositories.ts).<br>
+&nbsp;&nbsp;&nbsp;✔️ delete existant repositories that are not on the [configs file](./src/configs/repositories.ts);<br>
+&nbsp;&nbsp;&nbsp;✔️ simple way to adjust which repo will be synced, by editing the [configs file](./src/configs/repositories.ts).<br>
 
 ## :warning: Requirements<a href="#TOC"><img align="right" src="./.github/images/up_arrow.png" width="22"></a>
 
