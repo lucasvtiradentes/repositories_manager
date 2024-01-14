@@ -3,18 +3,9 @@ import { homedir } from 'node:os';
 import { cloneMissingRepositories } from './commands/clone_missing_repos.js';
 import { removeSyncedRepositories } from './commands/remove_synced_repos.js';
 import { showReposByCategory } from './commands/show_repos_by_category.js';
-import { REPOS, TRepoTuple } from './configs/repositories.js';
-
-const REPOS_FOLDER = `${homedir()}/repos`
-
-const personalRepos: TRepoTuple[] = [
-  ...REPOS.github_repos,
-  ...REPOS.lifetracer_repos,
-]
-
-const workRepos: TRepoTuple[] = [
-  ...REPOS.uds_repos
-]
+import { GITHUB_REPOS_CONFIGS, SSH_REPOS_CONFIGS } from './configs/repositories.js';
+import { logger } from './utils/logger.js';
+import { getParsedGithubRepos } from './utils/parse_github_items.js';
 
 // =============================================================================
 
@@ -35,25 +26,18 @@ select({
     }
   ]
 }).then(async (answer) => {
-  console.log('');
+  logger.info('');
+
+  const configs = {
+    allRepos: [...getParsedGithubRepos(GITHUB_REPOS_CONFIGS), ...SSH_REPOS_CONFIGS],
+    reposFolder: `${homedir()}/repos`
+  }
 
   if (answer === 'sync_repos'){
-
-    console.log(`Cloning PERSONAL repositories [${personalRepos.length}]:\n`);
-    await cloneMissingRepositories(REPOS_FOLDER, personalRepos)
-
-    console.log(`\nCloning WORK repositories [${workRepos.length}]:\n`);
-    await cloneMissingRepositories(REPOS_FOLDER, workRepos)
-
+    await cloneMissingRepositories(configs)
   } else if (answer === 'remove_sync_not_listed_repos'){
-
-    await removeSyncedRepositories(REPOS_FOLDER, personalRepos, 'github')
-    console.log('');
-    await removeSyncedRepositories(REPOS_FOLDER, workRepos, 'uds')
-
+    await removeSyncedRepositories(configs)
   } else if(answer === 'shows_repos_by_category'){
-
-    await showReposByCategory(REPOS_FOLDER, personalRepos)
-
+    await showReposByCategory(configs)
   }
 })

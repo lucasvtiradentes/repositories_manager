@@ -1,4 +1,8 @@
 import { exec } from 'node:child_process';
+import { readdirSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+// SYSTEM UTILS ================================================================
 
 type TAsyncExec = {
   stderr: string;
@@ -19,6 +23,27 @@ export function asyncExec(command: string): Promise<TAsyncExec> {
     });
   });
 }
+
+// FS UTILS ====================================================================
+
+export function getAllSubfolders(dir: string, subfolders: string[] = []): string[] {
+  const ignoredFolders = [".git", "node_modules", "dist"]
+
+  readdirSync(dir, { withFileTypes: true }).forEach((dirent) => {
+    if (dirent.isDirectory()) {
+      const subDir = resolve(dir, dirent.name);
+      subfolders.push(subDir);
+
+      if (!ignoredFolders.some(ignoredFolder => subDir.includes(ignoredFolder))){
+        getAllSubfolders(subDir, subfolders);
+      }
+    }
+  });
+
+  return subfolders;
+}
+
+// STRING UTILS ================================================================
 
 export function extractRepositoryNameFromSshString(url: string) {
   const regex = /\/([^\/]+)\.git$/;
@@ -53,3 +78,7 @@ export function customConsoleLog(message: string, isUpdatingLine?: boolean) {
     process.stdout.write(message);
   }
 }
+
+// ARRAY UTILS =================================================================
+
+export const mergeArraysOfArrays = <T>(arr: T[][]): T[] => arr.reduce((acc, val) => acc.concat(val), []);

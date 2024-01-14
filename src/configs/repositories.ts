@@ -1,83 +1,112 @@
-import { TCategoryInfo, CATEGORIES, TRepositorySSH, UDS_CATEGORIES } from "./categories"
+import { CATEGORY, TCategoryItem } from "./categories"
 
-// CONFIGS =====================================================================
+export const GITHUB_REPOS_CONFIGS = {
+  lucasvtiradentes: {
+    my_devices_setup: { ...CATEGORY.personal },
+    repositories_syncer: { ...CATEGORY.utils },
+    'dyn-markdown': { ...CATEGORY.open_source },
+    linux_reminder: { ...CATEGORY.open_source },
+    my_accounts: { ...CATEGORY.personal },
+    dotfiles: { ...CATEGORY.utils },
+    uds_utils: { ...CATEGORY.work_utils },
+    'repository-utils': { ...CATEGORY.utils },
+    'ticktick-api-lvt': { ...CATEGORY.open_source },
+    container_scheduler: { ...CATEGORY.open_source },
+    uds_page_actions: { ...CATEGORY.open_source_resource },
+    // 'my-tutorials': { ...CATEGORY.personal },
+    lvt_page_actions: { ...CATEGORY.open_source_resource },
+    'development-utils': { ...CATEGORY.utils },
+    // page_actions_attacher: { ...CATEGORY.open_source },
+    lucasvtiradentes: { ...CATEGORY.personal },
+    'gcal-sync': { ...CATEGORY.open_source },
+    // 'twitch-notifier': { ...CATEGORY.open_source },
+    // 'dev-buddy': { ...CATEGORY.portfolio },
+    // 'update-my-stats': { ...CATEGORY.personal },
+    // 'esports-notifier': { ...CATEGORY.open_source },
+    // boilermanager: { ...CATEGORY.open_source },
+    // 'golang-boilerplates': { ...CATEGORY.open_source_resource },
+    // 'js-boilerplates': { ...CATEGORY.open_source_resource },
+    // 'job-searcher': { ...CATEGORY.portfolio },
+    // 'boilermanager-template': { ...CATEGORY.open_source_resource },
+    // dropspy: { ...CATEGORY.company_project },
+    // 'shopify-store-omni-pixel': { ...CATEGORY.company_project },
+    // 'supermarket-chatbot': { ...CATEGORY.company_project },
+    // 'waiter-app-server': { ...CATEGORY.portfolio },
+    // 'waiter-app-mobile': { ...CATEGORY.portfolio },
+    // 'ecommerce-stores-api': { ...CATEGORY.company_project },
+    // 'biacaminha.com.br': { ...CATEGORY.company_project },
+    // 'maritimusengenharia.com': { ...CATEGORY.company_project },
+    // 'github-repo-explorer': { ...CATEGORY.portfolio },
+    // 'metaversus-landinpage': { ...CATEGORY.portfolio },
+    // cryptor: { ...CATEGORY.open_source },
+    // 'notifications-microservice': { ...CATEGORY.portfolio },
+    // 'covid19-cases-dashboard': { ...CATEGORY.portfolio },
+    // 'todo-app': { ...CATEGORY.portfolio },
+    // 'github-assets': { ...CATEGORY.utils }
+  },
+  'life-tracer': {
+    lifetracer_desktop: { ...CATEGORY.lifetracer },
+    lifetracer_backend: { ...CATEGORY.lifetracer },
+    lifetracer_frontend: { ...CATEGORY.lifetracer },
+    lifetracer_setup: { ...CATEGORY.lifetracer }
+  }
+} as const satisfies Record<string, Record<string, TCategoryItem>>
 
-const github_ssh="git@github.com:lucasvtiradentes"
+export type TGithubRepos = typeof GITHUB_REPOS_CONFIGS
 
-export type TRepoTuple = [TCategoryInfo, TRepositorySSH]
+export const SSH_REPOS_CONFIGS = [
+  {
+    ...CATEGORY.work_it_works,
+    git_ssh: 'git@gitlab.uds.com.br:itworks/contabilidade/application/backend-node.git'
+  },
+  {
+    ...CATEGORY.work_it_works,
+    git_ssh: 'git@gitlab.uds.com.br:itworks/contabilidade/application/frontend-react.git'
+  },
+  {
+    ...CATEGORY.work_it_works,
+    git_ssh: 'git@gitlab.uds.com.br:itworks/contabilidade/application/service-data.git'
+  },
+  {
+    ...CATEGORY.work_it_works,
+    git_ssh: 'git@gitlab.uds.com.br:itworks/contabilidade/application/service-producer.git'
+  },
+  {
+    ...CATEGORY.work_it_works,
+    git_ssh: 'git@gitlab.uds.com.br:itworks/contabilidade/application/service-sat.git'
+  },
+  {
+    ...CATEGORY.work_pdv365,
+    git_ssh: 'git@gitlab.uds.com.br:pdv365/pdv365/backoffice/backend-node.git'
+  },
+  {
+    ...CATEGORY.work_pdv365,
+    git_ssh: 'git@gitlab.uds.com.br:pdv365/pdv365/backoffice/frontend-react.git'
+  },
+  {
+    ...CATEGORY.work_pdv365,
+    git_ssh: 'git@gitlab.uds.com.br:pdv365/pdv365/portal-rh/portal-backend.git'
+  },
+  {
+    ...CATEGORY.work_pdv365,
+    git_ssh: 'git@gitlab.uds.com.br:pdv365/pdv365/portal-rh/portal-frontend.git'
+  },
+  {
+    ...CATEGORY.work_pdv365,
+    git_ssh: 'git@gitlab.uds.com.br:pdv365/pdv365/terminal/terminal-account.git'
+  },
+  {
+    ...CATEGORY.work_pdv365,
+    git_ssh: 'git@gitlab.uds.com.br:pdv365/pdv365/portal-franquia/franquia-event.git'
+  },
+  {
+    ...CATEGORY.work_krebs,
+    git_ssh: 'git@gitlab.uds.com.br:krebs/krebs-backend.git'
+  },
+  {
+    ...CATEGORY.work_krebs,
+    git_ssh: 'git@gitlab.uds.com.br:krebs/krebs-backoffice-react.git'
+  }
+] as const satisfies (TCategoryItem & { git_ssh: string })[]
 
-// GITHUB ======================================================================
-
-const github_repos = [
-  [CATEGORIES.utils, `${github_ssh}/repositories_syncer.git`],
-  [CATEGORIES.personal, `${github_ssh}/my_devices_setup.git`],
-  [CATEGORIES.open_source, `${github_ssh}/dyn-markdown.git`],
-  [CATEGORIES.open_source, `${github_ssh}/linux_reminder.git`],
-  [CATEGORIES.personal, `${github_ssh}/my_accounts.git`],
-  [CATEGORIES.utils, `${github_ssh}/dotfiles.git`],
-  [UDS_CATEGORIES.uds_tools, `${github_ssh}/uds_utils.git`],
-  [CATEGORIES.utils, `${github_ssh}/repository-utils.git`],
-  [CATEGORIES.open_source, `${github_ssh}/ticktick-api-lvt.git`],
-  [CATEGORIES.open_source, `${github_ssh}/container_scheduler.git`],
-  [CATEGORIES.open_source_resource, `${github_ssh}/uds_page_actions.git`],
-  // [CATEGORIES.personal, `${github_ssh}/my-tutorials.git`],
-  [CATEGORIES.open_source_resource, `${github_ssh}/lvt_page_actions.git`],
-  [CATEGORIES.utils, `${github_ssh}/development-utils.git`],
-  // [CATEGORIES.open_source, `${github_ssh}/page_actions_attacher.git`],
-  [CATEGORIES.personal, `${github_ssh}/lucasvtiradentes.git`],
-  [CATEGORIES.open_source, `${github_ssh}/gcal-sync.git`],
-  // [CATEGORIES.open_source, `${github_ssh}/twitch-notifier.git`],
-  // [CATEGORIES.portfolio, `${github_ssh}/dev-buddy.git`],
-  // [CATEGORIES.personal, `${github_ssh}/update-my-stats.git`],
-  // [CATEGORIES.open_source, `${github_ssh}/esports-notifier.git`],
-  // [CATEGORIES.open_source, `${github_ssh}/boilermanager.git`],
-  // [CATEGORIES.open_source_resource, `${github_ssh}/golang-boilerplates.git`],
-  // [CATEGORIES.open_source_resource, `${github_ssh}/js-boilerplates.git`],
-  // [CATEGORIES.portfolio, `${github_ssh}/job-searcher.git`],
-  // [CATEGORIES.open_source_resource, `${github_ssh}/boilermanager-template.git`],
-  // [CATEGORIES.company_project, `${github_ssh}/dropspy.git`],
-  // [CATEGORIES.company_project, `${github_ssh}/shopify-store-omni-pixel.git`],
-  // [CATEGORIES.company_project, `${github_ssh}/supermarket-chatbot.git`],
-  // [CATEGORIES.portfolio, `${github_ssh}/waiter-app-server.git`],
-  // [CATEGORIES.portfolio, `${github_ssh}/waiter-app-mobile.git`],
-  // [CATEGORIES.company_project, `${github_ssh}/ecommerce-stores-api.git`],
-  // [CATEGORIES.company_project, `${github_ssh}/biacaminha.com.br.git`],
-  // [CATEGORIES.company_project, `${github_ssh}/maritimusengenharia.com.git`],
-  // [CATEGORIES.portfolio, `${github_ssh}/github-repo-explorer.git`],
-  // [CATEGORIES.portfolio, `${github_ssh}/metaversus-landinpage.git`],
-  // [CATEGORIES.open_source, `${github_ssh}/cryptor.git`],
-  // [CATEGORIES.portfolio, `${github_ssh}/notifications-microservice.git`],
-  // [CATEGORIES.portfolio, `${github_ssh}/covid19-cases-dashboard.git`],
-  // [CATEGORIES.portfolio, `${github_ssh}/todo-app.git`],
-  // [CATEGORIES.utils, `${github_ssh}/github-assets.git`]
-] as const satisfies TRepoTuple[]
-
-const lifetracer_repos=[
-  [CATEGORIES.projects, "git@github.com:life-tracer/lifetracer_desktop.git"],
-  [CATEGORIES.projects, "git@github.com:life-tracer/lifetracer_backend.git"],
-  [CATEGORIES.projects, "git@github.com:life-tracer/lifetracer_frontend.git"],
-  [CATEGORIES.projects, "git@github.com:life-tracer/lifetracer_setup.git"]
-] as const satisfies TRepoTuple[]
-
-// UDS =========================================================================
-
-const uds_repos = [
-  [UDS_CATEGORIES.it_works, "git@gitlab.uds.com.br:itworks/contabilidade/application/backend-node.git"],
-  [UDS_CATEGORIES.it_works, "git@gitlab.uds.com.br:itworks/contabilidade/application/frontend-react.git"],
-  [UDS_CATEGORIES.it_works, "git@gitlab.uds.com.br:itworks/contabilidade/application/service-data.git"],
-  [UDS_CATEGORIES.it_works, "git@gitlab.uds.com.br:itworks/contabilidade/application/service-producer.git"],
-  [UDS_CATEGORIES.it_works, "git@gitlab.uds.com.br:itworks/contabilidade/application/service-sat.git"],
-  [UDS_CATEGORIES.pdv365, "git@gitlab.uds.com.br:pdv365/pdv365/backoffice/backend-node.git"],
-  [UDS_CATEGORIES.pdv365, "git@gitlab.uds.com.br:pdv365/pdv365/backoffice/frontend-react.git"],
-  [UDS_CATEGORIES.pdv365, "git@gitlab.uds.com.br:pdv365/pdv365/portal-rh/portal-backend.git"],
-  [UDS_CATEGORIES.pdv365, "git@gitlab.uds.com.br:pdv365/pdv365/portal-rh/portal-frontend.git"],
-  [UDS_CATEGORIES.pdv365, "git@gitlab.uds.com.br:pdv365/pdv365/terminal/terminal-account.git"]
-] as const satisfies TRepoTuple[]
-
-// EXPORT ======================================================================
-
-export const REPOS = {
-  github_repos,
-  lifetracer_repos,
-  uds_repos,
-}
+export type TSshRepos = typeof SSH_REPOS_CONFIGS

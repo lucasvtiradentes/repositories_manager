@@ -1,31 +1,33 @@
 import { existsSync, mkdirSync } from 'node:fs';
-import { TRepoTuple } from '../configs/repositories.js';
+import { TConfigsProps, getAllParsedRepos } from '../utils/get_parsed_repos.js';
+import { logger } from '../utils/logger.js';
 import { asyncExec, customConsoleLog, standardizeStringArray } from '../utils/utils.js';
-import { parseReposInfo } from './parse_repos_info.js';
 
-export async function cloneMissingRepositories(baseFolder: string, repos: TRepoTuple[]){
-  const sortedParsedRepos = parseReposInfo(baseFolder, repos)
-  const maxCategoryName = Math.max(...sortedParsedRepos.map(repo => repo.category.length))
-  const maxRepoName = Math.max(...sortedParsedRepos.map(repo => repo.name.length))
+export async function cloneMissingRepositories({allRepos, reposFolder}: TConfigsProps){
+  const sortedParsedRepos = getAllParsedRepos({allRepos, reposFolder})
+  const maxCategoryName = Math.max(...sortedParsedRepos.map(repo => repo.domain.length))
+  const maxSubCategoryName = Math.max(...sortedParsedRepos.map(repo => repo.category.length))
+  const maxRepoName = Math.max(...sortedParsedRepos.map(repo => repo.repository.length))
+  const maxColumnsArr = [maxCategoryName, maxSubCategoryName, maxRepoName]
 
   if (sortedParsedRepos.length > 0){
-    console.log(standardizeStringArray(["category", "repository", 'action'], [maxCategoryName, maxRepoName]));
+    logger.info(standardizeStringArray(["domain", "category", "repository", 'action'], maxColumnsArr));
   }
 
   for (let item of sortedParsedRepos){
     let action = ''
 
-    const commonString = standardizeStringArray([item.category, item.name, ''], [maxCategoryName, maxRepoName])
+    const commonString = standardizeStringArray([item.domain, item.category, item.repository, ''], maxColumnsArr)
     customConsoleLog(commonString)
 
-    if (existsSync(item.path)){
+    if (existsSync(item.repository_path)){
       action = 'already exists'
     } else {
-      if (!existsSync(item.category)){
-        mkdirSync(item.categoryPath, { recursive: true })
+      if (!existsSync(item.domain)){
+        mkdirSync(item.folder_path, { recursive: true })
       }
       action = 'created'
-      await asyncExec(`git clone ${item.ssh} ${item.path}`)
+      await asyncExec(`git clone ${item.git_ssh} ${item.repository_path}`)
     }
 
     customConsoleLog(commonString + action + "\n", true)

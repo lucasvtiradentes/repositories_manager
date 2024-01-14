@@ -1,52 +1,56 @@
-export const CATEGORIES = {
-  open_source: {
-    name: "open_source",
-    path: "/github/open_source"
-  },
-  open_source_resource: {
-    name: "open_source_resource",
-    path: "/github/open_source_resource"
-  },
-  personal: {
-    name: "personal",
-    path: "/github/personal"
-  },
-  portfolio: {
-    name: "portfolio",
-    path: "/github/portfolio"
-  },
-  utils: {
-    name: "utils",
-    path: "/github/utils"
-  },
-  projects: {
-    name: "projects",
-    path: "/github/projects"
-  },
-  company_project: {
-    name: "company_project",
-    path: "/github/company_project"
-  }
-} as const satisfies Record<string, TCategoryInfo>
+import { DOMAIN, TDomain } from "./domains"
 
-export const UDS_CATEGORIES = {
-  uds_tools: {
-    name: "uds",
-    path: "/uds/tools"
-  },
-  it_works: {
-    name: "it_works",
-    path: "/uds/it_works"
-  },
-  pdv365: {
-    name: "pdv365",
-    path: "/uds/pdv365"
-  }
-} as const satisfies Record<string, TCategoryInfo>
-
-export type TCategoryInfo = {
-  name: string
-  path: string
+export type TCategoryItem = {
+  domain: TDomain
+  category?: string
 }
 
-export type TRepositorySSH = string
+export const CATEGORY = {
+  utils: {
+    domain: DOMAIN.personal,
+    category: 'utils',
+  },
+  personal: {
+    domain: DOMAIN.personal,
+    category: 'personal',
+  },
+  open_source: {
+    domain: DOMAIN.personal,
+    category: 'open_source',
+  },
+  open_source_resource: {
+    domain: DOMAIN.personal,
+    category: 'open_source_resource',
+  },
+  portfolio: {
+    domain: DOMAIN.personal,
+    category: 'portfolio',
+  },
+  company_project: {
+    domain: DOMAIN.personal,
+    category: 'company_project',
+  },
+  // lifetracer
+  lifetracer: {
+    domain: DOMAIN.lifetracer,
+  },
+  // work
+  work_utils: {
+    domain: DOMAIN.work,
+  },
+  work_it_works: {
+    domain: DOMAIN.work,
+    category: 'it_works'
+  },
+  work_pdv365: {
+    domain: DOMAIN.work,
+    category: 'pdv365'
+  },
+  work_krebs: {
+    domain: DOMAIN.work,
+    category: 'krebs'
+  }
+} as const satisfies Record<string, TCategoryItem>
+
+
+export type TCategory = keyof typeof CATEGORY
