@@ -42,10 +42,10 @@ To setup this project in your computer, download it in this link or run the foll
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/lucasvtiradentes/ticktick-api-lvt
+$ git clone https://github.com/lucasvtiradentes/repositories_syncer
 
 # Go into the repository
-$ cd ticktick-api-lvt
+$ cd repositories_syncer
 ```
 
 After download it, go to the project folder and run these commands:
