@@ -2,21 +2,22 @@ import { CATEGORY, TCategoryItem } from "./categories"
 
 export const GITHUB_REPOS_CONFIGS = {
   lucasvtiradentes: {
-    repositories_syncer: { ...CATEGORY.utils },
+    repositories_syncer: { ...CATEGORY.personal },
+    'development-utils': { ...CATEGORY.personal },
+    obsidian_vaults: {...CATEGORY.personal },
     'gcal-sync': { ...CATEGORY.open_source },
     uds_page_actions: { ...CATEGORY.work_utils },
-    dotfiles: { ...CATEGORY.utils },
+    dotfiles: { ...CATEGORY.personal },
     my_devices_setup: { ...CATEGORY.personal },
     'dyn-markdown': { ...CATEGORY.open_source },
     linux_reminder: { ...CATEGORY.open_source },
     my_accounts: { ...CATEGORY.personal },
     uds_utils: { ...CATEGORY.work_utils },
-    'repository-utils': { ...CATEGORY.utils },
+    'repository-utils': { ...CATEGORY.personal },
     'ticktick-api-lvt': { ...CATEGORY.open_source },
     container_scheduler: { ...CATEGORY.open_source },
     // 'my-tutorials': { ...CATEGORY.personal },
     lvt_page_actions: { ...CATEGORY.personal },
-    'development-utils': { ...CATEGORY.utils },
     // page_actions_attacher: { ...CATEGORY.open_source },
     lucasvtiradentes: { ...CATEGORY.personal },
     // 'twitch-notifier': { ...CATEGORY.open_source },
@@ -42,7 +43,7 @@ export const GITHUB_REPOS_CONFIGS = {
     // 'notifications-microservice': { ...CATEGORY.portfolio },
     // 'covid19-cases-dashboard': { ...CATEGORY.portfolio },
     // 'todo-app': { ...CATEGORY.portfolio },
-    // 'github-assets': { ...CATEGORY.utils }
+    // 'github-assets': { ...CATEGORY.personal }
   },
   'life-tracer': {
     lifetracer_desktop: { ...CATEGORY.lifetracer },

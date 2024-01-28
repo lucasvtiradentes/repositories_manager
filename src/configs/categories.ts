@@ -6,10 +6,6 @@ export type TCategoryItem = {
 }
 
 export const CATEGORY = {
-  utils: {
-    domain: DOMAIN.personal,
-    category: 'utils',
-  },
   personal: {
     domain: DOMAIN.personal,
     category: 'personal',
