@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 const zCategory = z.string().nullable();
+
 const zRepoOptions = z.object({
   ignore_sync: z.boolean().optional(),
   domain: z.string().optional()
@@ -18,7 +19,10 @@ const zSshRepo = z.object({
 
 export const zConfigs = z.object({
   path: z.string(),
-  open_command: z.string(),
+  open_command: z.object({
+    repository: z.string(),
+    configs: z.string()
+  }),
   github_repositories: z.record(zGithubRepos),
   ssh_repositories: z.array(zSshRepo)
 });

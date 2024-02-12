@@ -3,8 +3,14 @@ import { existsSync } from 'node:fs';
 import { TConfigs } from './schema.js';
 import { extractRepositoryNameFromSshString, mergeArraysOfArrays } from './utils/utils.js';
 
+type TExtendedRepo = TConfigs['ssh_repositories'][number] & {
+  local_path: string;
+  ignore_sync?: boolean;
+  exists_locally: boolean;
+};
+
 export const getParsedRepositories = (configs: TConfigs) => {
-  const parsedGithubRepositories = mergeArraysOfArrays(
+  const parsedGithubRepositories: TExtendedRepo[] = mergeArraysOfArrays(
     Object.entries(configs.github_repositories).map(([github_user, github_repositories]) => {
       const github_user_domain = `github_${github_user}`;
       const parsedGithubUserRepos = Object.entries(github_repositories).map(([repo_name, repo_configs]) => {
@@ -26,7 +32,7 @@ export const getParsedRepositories = (configs: TConfigs) => {
     })
   );
 
-  const parsedSshRepositories = configs.ssh_repositories.map((repo) => {
+  const parsedSshRepositories: TExtendedRepo[] = configs.ssh_repositories.map((repo) => {
     const local_path = `${configs.path}/${repo.domain}/${repo.category ?? ''}/${extractRepositoryNameFromSshString(repo.git_ssh)}`;
     const exists_locally = existsSync(local_path);
 
