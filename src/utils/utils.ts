@@ -79,10 +79,6 @@ export function customConsoleLog(message: string, isUpdatingLine?: boolean) {
   }
 }
 
-// ARRAY UTILS =================================================================
-
-export const mergeArraysOfArrays = <T>(arr: T[][]): T[] => arr.reduce((acc, val) => acc.concat(val), []);
-
 export const gracefulThrowError = (message: string) => {
   console.log(`\x1b[31mERROR: ${message}\x1b[0m`);
   process.exit();
@@ -92,3 +88,9 @@ export const successfulMessage = (message: string) => {
   console.log(`\x1b[32mSUCCESS: ${message}\x1b[0m`);
   process.exit();
 };
+
+// ARRAY UTILS =================================================================
+
+export const mergeArraysOfArrays = <T>(arr: T[][]): T[] => arr.reduce((acc, val) => acc.concat(val), []);
+
+export type TNullable<TData> = TData | null;

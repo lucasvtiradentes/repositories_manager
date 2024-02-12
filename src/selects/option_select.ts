@@ -28,16 +28,12 @@ const SELECT_OPTIONS = [
   {
     name: 'open configs file',
     value: 'open_configs'
-  },
-  {
-    name: 'list configs repositories',
-    value: 'shows_repos_by_category'
   }
 ] as const;
 
-type ToptionsValues = (typeof SELECT_OPTIONS)[number]['value'];
+export type TOptionsValues = (typeof SELECT_OPTIONS)[number]['value'];
 
-export function optionSelect(cbFn: (answer: ToptionsValues) => Promise<void>) {
+export function optionSelect(cbFn: (answer: TOptionsValues) => Promise<void>) {
   const fuzzy = new fuse(SELECT_OPTIONS, {
     includeScore: true,
     keys: ['name']
@@ -54,5 +50,5 @@ export function optionSelect(cbFn: (answer: ToptionsValues) => Promise<void>) {
 
   inquirer.registerPrompt('autocomplete', inquirerPrompt);
 
-  inquirer.prompt(promptQuestions).then(async (answer: { [SELECT_KEY]: ToptionsValues }) => cbFn(answer[SELECT_KEY]));
+  inquirer.prompt(promptQuestions).then(async (answer: { [SELECT_KEY]: TOptionsValues }) => cbFn(answer[SELECT_KEY]));
 }

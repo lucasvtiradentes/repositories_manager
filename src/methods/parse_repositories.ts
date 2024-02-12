@@ -1,9 +1,9 @@
 import { existsSync } from 'node:fs';
 
-import { TConfigs } from './schema.js';
-import { extractRepositoryNameFromSshString, mergeArraysOfArrays } from './utils/utils.js';
+import { TConfigs } from '../consts/schema.js';
+import { extractRepositoryNameFromSshString, mergeArraysOfArrays } from '../utils/utils.js';
 
-type TExtendedRepo = TConfigs['ssh_repositories'][number] & {
+export type TExtendedRepo = TConfigs['ssh_repositories'][number] & {
   local_path: string;
   ignore_sync?: boolean;
   exists_locally: boolean;

@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "commander": "12.0.0",
+    "commitizen": "^4.3.0",
     "fuse.js": "7.0.0",
     "inquirer": "9.2.14",
     "inquirer-autocomplete-prompt": "3.0.1",

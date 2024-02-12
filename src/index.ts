@@ -1,25 +1,30 @@
 #! /usr/bin/env node
 
 import { program } from 'commander';
-import { existsSync, unlinkSync, writeFileSync } from 'fs';
+import { existsSync } from 'fs';
 
+import { openConfigsCommand } from './commands/open_configs';
+import { openRepositoryCommand } from './commands/open_repository';
+import { pullMissingReposCommand } from './commands/pull_missing_repos';
+import { purgeLocalReposCommand } from './commands/purge_local_repos';
+import { removeConfigsCommand } from './commands/remove_configs';
+import { setupConfigsCommand } from './commands/setup_configs';
 import { APP_INFO } from './consts/app_consts';
 import { CONFIGS } from './consts/configs';
 import { ERRORS } from './consts/errors';
-import { getParsedRepositories } from './parse_repositories';
-import { TConfigs, zConfigs } from './schema';
-import { optionSelect } from './selects/option_select';
-import { repositorySelect } from './selects/repository_select';
+import { TConfigs, zConfigs } from './consts/schema';
+import { getParsedRepositories } from './methods/parse_repositories';
+import { TOptionsValues, optionSelect } from './selects/option_select';
 import { readJson } from './utils/read_json';
-import { asyncExec, gracefulThrowError, successfulMessage } from './utils/utils';
+import { TNullable, gracefulThrowError } from './utils/utils';
 
 type TProgramOptions = {
   setup: string;
   uninstall: boolean;
-  pull: boolean;
-  purge: boolean;
-  repo: boolean;
-  configs: boolean;
+  pull_repos: boolean;
+  purge_repos: boolean;
+  open_repo: boolean;
+  open_configs: boolean;
 };
 
 function setupProgramConfigs() {
@@ -28,10 +33,10 @@ function setupProgramConfigs() {
   program
     .option('-s, --setup <file>', 'setup your repositories configs file path')
     .option('-u, --uninstall', 'remove the repositories configs file')
-    .option('-p, --pull', 'clone missing repositories locally')
-    .option('-pg, --purge', 'purge repositories that should not exist locally')
-    .option('-or, --repo', 'select repository to open')
-    .option('-oc, --configs', 'open the configs file');
+    .option('-p, --pull_repos', 'clone missing repositories locally')
+    .option('-pg, --purge_repos', 'purge repositories that should not exist locally')
+    .option('-or, --open_repo', 'select repository to open')
+    .option('-oc, --open_configs', 'open the configs file');
 
   return program;
 }
@@ -48,72 +53,72 @@ function getParsedConfigsFileOrThrow() {
   return { configsFilePath: configsFile.configs_path, userConfisFile };
 }
 
+function parseCommanderOption(options: TProgramOptions): TNullable<TOptionsValues> {
+  if (options.setup) return 'setup_configs';
+  if (options.uninstall) return 'remove_configs';
+  if (options.pull_repos) return 'pull_missing_repos';
+  if (options.purge_repos) return 'purge_local_repos';
+  if (options.open_repo) return 'open_repository';
+  if (options.open_configs) return 'open_configs';
+  return null;
+}
+
 async function main() {
   const program = setupProgramConfigs().parse();
   const options = program.opts() satisfies TProgramOptions;
+  const parsedOption = parseCommanderOption(options);
+
   const configsFileExists = existsSync(CONFIGS.user_configs_file);
 
-  if (options.setup) {
-    writeFileSync(CONFIGS.user_configs_file, JSON.stringify({ configs_path: options.setup }, null, 2));
-    successfulMessage(`you have successfully ${configsFileExists ? 'updated' : 'configured'} ${APP_INFO.name}!`);
+  if (parsedOption === 'setup_configs') {
+    setupConfigsCommand({ configsFileExists, configs_path: options.setup });
     return;
   }
 
   if (!configsFileExists) gracefulThrowError(ERRORS.method_requires_configs);
   // every method after this needs configs file
 
-  if (options.uninstall) {
-    unlinkSync(CONFIGS.user_configs_file);
-    successfulMessage('your configs file was removed!');
+  if (parsedOption === 'remove_configs') {
+    removeConfigsCommand();
     return;
   }
 
   const { configsFilePath, userConfisFile } = getParsedConfigsFileOrThrow();
   const parsedRepositories = getParsedRepositories(userConfisFile);
 
-  if (options.pull) {
-    const reposToClone = parsedRepositories.filter((repo) => repo.exists_locally === false && repo.ignore_sync !== true);
-    console.log('pull', reposToClone);
+  if (parsedOption === 'pull_missing_repos') {
+    pullMissingReposCommand({ parsedRepositories });
     return;
   }
 
-  if (options.purge) {
-    const reposToDelete = parsedRepositories.filter((repo) => repo.exists_locally && repo.ignore_sync === true);
-    console.log('purge', reposToDelete);
+  if (parsedOption === 'purge_local_repos') {
+    purgeLocalReposCommand({ parsedRepositories });
     return;
   }
 
-  if (options.repo) {
-    repositorySelect(parsedRepositories, async (repository) => {
-      const repoInfo = parsedRepositories.find((repo) => repo.git_ssh === repository)!;
-      if (repoInfo.exists_locally) {
-        await asyncExec(`${userConfisFile.open_command.repository} ${repoInfo.local_path}`);
-      } else {
-        console.log('ele nao existe, deseja clonar e abrir em seguida?');
-      }
-    });
-
+  if (parsedOption === 'open_repository') {
+    openRepositoryCommand({ parsedRepositories, userConfisFile });
     return;
   }
 
-  if (options.configs) {
-    await asyncExec(`${userConfisFile.open_command.configs} ${configsFilePath}`);
+  if (parsedOption === 'open_configs') {
+    await openConfigsCommand({ configsFilePath, userConfisFile });
     return;
   }
 
   optionSelect(async (option) => {
     if (option === 'setup_configs') {
-      console.log('setup_configs');
+      setupConfigsCommand({ configsFileExists, configs_path: options.setup });
     } else if (option === 'remove_configs') {
-      console.log('remove_configs');
+      removeConfigsCommand();
     } else if (option === 'pull_missing_repos') {
-      console.log('pull_missing_repos');
+      pullMissingReposCommand({ parsedRepositories });
     } else if (option === 'purge_local_repos') {
-      console.log('purge_local_repos');
+      purgeLocalReposCommand({ parsedRepositories });
     } else if (option === 'open_repository') {
-      console.log('open_repository');
+      openRepositoryCommand({ parsedRepositories, userConfisFile });
     } else if (option === 'open_configs') {
-      console.log('open_configs');
+      await openConfigsCommand({ configsFilePath, userConfisFile });
     }
   });
 }
