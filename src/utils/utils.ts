@@ -24,6 +24,9 @@ export function asyncExec(command: string): Promise<TAsyncExec> {
   });
 }
 
+export function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 // FS UTILS ====================================================================
 
 export function getAllSubfolders(dir: string, subfolders: string[] = []): string[] {
