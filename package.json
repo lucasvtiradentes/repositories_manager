@@ -20,7 +20,8 @@
   },
   "bin": {
     "rp": "./dist/index.js",
-    "repositories_utils": "./dist/index.js"
+    "rpu": "./dist/index.js",
+    "repository_utils": "./dist/index.js"
   },
   "scripts": {
     "prepare": "husky && chmod +x ./examples/simple.sh",

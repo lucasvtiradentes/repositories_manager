@@ -6,12 +6,8 @@ const SELECT_KEY = 'option' as const;
 
 const SELECT_OPTIONS = [
   {
-    name: 'setup your repositories sync configs',
-    value: 'setup_configs'
-  },
-  {
-    name: 'remove your repositories sync configs',
-    value: 'remove_configs'
+    name: 'choose repository to open',
+    value: 'open_repository'
   },
   {
     name: 'pull missing repositories locally',
@@ -22,16 +18,16 @@ const SELECT_OPTIONS = [
     value: 'purge_local_repos'
   },
   {
-    name: 'choose repository to open',
-    value: 'open_repository'
-  },
-  {
     name: 'open configs file',
     value: 'open_configs'
+  },
+  {
+    name: 'remove your repositories sync configs',
+    value: 'remove_configs'
   }
 ] as const;
 
-export type TOptionsValues = (typeof SELECT_OPTIONS)[number]['value'];
+export type TOptionsValues = (typeof SELECT_OPTIONS)[number]['value'] | 'setup_configs';
 
 export function optionSelect(cbFn: (answer: TOptionsValues) => Promise<void>) {
   const fuzzy = new fuse(SELECT_OPTIONS, {

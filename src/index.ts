@@ -20,7 +20,7 @@ import { TNullable, gracefulThrowError } from './utils/utils';
 
 type TProgramOptions = {
   setup: string;
-  uninstall: boolean;
+  remove: boolean;
   pull_repos: boolean;
   purge_repos: boolean;
   open_repo: boolean;
@@ -32,7 +32,7 @@ function setupProgramConfigs() {
 
   program
     .option('-s, --setup <file>', 'setup your repositories configs file path')
-    .option('-u, --uninstall', 'remove the repositories configs file')
+    .option('-r, --remove', 'remove the repositories configs file')
     .option('-p, --pull_repos', 'clone missing repositories locally')
     .option('-pg, --purge_repos', 'purge repositories that should not exist locally')
     .option('-or, --open_repo', 'select repository to open')
@@ -55,7 +55,7 @@ function getParsedConfigsFileOrThrow() {
 
 function parseCommanderOption(options: TProgramOptions): TNullable<TOptionsValues> {
   if (options.setup) return 'setup_configs';
-  if (options.uninstall) return 'remove_configs';
+  if (options.remove) return 'remove_configs';
   if (options.pull_repos) return 'pull_missing_repos';
   if (options.purge_repos) return 'purge_local_repos';
   if (options.open_repo) return 'open_repository';
@@ -68,15 +68,24 @@ async function main() {
   const options = program.opts() satisfies TProgramOptions;
   const parsedOption = parseCommanderOption(options);
 
-  const configsFileExists = existsSync(CONFIGS.user_configs_file);
-
   if (parsedOption === 'setup_configs') {
-    setupConfigsCommand({ configsFileExists, configs_path: options.setup });
+    setupConfigsCommand({ configs_path: options.setup });
     return;
   }
 
-  if (!configsFileExists) gracefulThrowError(ERRORS.method_requires_configs);
-  // every method after this needs configs file
+  // if it does not exists means the user has not configured their repos
+  const shouldShowHelpOrThrowError = !existsSync(CONFIGS.user_configs_file);
+
+  if (shouldShowHelpOrThrowError) {
+    const hasSpecifiedAnOption = Object.keys(options).length > 0;
+
+    if (hasSpecifiedAnOption) {
+      gracefulThrowError(ERRORS.method_requires_configs);
+    } else {
+      program.help();
+      return;
+    }
+  }
 
   if (parsedOption === 'remove_configs') {
     removeConfigsCommand();
@@ -107,9 +116,7 @@ async function main() {
   }
 
   optionSelect(async (option) => {
-    if (option === 'setup_configs') {
-      setupConfigsCommand({ configsFileExists, configs_path: options.setup });
-    } else if (option === 'remove_configs') {
+    if (option === 'remove_configs') {
       removeConfigsCommand();
     } else if (option === 'pull_missing_repos') {
       pullMissingReposCommand({ parsedRepositories });
