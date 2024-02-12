@@ -3,11 +3,12 @@ import { CATEGORY, TCategoryItem } from "./categories"
 export const GITHUB_REPOS_CONFIGS = {
   lucasvtiradentes: {
     repositories_syncer: { ...CATEGORY.personal },
-    'development-utils': { ...CATEGORY.personal },
-    obsidian_vaults: {...CATEGORY.personal },
-    'gcal-sync': { ...CATEGORY.open_source },
-    uds_page_actions: { ...CATEGORY.work_utils },
     dotfiles: { ...CATEGORY.personal },
+    'lucasvtiradentes.com': { ...CATEGORY.personal },
+    'development-utils': { ...CATEGORY.personal },
+    'gcal-sync': { ...CATEGORY.open_source },
+    obsidian_vaults: {...CATEGORY.personal },
+    uds_page_actions: { ...CATEGORY.work_utils },
     my_devices_setup: { ...CATEGORY.personal },
     'dyn-markdown': { ...CATEGORY.open_source },
     linux_reminder: { ...CATEGORY.open_source },

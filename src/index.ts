@@ -1,29 +1,14 @@
-import select from '@inquirer/select';
 import { homedir } from 'node:os';
 import { cloneMissingRepositories } from './commands/clone_missing_repos.js';
 import { removeSyncedRepositories } from './commands/remove_synced_repos.js';
 import { showReposByCategory } from './commands/show_repos_by_category.js';
 import { GITHUB_REPOS_CONFIGS, SSH_REPOS_CONFIGS } from './configs/repositories.js';
+import { optionSelect } from './selects/option_select';
+import { repositorySelect } from './selects/repository_select';
 import { logger } from './utils/logger.js';
 import { getParsedGithubRepos } from './utils/parse_github_items.js';
 
-select({
-  message: 'Select an option',
-  choices: [
-    {
-      name: 'download missing repositories',
-      value: 'sync_repos',
-    },
-    {
-      name: 'delete local repositories that are not on configs',
-      value: 'remove_sync_not_listed_repos',
-    },
-    {
-      name: 'list configs repositories',
-      value: 'shows_repos_by_category',
-    }
-  ]
-}).then(async (answer) => {
+optionSelect(async (option) => {
   logger.info('');
 
   const configs = {
@@ -31,11 +16,15 @@ select({
     reposFolder: `${homedir()}/repos`
   }
 
-  if (answer === 'sync_repos'){
+  if (option === 'sync_repos'){
     await cloneMissingRepositories(configs)
-  } else if (answer === 'remove_sync_not_listed_repos'){
+  } else if (option === 'remove_sync_not_listed_repos'){
     await removeSyncedRepositories(configs)
-  } else if(answer === 'shows_repos_by_category'){
+  } else if(option === 'shows_repos_by_category'){
     await showReposByCategory(configs)
+  } else if (option === 'list_repos_to_open'){
+    repositorySelect(configs.allRepos, async (repository) => {
+      console.log(repository);
+    })
   }
 })
