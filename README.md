@@ -44,10 +44,10 @@ To setup this project in your computer, download it in this link or run the foll
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/lucasvtiradentes/repositories_syncer
+$ git clone https://github.com/lucasvtiradentes/repositories_utils
 
 # Go into the repository
-$ cd repositories_syncer
+$ cd repositories_utils
 ```
 
 After download it, go to the project folder and run these commands:
