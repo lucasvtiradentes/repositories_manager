@@ -43,7 +43,7 @@ export function optionSelect(cbFn: (answer: TOptionsValues) => Promise<void>) {
     {
       type: 'autocomplete',
       name: SELECT_KEY,
-      message: 'Select an option: ',
+      message: 'select an option: ',
       source: (_, query) => Promise.resolve(query ? fuzzy.search(query).map((it) => it.item) : [...SELECT_OPTIONS])
     }
   ] satisfies inquirerPrompt.AutocompleteQuestionOptions[];

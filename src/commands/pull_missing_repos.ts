@@ -1,8 +1,9 @@
 import { existsSync, mkdirSync } from 'node:fs';
 
 import { TExtendedRepo } from '../methods/parse_repositories';
+import { confirmationSelect } from '../selects/confirmation_select';
 import { logger } from '../utils/logger.js';
-import { asyncExec, customConsoleLog, delay, standardizeStringArray } from '../utils/utils.js';
+import { asyncExec, standardizeStringArray, successfulMessage } from '../utils/utils.js';
 
 type TPullMissingReposCommandProps = {
   parsedRepositories: TExtendedRepo[];
@@ -16,27 +17,32 @@ export const pullMissingReposCommand = async ({ parsedRepositories }: TPullMissi
   const maxRepoName = Math.max(...reposToClone.map((repo) => repo.repository_name.length));
   const maxColumnsArr = [maxCategoryName, maxSubCategoryName, maxRepoName];
 
-  if (reposToClone.length > 0) {
-    logger.info(standardizeStringArray(['domain', 'category', 'repository', 'action'], maxColumnsArr));
+  if (reposToClone.length === 0) {
+    logger.info('there are no repositories to be cloned!\n');
+    return;
   }
+
+  logger.info('the following repositories are tracked to be clonned: \n');
+  logger.info(standardizeStringArray(['domain', 'category', 'repository'], maxColumnsArr));
 
   for (const item of reposToClone) {
-    let action = '';
-
     const commonString = standardizeStringArray([item.domain, item.category ?? '-', item.repository_name, ''], maxColumnsArr);
-    customConsoleLog(commonString);
-
-    if (item.exists_locally) {
-      action = 'already exists';
-    } else {
-      if (!existsSync(item.domain)) {
-        mkdirSync(item.folder_path, { recursive: true });
-      }
-      action = 'cloned';
-      await delay(1000);
-      // await asyncExec(`git clone ${item.git_ssh} ${item.local_path}`);
-    }
-
-    customConsoleLog(commonString + action + '\n', true);
+    logger.info(commonString);
   }
+
+  logger.info('');
+
+  confirmationSelect('are you sure you want to clone them?', async (shouldCloneRepos) => {
+    if (shouldCloneRepos) {
+      for (const repo of reposToClone) {
+        if (!existsSync(repo.folder_path)) {
+          mkdirSync(repo.folder_path, { recursive: true });
+        }
+        await asyncExec(`git clone ${repo.git_ssh} ${repo.local_path}`);
+        logger.info(`clonned ${repo.repository_name}`);
+      }
+
+      successfulMessage('all repositories were cloned!\n');
+    }
+  });
 };

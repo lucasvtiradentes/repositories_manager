@@ -1,7 +1,8 @@
 import { TConfigs } from '../consts/schema';
 import { TExtendedRepo } from '../methods/parse_repositories';
+import { confirmationSelect } from '../selects/confirmation_select';
 import { repositorySelect } from '../selects/repository_select';
-import { asyncExec } from '../utils/utils';
+import { asyncExec, successfulMessage } from '../utils/utils';
 
 type TOpenRepositoryCommandProps = {
   userConfisFile: TConfigs;
@@ -11,10 +12,22 @@ type TOpenRepositoryCommandProps = {
 export const openRepositoryCommand = async ({ parsedRepositories, userConfisFile }: TOpenRepositoryCommandProps) => {
   repositorySelect(parsedRepositories, async (repository) => {
     const repoInfo = parsedRepositories.find((repo) => repo.git_ssh === repository)!;
+
+    const openCurrentRepository = async () => {
+      const openRepoCommand = `${userConfisFile.open_command.repository} ${repoInfo.local_path}`;
+      await asyncExec(openRepoCommand);
+    };
+
     if (repoInfo.exists_locally) {
-      await asyncExec(`${userConfisFile.open_command.repository} ${repoInfo.local_path}`);
+      await openCurrentRepository();
     } else {
-      console.log('ele nao existe, deseja clonar e abrir em seguida?');
+      confirmationSelect('this repository does not exists locally, do you want to clone it?', async (shouldClone) => {
+        if (shouldClone) {
+          await asyncExec(`git clone ${repoInfo.git_ssh} ${repoInfo.local_path}`);
+          await openCurrentRepository();
+          successfulMessage('repo cloned, make sure to update your configs file to keep everything sync!\n');
+        }
+      });
     }
   });
 };
