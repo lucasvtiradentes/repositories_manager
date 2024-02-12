@@ -1,0 +1,124 @@
+{
+  "path": "/home/lucasvtiradentes/repos",
+  "open_command": "vscode",
+  "github_repositories": {
+    "lucasvtiradentes": {
+      "repositories_syncer":        ["personal", { "ignore_sync": true }],
+      "dotfiles":                   ["personal"],
+      "lucasvtiradentes.com":       ["personal"],
+      "development-utils":          ["personal"],
+      "gcal-sync":                  ["open_source"],
+      "obsidian_vaults":            ["personal"],
+      "uds_page_actions":           [null, { "domain": "uds" }],
+      "my_devices_setup":           ["personal"],
+      "dyn-markdown":               ["open_source"],
+      "linux_reminder":             ["open_source"],
+      "my_accounts":                ["personal"],
+      "uds_utils":                  [null, { "domain": "uds" }],
+      "repository-utils":           ["personal"],
+      "ticktick-api-lvt":           ["open_source"],
+      "container_scheduler":        ["open_source"],
+      "my-tutorials":               ["personal", { "ignore_sync": true }],
+      "lvt_page_actions":           ["personal"],
+      "page_actions_attacher":      ["open_source", { "ignore_sync": true }],
+      "lucasvtiradentes":           ["personal"],
+      "twitch-notifier":            ["open_source", { "ignore_sync": true }],
+      "dev-buddy":                  ["portfolio", { "ignore_sync": true }],
+      "update-my-stats":            ["personal", { "ignore_sync": true }],
+      "esports-notifier":           ["open_source", { "ignore_sync": true }],
+      "boilermanager":              ["open_source", { "ignore_sync": true }],
+      "golang-boilerplates":        ["open_source", { "ignore_sync": true }],
+      "js-boilerplates":            ["open_source", { "ignore_sync": true }],
+      "job-searcher":               ["portfolio", { "ignore_sync": true }],
+      "boilermanager-template":     ["open_source", { "ignore_sync": true }],
+      "dropspy":                    ["company_project", { "ignore_sync": true }],
+      "shopify-store-omni-pixel":   ["company_project", { "ignore_sync": true }],
+      "supermarket-chatbot":        ["company_project", { "ignore_sync": true }],
+      "waiter-app-server":          ["portfolio", { "ignore_sync": true }],
+      "waiter-app-mobile":          ["portfolio", { "ignore_sync": true }],
+      "ecommerce-stores-api":       ["company_project", { "ignore_sync": true }],
+      "biacaminha.com.br":          ["company_project", { "ignore_sync": true }],
+      "maritimusengenharia.com":    ["company_project", { "ignore_sync": true }],
+      "github-repo-explorer":       ["portfolio", { "ignore_sync": true }],
+      "metaversus-landinpage":      ["portfolio", { "ignore_sync": true }],
+      "cryptor":                    ["open_source", { "ignore_sync": true }],
+      "notifications-microservice": ["portfolio", { "ignore_sync": true }],
+      "covid19-cases-dashboard":    ["portfolio", { "ignore_sync": true }],
+      "todo-app":                   ["portfolio", { "ignore_sync": true }],
+      "github-assets":              ["personal", { "ignore_sync": true }]
+    },
+    "lifetracer": {
+      "lifetracer_desktop":         [null],
+      "lifetracer_backend":         [null],
+      "lifetracer_frontend":        [null],
+      "lifetracer_setup":           [null]
+    }
+  },
+  "ssh_repositories": [
+    {
+      "domain":"uds",
+      "category":"it_works",
+      "git_ssh":"git@gitlab.uds.com.br:itworks/contabilidade/application/backend-node.git"
+    },
+    {
+      "domain":"uds",
+      "category":"it_works",
+      "git_ssh":"git@gitlab.uds.com.br:itworks/contabilidade/application/frontend-react.git"
+    },
+    {
+      "domain":"uds",
+      "category":"it_works",
+      "git_ssh":"git@gitlab.uds.com.br:itworks/contabilidade/application/service-data.git"
+    },
+    {
+      "domain":"uds",
+      "category":"it_works",
+      "git_ssh":"git@gitlab.uds.com.br:itworks/contabilidade/application/service-producer.git"
+    },
+    {
+      "domain":"uds",
+      "category":"it_works",
+      "git_ssh":"git@gitlab.uds.com.br:itworks/contabilidade/application/service-sat.git"
+    },
+    {
+      "domain":"uds",
+      "category":"pdv365",
+      "git_ssh":"git@gitlab.uds.com.br:pdv365/pdv365/backoffice/backend-node.git"
+    },
+    {
+      "domain":"uds",
+      "category":"pdv365",
+      "git_ssh":"git@gitlab.uds.com.br:pdv365/pdv365/backoffice/frontend-react.git"
+    },
+    {
+      "domain":"uds",
+      "category":"pdv365",
+      "git_ssh":"git@gitlab.uds.com.br:pdv365/pdv365/portal-rh/portal-backend.git"
+    },
+    {
+      "domain":"uds",
+      "category":"pdv365",
+      "git_ssh":"git@gitlab.uds.com.br:pdv365/pdv365/portal-rh/portal-frontend.git"
+    },
+    {
+      "domain":"uds",
+      "category":"pdv365",
+      "git_ssh":"git@gitlab.uds.com.br:pdv365/pdv365/terminal/terminal-account.git"
+    },
+    {
+      "domain":"uds",
+      "category":"pdv365",
+      "git_ssh":"git@gitlab.uds.com.br:pdv365/pdv365/portal-franquia/franquia-event.git"
+    },
+    {
+      "domain":"uds",
+      "category":"krebs",
+      "git_ssh":"git@gitlab.uds.com.br:krebs/krebs-backend.git"
+    },
+    {
+      "domain":"uds",
+      "category":"krebs",
+      "git_ssh":"git@gitlab.uds.com.br:krebs/krebs-backoffice-react.git"
+    }
+  ]
+}

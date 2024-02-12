@@ -18,7 +18,8 @@
   "dependencies": {
     "fuse.js": "7.0.0",
     "inquirer": "9.2.14",
-    "inquirer-autocomplete-prompt": "3.0.1"
+    "inquirer-autocomplete-prompt": "3.0.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/inquirer": "9.0.7",

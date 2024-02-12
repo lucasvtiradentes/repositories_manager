@@ -1,4 +1,4 @@
-import { CONFIGS } from "../configs/configs";
+import { CONFIGS } from "../consts/configs";
 import { TConfigsProps, getAllParsedRepos } from "../utils/get_parsed_repos";
 import { getParseExistantRepos } from "../utils/list_local_repos";
 import { logger } from "../utils/logger";
