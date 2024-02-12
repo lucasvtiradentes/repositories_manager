@@ -1,7 +1,7 @@
 {
   "name": "repositories_utils",
   "version": "0.0.1",
-  "description": "🔄 sync my personal and work repositories on a fresh Ubuntu based instance.",
+  "description": "🔄 sync and manage your git repositories effortlessly.",
   "license": "MIT",
   "keywords": [
     "repositories",
@@ -29,7 +29,9 @@
     "dev": "bash ./examples/simple.sh",
     "build": "rimraf ./dist && tsc",
     "commit": "cz",
-    "changeset": "npx changeset"
+    "package_check": "npm publish --dry-run",
+    "changeset": "npx changeset",
+    "release": "pnpm run build && changeset publish"
   },
   "dependencies": {
     "commander": "12.0.0",

@@ -1,0 +1,25 @@
+# FILES ########################################################################
+
+.changeset/
+.github/
+.husky/
+.vscode/
+examples/
+ignore/
+node_modules/
+src/
+
+# FILES ########################################################################
+
+.commitlintrc
+.czrc
+.editorconfig
+.eslintignore
+.eslintrc
+.lintstagedrc.json
+.prettierignore
+.prettierrc
+tsconfig.json
+user_data.json
+LICENSE
+README.md

@@ -7,7 +7,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "package.json": ".czrc, .editorconfig, .commitlintrc, .eslintignore, .eslintrc, .lintstagedrc.json, .prettierignore, .prettierrc, tsconfig.json, package-lock.json, yarn.lock, pnpm-lock.yaml",
-    "README.md": "LICENSE",
+    "README.md": "LICENSE, CHANGELOG.md",
   },
   "files.associations": {
     ".czrc": "json"
