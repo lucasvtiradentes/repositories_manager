@@ -1,11 +1,14 @@
+import { spawn } from 'node:child_process';
+
 import { TConfigs } from '../consts/schema';
-import { asyncExec } from '../utils/utils';
 
 type TOpenConfigsCommandProps = {
   userConfisFile: TConfigs;
   configsFilePath: string;
 };
 
-export const openConfigsCommand = async ({ userConfisFile, configsFilePath }: TOpenConfigsCommandProps) => {
-  await asyncExec(`${userConfisFile.open_command.configs} ${configsFilePath}`);
+export const openConfigsCommand = ({ userConfisFile, configsFilePath }: TOpenConfigsCommandProps) => {
+  // const commandToOpenConfigs = `${userConfisFile.open_command.configs} ${configsFilePath}`;
+  const child = spawn(userConfisFile.open_command.configs, [configsFilePath], { detached: true, stdio: 'ignore' });
+  child.unref();
 };

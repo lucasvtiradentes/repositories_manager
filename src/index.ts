@@ -102,7 +102,7 @@ async function main() {
   }
 
   if (parsedOption === 'open_configs') {
-    await openConfigsCommand({ configsFilePath, userConfisFile });
+    openConfigsCommand({ configsFilePath, userConfisFile });
     return;
   }
 
@@ -118,7 +118,7 @@ async function main() {
     } else if (option === 'open_repository') {
       openRepositoryCommand({ parsedRepositories, userConfisFile });
     } else if (option === 'open_configs') {
-      await openConfigsCommand({ configsFilePath, userConfisFile });
+      openConfigsCommand({ configsFilePath, userConfisFile });
     }
   });
 }
