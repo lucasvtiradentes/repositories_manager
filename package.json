@@ -1,6 +1,6 @@
 {
   "name": "repositories_utils",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "🔄 sync my personal and work repositories on a fresh Ubuntu based instance.",
   "license": "MIT",
   "keywords": [
