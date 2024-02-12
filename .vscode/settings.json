@@ -1,0 +1,15 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "package.json": ".czrc, .editorconfig, .commitlintrc, .eslintignore, .eslintrc, .lintstagedrc.json, .prettierignore, .prettierrc, tsconfig.json, package-lock.json, yarn.lock, pnpm-lock.yaml",
+    "README.md": "LICENSE",
+  },
+  "files.associations": {
+    ".czrc": "json"
+  }
+}

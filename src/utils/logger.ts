@@ -1,4 +1,4 @@
-const DEBUG_MODE = true
+const DEBUG_MODE = true;
 
 export const logger = {
   info: (message: any, ...optionalParams: any[]) => {

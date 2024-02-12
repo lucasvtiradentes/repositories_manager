@@ -1,3 +1,3 @@
 export const ERRORS = {
-  json_not_found: (path: string) => "Json was not found!"
-}
+  json_not_found: (_path: string) => 'Json was not found!'
+};

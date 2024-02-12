@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
+
 import { ERRORS } from '../consts/errors';
 
 export function readJson(jsonPath: string): Record<string, unknown> {

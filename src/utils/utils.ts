@@ -27,14 +27,14 @@ export function asyncExec(command: string): Promise<TAsyncExec> {
 // FS UTILS ====================================================================
 
 export function getAllSubfolders(dir: string, subfolders: string[] = []): string[] {
-  const ignoredFolders = [".git", "node_modules", "dist"]
+  const ignoredFolders = ['.git', 'node_modules', 'dist'];
 
   readdirSync(dir, { withFileTypes: true }).forEach((dirent) => {
     if (dirent.isDirectory()) {
       const subDir = resolve(dir, dirent.name);
       subfolders.push(subDir);
 
-      if (!ignoredFolders.some(ignoredFolder => subDir.includes(ignoredFolder))){
+      if (!ignoredFolders.some((ignoredFolder) => subDir.includes(ignoredFolder))) {
         getAllSubfolders(subDir, subfolders);
       }
     }
@@ -46,13 +46,13 @@ export function getAllSubfolders(dir: string, subfolders: string[] = []): string
 // STRING UTILS ================================================================
 
 export function extractRepositoryNameFromSshString(url: string) {
-  const regex = /\/([^\/]+)\.git$/;
+  const regex = /\/([^/]+)\.git$/;
   const match = url.match(regex);
   return match ? match[1] : null;
 }
 
-export function standardizeStringArray(strArr: string[], minColArr: number[]){
-  const divider = " | "
+export function standardizeStringArray(strArr: string[], minColArr: number[]) {
+  const divider = ' | ';
   const str = strArr.reduce((strArr, columnStr, columnIndex) => {
     const rowMaxLength = minColArr[columnIndex];
     const parsedItem = (() => {

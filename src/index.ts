@@ -1,12 +1,11 @@
-import { getParsedRepositories } from "./parse_repositories";
-import { TConfigs, zConfigs } from "./schema";
-import { readJson } from "./utils/read_json";
+import { getParsedRepositories } from './parse_repositories';
+import { TConfigs, zConfigs } from './schema';
+import { readJson } from './utils/read_json';
 
+const file = readJson('./examples/configs.json') as TConfigs;
+zConfigs.parse(file);
 
-const file = readJson('./examples/configs.json') as TConfigs
-zConfigs.parse(file)
-
-const parsedRepositories = getParsedRepositories(file)
+const parsedRepositories = getParsedRepositories(file);
 console.log(parsedRepositories);
 
 // optionSelect(async (option) => {
