@@ -4,6 +4,5 @@ ignore/
 
 user_data.json
 
-pnpm-lock.yaml
 package-lock.json
 yarn.lock
