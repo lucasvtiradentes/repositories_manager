@@ -1,5 +1,11 @@
 # repositories_utils
 
+## 0.0.3
+
+### Patch Changes
+
+- d7de1ee: update project to esm in order to work with inquirer
+
 ## 0.0.2
 
 ### Patch Changes
