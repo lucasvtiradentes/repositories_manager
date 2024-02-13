@@ -6,7 +6,7 @@
   },
   "github_repositories": {
     "lucasvtiradentes": {
-      "repositories_syncer":        ["personal"],
+      "repositories_utils":         ["open_source"],
       "dotfiles":                   ["personal"],
       "lucasvtiradentes.com":       ["personal"],
       "development-utils":          ["personal"],

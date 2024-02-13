@@ -48,6 +48,22 @@ export function getAllSubfolders(dir: string, subfolders: string[] = []): string
 
 // STRING UTILS ================================================================
 
+export function standardizeString(value: string, length: number) {
+  const rowMaxLength = length;
+
+  const parsedItem = (() => {
+    if (value.length > rowMaxLength) {
+      return value.substring(0, rowMaxLength);
+    } else if (value.length < rowMaxLength) {
+      return value + ' '.repeat(rowMaxLength - value.length);
+    }
+
+    return value;
+  })();
+
+  return parsedItem;
+}
+
 export function extractRepositoryNameFromSshString(url: string) {
   const regex = /\/([^/]+)\.git$/;
   const match = url.match(regex);
