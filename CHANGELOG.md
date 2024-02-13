@@ -1,5 +1,11 @@
 # repositories_utils
 
+## 0.0.4
+
+### Patch Changes
+
+- 24490fd: add domain and category to repo selector
+
 ## 0.0.3
 
 ### Patch Changes
