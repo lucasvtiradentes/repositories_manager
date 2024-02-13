@@ -3,20 +3,20 @@
 import { program } from 'commander';
 import { existsSync } from 'fs';
 
-import { openConfigsCommand } from './commands/open_configs';
-import { openRepositoryCommand } from './commands/open_repository';
-import { pullMissingReposCommand } from './commands/pull_missing_repos';
-import { purgeLocalReposCommand } from './commands/purge_local_repos';
-import { removeConfigsCommand } from './commands/remove_configs';
-import { setupConfigsCommand } from './commands/setup_configs';
-import { APP_INFO } from './consts/app_consts';
-import { CONFIGS } from './consts/configs';
-import { ERRORS } from './consts/errors';
-import { TConfigs, zConfigs } from './consts/schema';
-import { getParsedRepositories } from './methods/parse_repositories';
-import { TOptionsValues, optionSelect } from './selects/option_select';
-import { readJson } from './utils/read_json';
-import { TNullable, gracefulThrowError } from './utils/utils';
+import { openConfigsCommand } from './commands/open_configs.js';
+import { openRepositoryCommand } from './commands/open_repository.js';
+import { pullMissingReposCommand } from './commands/pull_missing_repos.js';
+import { purgeLocalReposCommand } from './commands/purge_local_repos.js';
+import { removeConfigsCommand } from './commands/remove_configs.js';
+import { setupConfigsCommand } from './commands/setup_configs.js';
+import { APP_INFO } from './consts/app_consts.js';
+import { CONFIGS } from './consts/configs.js';
+import { ERRORS } from './consts/errors.js';
+import { TConfigs, zConfigs } from './consts/schema.js';
+import { getParsedRepositories } from './methods/parse_repositories.js';
+import { TOptionsValues, optionSelect } from './selects/option_select.js';
+import { readJson } from './utils/read_json.js';
+import { TNullable, gracefulThrowError } from './utils/utils.js';
 
 type TProgramOptions = {
   setup: string;

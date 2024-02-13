@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 
-import { TConfigs } from '../consts/schema';
+import { TConfigs } from '../consts/schema.js';
 
 type TOpenConfigsCommandProps = {
   userConfisFile: TConfigs;

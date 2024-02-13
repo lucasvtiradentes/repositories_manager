@@ -2,7 +2,7 @@ import fuse from 'fuse.js';
 import inquirer from 'inquirer';
 import inquirerPrompt from 'inquirer-autocomplete-prompt';
 
-import { extractRepositoryNameFromSshString } from '../utils/utils';
+import { extractRepositoryNameFromSshString } from '../utils/utils.js';
 
 const SELECT_KEY = 'repository' as const;
 

@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync } from 'node:fs';
 
-import { TExtendedRepo } from '../methods/parse_repositories';
-import { confirmationSelect } from '../selects/confirmation_select';
+import { TExtendedRepo } from '../methods/parse_repositories.js';
+import { confirmationSelect } from '../selects/confirmation_select.js';
 import { logger } from '../utils/logger.js';
 import { asyncExec, standardizeStringArray, successfulMessage } from '../utils/utils.js';
 

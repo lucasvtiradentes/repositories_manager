@@ -1,7 +1,7 @@
-import { TExtendedRepo } from '../methods/parse_repositories';
-import { confirmationSelect } from '../selects/confirmation_select';
-import { logger } from '../utils/logger';
-import { asyncExec, standardizeStringArray, successfulMessage } from '../utils/utils';
+import { TExtendedRepo } from '../methods/parse_repositories.js';
+import { confirmationSelect } from '../selects/confirmation_select.js';
+import { logger } from '../utils/logger.js';
+import { asyncExec, standardizeStringArray, successfulMessage } from '../utils/utils.js';
 
 type TPurgeLocalReposCommandProps = {
   parsedRepositories: TExtendedRepo[];

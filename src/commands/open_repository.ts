@@ -1,8 +1,8 @@
-import { TConfigs } from '../consts/schema';
-import { TExtendedRepo } from '../methods/parse_repositories';
-import { confirmationSelect } from '../selects/confirmation_select';
-import { repositorySelect } from '../selects/repository_select';
-import { asyncExec, successfulMessage } from '../utils/utils';
+import { TConfigs } from '../consts/schema.js';
+import { TExtendedRepo } from '../methods/parse_repositories.js';
+import { confirmationSelect } from '../selects/confirmation_select.js';
+import { repositorySelect } from '../selects/repository_select.js';
+import { asyncExec, successfulMessage } from '../utils/utils.js';
 
 type TOpenRepositoryCommandProps = {
   userConfisFile: TConfigs;

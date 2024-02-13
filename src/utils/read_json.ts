@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 
-import { ERRORS } from '../consts/errors';
-import { gracefulThrowError } from './utils';
+import { ERRORS } from '../consts/errors.js';
+import { gracefulThrowError } from './utils.js';
 
 export function readJson(jsonPath: string): Record<string, unknown> {
   if (!existsSync(jsonPath)) {

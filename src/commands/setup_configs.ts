@@ -1,8 +1,8 @@
 import { existsSync, writeFileSync } from 'fs';
 
-import { APP_INFO } from '../consts/app_consts';
-import { CONFIGS } from '../consts/configs';
-import { successfulMessage } from '../utils/utils';
+import { APP_INFO } from '../consts/app_consts.js';
+import { CONFIGS } from '../consts/configs.js';
+import { successfulMessage } from '../utils/utils.js';
 
 type TSetupConfigsCommandProps = {
   configs_path: string;
