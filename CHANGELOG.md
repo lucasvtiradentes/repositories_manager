@@ -1,5 +1,11 @@
 # repositories_utils
 
+## 0.1.0
+
+### Minor Changes
+
+- d6d2ed2: remove emoji icon on repo name
+
 ## 0.0.4
 
 ### Patch Changes
