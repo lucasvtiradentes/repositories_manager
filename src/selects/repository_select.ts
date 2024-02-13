@@ -16,7 +16,7 @@ export function repositorySelect(repositories: TExtendedRepo[], cbFn: (answer: T
     const repoInfo = [standardizeString(extractRepositoryNameFromSshString(item.git_ssh)!, maxRepositoryNameLength), standardizeString(item.category ?? '', maxCategoryLength), standardizeString(item.domain, maxDomainLength)].join(' ');
 
     return {
-      name: (item.exists_locally ? '⬇️' : ' ') + repoInfo,
+      name: repoInfo,
       value: item.git_ssh,
       ...item
     };
