@@ -1,7 +1,7 @@
 <a name="TOC"></a>
 
 <h3 align="center">
-  REPOSITORIES SYNCER
+  REPOSITORIES UTILS
 </h3>
 
 <div align="center">
@@ -11,24 +11,31 @@
 </div>
 
 <p align="center">
-  <a href="#dart-features">Features</a> • <a href="#warning-requirements">Requirements</a> • <a href="#bulb-usage">Usage</a> • <a href="#wrench-development">Development</a> • <a href="#books-about">About</a> • <a href="#family-community">Community</a>
+  <a href="#dart-features">Features</a> • <a href="#warning-requirements">Requirements</a> • <a href="#bulb-usage">Usage</a> • <a href="#wrench-development">Development</a> • <a href="#books-about">About</a>
 </p>
 
 <a href="#"><img src="./.github/images/divider.png" /></a>
 
 ## :trumpet: Overview
 
+easily manage your repos based on a simple configs json file!
+
 <div align="center">
-  <table>
-    <tr>
-      <th>
-        <a href="#"><img src="./.github/images/demo.png" /></a>
-      </th>
-      <th>
-        <a href="#"><img src="./.github/images/demo_p2.png" /></a>
-      </th>
-    </tr>
-  </table>
+  <img width="80%" src="./.github/images/repositories_utils.webp">
+</div>
+
+<div align="center">
+  <details>
+    <summary>main execution flow</summary>
+    <a href="https://app.eraser.io/workspace/Ynym43GrUxA2u497qmEC?elements=AUpUUQrBNJ3SkIKKOHl1Iw"><img src="https://app.eraser.io/workspace/Ynym43GrUxA2u497qmEC/preview?elements=AUpUUQrBNJ3SkIKKOHl1Iw&type=embed" /></a>
+  </details>
+</div>
+
+<div align="center">
+  <details>
+    <summary>available options</summary>
+    <a href="https://app.eraser.io/workspace/Ynym43GrUxA2u497qmEC?elements=3dwTgwIdHJUqkJI8PaZdRQ"><img src="https://app.eraser.io/workspace/Ynym43GrUxA2u497qmEC/preview?elements=3dwTgwIdHJUqkJI8PaZdRQ&type=embed" /></a>
+  </details>
 </div>
 
 ## :question: Motivation
@@ -83,7 +90,7 @@ Options:
   -V, --version        output the version number
 ```
 
-or, if your prefer (as I do), simply run `rpu` and you can select the option you want!
+or, if your prefer (as I do), simply run `rp` on your terminal and you can select the option you want!
 
 ## :wrench: Development<a href="#TOC"><img align="right" src="./.github/images/up_arrow.png" width="22"></a>
 
