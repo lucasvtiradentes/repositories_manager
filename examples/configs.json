@@ -6,8 +6,10 @@
   },
   "github_repositories": {
     "lucasvtiradentes": {
-      "repositories_utils":         ["open_source"],
+      "repo_manager":               ["open_source"],
       "dotfiles":                   ["personal"],
+      "lucasvtiradentes":           ["personal"],
+      "update-my-stats":            ["personal", { "ignore_sync": true }],
       "lucasvtiradentes.com":       ["personal"],
       "development-utils":          ["personal"],
       "gcal-sync":                  ["open_source"],
@@ -24,10 +26,8 @@
       "my-tutorials":               ["personal", { "ignore_sync": true }],
       "lvt_page_actions":           ["personal"],
       "page_actions_attacher":      ["open_source", { "ignore_sync": true }],
-      "lucasvtiradentes":           ["personal"],
       "twitch-notifier":            ["open_source", { "ignore_sync": true }],
       "dev-buddy":                  ["portfolio", { "ignore_sync": true }],
-      "update-my-stats":            ["personal", { "ignore_sync": true }],
       "esports-notifier":           ["open_source", { "ignore_sync": true }],
       "boilermanager":              ["open_source", { "ignore_sync": true }],
       "golang-boilerplates":        ["open_source", { "ignore_sync": true }],

@@ -1,13 +1,13 @@
 <a name="TOC"></a>
 
 <h3 align="center">
-  REPOSITORIES UTILS
+  REPO MANAGER
 </h3>
 
 <div align="center">
-  <a href="https://www.npmjs.com/package/repositories_utils"><img src="https://img.shields.io/npm/v/repositories_utils.svg?style=flat" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/repo_manager"><img src="https://img.shields.io/npm/v/repo_manager.svg?style=flat" alt="npm version"></a>
   <a href="https://nodejs.org/en/"><img src="https://img.shields.io/badge/made%20with-node-1f425f?logo=node.js&.svg" /></a>
-  <a href="https://github.com/lucasvtiradentes/repositories_utils#contributing"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="contributions" /></a>
+  <a href="https://github.com/lucasvtiradentes/repo_manager#contributing"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="contributions" /></a>
 </div>
 
 <p align="center">
@@ -21,7 +21,7 @@
 easily manage your repos based on a simple configs json file!
 
 <div align="center">
-  <img width="80%" src="./.github/images/repositories_utils.webp">
+  <img width="80%" src="./.github/images/repo_manager.webp">
 </div>
 
 <div align="center">
@@ -64,18 +64,18 @@ To setup this project in your computer, download it in this link or run the foll
 
 ```bash
 # install the package
-$ npm install repositories_utils -g
+$ npm install repo_manager -g
 
 # setup the package with your configs
 $ rpu -s "/path/to/your_configs_file.json"
 
-# tip: you can use it on your terminal as: rpu, rp or repositories_utils
+# tip: you can use it on your terminal as: rpu, rp or repo_manager
 ```
 
-After setup the repositories_utils with your configs, you can use the following options:
+After setup the repo_manager with your configs, you can use the following options:
 
 ```bash
-Usage: repositories_utils [options]
+Usage: repo_manager [options]
 
 🔄 sync and manage your git repositories effortlessly.
 
@@ -100,10 +100,10 @@ To setup this project in your computer, download it in this link or run the foll
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/lucasvtiradentes/repositories_utils
+$ git clone https://github.com/lucasvtiradentes/repo_manager
 
 # Go into the repository
-$ cd repositories_utils
+$ cd repo_manager
 ```
 
 After download it, go to the project folder and run these commands:

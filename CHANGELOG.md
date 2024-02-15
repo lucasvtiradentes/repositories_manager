@@ -1,4 +1,4 @@
-# repositories_utils
+# repo_manager
 
 ## 0.1.0
 
