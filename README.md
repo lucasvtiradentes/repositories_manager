@@ -1,13 +1,13 @@
 <a name="TOC"></a>
 
 <h3 align="center">
-  REPO MANAGER
+  REPOSITORIES MANAGER
 </h3>
 
 <div align="center">
-  <a href="https://www.npmjs.com/package/repo_manager"><img src="https://img.shields.io/npm/v/repo_manager.svg?style=flat" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/repositories_manager"><img src="https://img.shields.io/npm/v/repositories_manager.svg?style=flat" alt="npm version"></a>
   <a href="https://nodejs.org/en/"><img src="https://img.shields.io/badge/made%20with-node-1f425f?logo=node.js&.svg" /></a>
-  <a href="https://github.com/lucasvtiradentes/repo_manager#contributing"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="contributions" /></a>
+  <a href="https://github.com/lucasvtiradentes/repositories_manager#contributing"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="contributions" /></a>
 </div>
 
 <p align="center">
@@ -18,23 +18,23 @@
 
 ## :trumpet: Overview
 
-easily manage your repos based on a simple configs json file!
+<div align="center">sync and manage your git repositories effortlessly</div>
 
 <div align="center">
-  <img width="80%" src="./.github/images/repo_manager.webp">
+  <img width="80%" src="./.github/images/repositories_manager.webp">
 </div>
 
 <div align="center">
   <details>
     <summary>main execution flow</summary>
-    <a href="https://app.eraser.io/workspace/Ynym43GrUxA2u497qmEC?elements=AUpUUQrBNJ3SkIKKOHl1Iw"><img src="https://app.eraser.io/workspace/Ynym43GrUxA2u497qmEC/preview?elements=AUpUUQrBNJ3SkIKKOHl1Iw&type=embed" /></a>
+    <img src="https://app.eraser.io/workspace/Ynym43GrUxA2u497qmEC/preview?elements=AUpUUQrBNJ3SkIKKOHl1Iw&type=embed" />
   </details>
 </div>
 
 <div align="center">
   <details>
     <summary>available options</summary>
-    <a href="https://app.eraser.io/workspace/Ynym43GrUxA2u497qmEC?elements=3dwTgwIdHJUqkJI8PaZdRQ"><img src="https://app.eraser.io/workspace/Ynym43GrUxA2u497qmEC/preview?elements=3dwTgwIdHJUqkJI8PaZdRQ&type=embed" /></a>
+    <img src="https://app.eraser.io/workspace/Ynym43GrUxA2u497qmEC/preview?elements=3dwTgwIdHJUqkJI8PaZdRQ&type=embed" />
   </details>
 </div>
 
@@ -64,18 +64,18 @@ To setup this project in your computer, download it in this link or run the foll
 
 ```bash
 # install the package
-$ npm install repo_manager -g
+$ npm install repositories_manager -g
 
 # setup the package with your configs
 $ rpu -s "/path/to/your_configs_file.json"
 
-# tip: you can use it on your terminal as: rpu, rp or repo_manager
+# tip: you can use it on your terminal as: rpu, rp or repositories_manager
 ```
 
-After setup the repo_manager with your configs, you can use the following options:
+After setup the repositories_manager with your configs, you can use the following options:
 
 ```bash
-Usage: repo_manager [options]
+Usage: repositories_manager [options]
 
 🔄 sync and manage your git repositories effortlessly.
 
@@ -100,10 +100,10 @@ To setup this project in your computer, download it in this link or run the foll
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/lucasvtiradentes/repo_manager
+$ git clone https://github.com/lucasvtiradentes/repositories_manager
 
 # Go into the repository
-$ cd repo_manager
+$ cd repositories_manager
 ```
 
 After download it, go to the project folder and run these commands:

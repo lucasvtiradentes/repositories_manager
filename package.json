@@ -1,7 +1,7 @@
 {
-  "name": "repo_manager",
+  "name": "repositories_manager",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "🔄 sync and manage your git repositories effortlessly.",
   "license": "MIT",
   "keywords": [
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lucasvtiradentes/repo_manager.git"
+    "url": "https://github.com/lucasvtiradentes/repositories_manager.git"
   },
   "bin": {
     "rp": "./dist/index.js",
