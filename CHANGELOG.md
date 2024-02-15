@@ -1,5 +1,11 @@
 # repo_manager
 
+## 0.1.1
+
+### Patch Changes
+
+- ecdee76: update package name
+
 ## 0.1.0
 
 ### Minor Changes
