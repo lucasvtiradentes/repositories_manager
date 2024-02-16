@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 1.0.0
+
+### Major Changes
+
+- f90ab63: update the package name
+
 ## 0.1.1
 
 ### Patch Changes
