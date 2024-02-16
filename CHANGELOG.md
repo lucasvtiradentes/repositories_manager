@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 1.0.1
+
+### Patch Changes
+
+- a6525b6: make the configs persist after update the package
+
 ## 1.0.0
 
 ### Major Changes
