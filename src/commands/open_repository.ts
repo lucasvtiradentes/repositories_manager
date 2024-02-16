@@ -1,7 +1,7 @@
 import { TConfigs } from '../consts/schema.js';
-import { TExtendedRepo } from '../methods/parse_repositories.js';
 import { confirmationSelect } from '../selects/confirmation_select.js';
 import { repositorySelect } from '../selects/repository_select.js';
+import { TExtendedRepo } from '../utils/parse_repositories.js';
 import { asyncExec, successfulMessage } from '../utils/utils.js';
 
 type TOpenRepositoryCommandProps = {

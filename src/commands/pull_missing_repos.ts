@@ -1,8 +1,8 @@
 import { existsSync, mkdirSync } from 'node:fs';
 
-import { TExtendedRepo } from '../methods/parse_repositories.js';
 import { confirmationSelect } from '../selects/confirmation_select.js';
 import { logger } from '../utils/logger.js';
+import { TExtendedRepo } from '../utils/parse_repositories.js';
 import { asyncExec, standardizeStringArray, successfulMessage } from '../utils/utils.js';
 
 type TPullMissingReposCommandProps = {

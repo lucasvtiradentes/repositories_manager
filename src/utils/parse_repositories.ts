@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { TConfigs } from '../consts/schema.js';
-import { extractRepositoryNameFromSshString, mergeArraysOfArrays } from '../utils/utils.js';
+import { extractRepositoryNameFromSshString, mergeArraysOfArrays } from './utils.js';
 
 export type TExtendedRepo = TConfigs['ssh_repositories'][number] & {
   repository_name: string;

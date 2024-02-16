@@ -40,7 +40,7 @@
 
 ## :question: Motivation
 
-My primary motivation for developing this tool was to ensure that all my repositories are set up the way I want, everywhere, with minimal effort. A good example is being able to have everything quickly set up for me after formatting my PC.
+My primary motivation for developing this tool was to ensure that all my repositories are set up the way I want, everywhere, with minimal effort. A good example is being able to have everything in place for me after formatting my PC.
 
 ## :dart: Features<a href="#TOC"><img align="right" src="./.github/images/up_arrow.png" width="22"></a>
 
@@ -69,7 +69,7 @@ $ npm install repositories_manager -g
 # setup the package with your configs
 $ rpu -s "/path/to/your_configs_file.json"
 
-# tip: you can use it on your terminal as: rpu, rp or repositories_manager
+# tip: you can use it on your terminal as: rp, rpm or repositories_manager
 ```
 
 After setup the repositories_manager with your configs, you can use the following options:

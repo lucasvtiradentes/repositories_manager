@@ -2,6 +2,8 @@ import { exec } from 'node:child_process';
 import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+import { logger } from './logger.js';
+
 // SYSTEM UTILS ================================================================
 
 type TAsyncExec = {
@@ -98,13 +100,13 @@ export function customConsoleLog(message: string, isUpdatingLine?: boolean) {
   }
 }
 
-export const gracefulThrowError = (message: string) => {
-  console.log(`\x1b[31mERROR: ${message}\x1b[0m`);
+export const gracefulThrowError = (message: string): never => {
+  logger.info(`\x1b[31mERROR: ${message}\x1b[0m`);
   process.exit();
 };
 
 export const successfulMessage = (message: string) => {
-  console.log(`\x1b[32mSUCCESS: ${message}\x1b[0m`);
+  logger.info(`\x1b[32mSUCCESS: ${message}\x1b[0m`);
   process.exit();
 };
 

@@ -2,7 +2,7 @@ import fuse from 'fuse.js';
 import inquirer from 'inquirer';
 import inquirerPrompt from 'inquirer-autocomplete-prompt';
 
-import { TExtendedRepo } from '../methods/parse_repositories.js';
+import { TExtendedRepo } from '../utils/parse_repositories.js';
 import { extractRepositoryNameFromSshString, standardizeString } from '../utils/utils.js';
 
 const SELECT_KEY = 'repository' as const;
