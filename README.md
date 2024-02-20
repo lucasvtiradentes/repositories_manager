@@ -18,7 +18,7 @@
 
 ## :trumpet: Overview
 
-<div align="center">sync and manage your git repositories effortlessly</div>
+<div align="center">sync and manage your git repositories effortlessly</div><br />
 
 <div align="center">
   <img width="80%" src="./.github/images/repositories_manager.webp">
@@ -33,14 +33,14 @@
 
 <div align="center">
   <details>
-    <summary>available options</summary>
+    <summary>available options flow</summary>
     <img src="https://app.eraser.io/workspace/Ynym43GrUxA2u497qmEC/preview?elements=3dwTgwIdHJUqkJI8PaZdRQ&type=embed" />
   </details>
 </div>
 
 ## :question: Motivation
 
-My primary motivation for developing this tool was to ensure that all my repositories are set up the way I want, everywhere, with minimal effort. A good example is being able to have everything in place for me after formatting my PC.
+My primary motivation for developing this tool was to ensure that all my repositories are set up the way I want, everywhere, with minimal effort. A good example is being able to have all my repos in place for me after formatting my PC or setting up a new VPS instance.
 
 ## :dart: Features<a href="#TOC"><img align="right" src="./.github/images/up_arrow.png" width="22"></a>
 

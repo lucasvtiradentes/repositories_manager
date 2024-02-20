@@ -6,29 +6,29 @@
   },
   "github_repositories": {
     "lucasvtiradentes": {
-      "repositories_manager":       ["open_source"],
-      "dotfiles":                   ["personal"],
-      "lucasvtiradentes":           ["personal"],
-      "update-my-stats":            ["personal", { "ignore_sync": true }],
       "lucasvtiradentes.com":       ["personal"],
+      "esports-notifier":           ["open_source", { "ignore_sync": true }],
+      "repositories_manager":       ["open_source"],
+      "lucasvtiradentes":           ["personal", { "ignore_sync": true }],
+      "dotfiles":                   ["personal"],
+      "update-my-stats":            ["personal", { "ignore_sync": true }],
       "development-utils":          ["personal"],
       "gcal-sync":                  ["open_source"],
       "obsidian_vaults":            ["personal"],
       "uds_page_actions":           [null, { "domain": "uds" }],
       "my_devices_setup":           ["personal"],
-      "dyn-markdown":               ["open_source"],
-      "linux_reminder":             ["open_source"],
+      "dyn-markdown":               ["open_source", { "ignore_sync": true }],
+      "linux_reminder":             ["open_source", { "ignore_sync": true }],
       "my_accounts":                ["personal"],
       "uds_utils":                  [null, { "domain": "uds" }],
       "repository-utils":           ["personal"],
       "ticktick-api-lvt":           ["open_source"],
-      "container_scheduler":        ["open_source"],
+      "container_scheduler":        ["open_source", { "ignore_sync": true }],
       "my-tutorials":               ["personal", { "ignore_sync": true }],
-      "lvt_page_actions":           ["personal"],
+      "lvt_page_actions":           ["personal", { "ignore_sync": true }],
       "page_actions_attacher":      ["open_source", { "ignore_sync": true }],
       "twitch-notifier":            ["open_source", { "ignore_sync": true }],
       "dev-buddy":                  ["portfolio", { "ignore_sync": true }],
-      "esports-notifier":           ["open_source", { "ignore_sync": true }],
       "boilermanager":              ["open_source", { "ignore_sync": true }],
       "golang-boilerplates":        ["open_source", { "ignore_sync": true }],
       "js-boilerplates":            ["open_source", { "ignore_sync": true }],
@@ -51,10 +51,10 @@
       "github-assets":              ["personal", { "ignore_sync": true }]
     },
     "lifetracer": {
-      "lifetracer_desktop":         [null],
-      "lifetracer_backend":         [null],
-      "lifetracer_frontend":        [null],
-      "lifetracer_setup":           [null]
+      "lifetracer_desktop":         [null, { "ignore_sync": true }],
+      "lifetracer_backend":         [null, { "ignore_sync": true }],
+      "lifetracer_frontend":        [null, { "ignore_sync": true }],
+      "lifetracer_setup":           [null, { "ignore_sync": true }]
     }
   },
   "ssh_repositories": [
