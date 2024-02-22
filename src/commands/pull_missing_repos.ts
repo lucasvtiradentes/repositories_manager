@@ -10,7 +10,7 @@ type TPullMissingReposCommandProps = {
 };
 
 export const pullMissingReposCommand = async ({ parsedRepositories }: TPullMissingReposCommandProps) => {
-  const reposToClone = parsedRepositories.filter((repo) => repo.exists_locally === false && repo.ignore_sync !== true);
+  const reposToClone = parsedRepositories.filter((repo) => repo.exists_locally === false && repo.sync === true);
 
   const maxCategoryName = Math.max(...reposToClone.map((repo) => repo.domain.length));
   const maxSubCategoryName = Math.max(...reposToClone.map((repo) => (repo.category ?? '').length));

@@ -8,7 +8,7 @@ type TPurgeLocalReposCommandProps = {
 };
 
 export const purgeLocalReposCommand = async ({ parsedRepositories }: TPurgeLocalReposCommandProps) => {
-  const reposToDelete = parsedRepositories.filter((repo) => repo.exists_locally && repo.ignore_sync === true);
+  const reposToDelete = parsedRepositories.filter((repo) => repo.exists_locally && repo.sync !== true);
 
   const maxCategoryName = Math.max(...reposToDelete.map((repo) => repo.domain.length));
   const maxSubcategoryName = Math.max(...reposToDelete.map((repo) => (repo.category ?? '').length));

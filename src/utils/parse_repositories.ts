@@ -8,7 +8,7 @@ export type TExtendedRepo = TConfigs['ssh_repositories'][number] & {
   repository_name: string;
   folder_path: string;
   local_path: string;
-  ignore_sync?: boolean;
+  sync?: boolean;
   exists_locally: boolean;
 };
 
@@ -28,7 +28,7 @@ export const getParsedRepositories = (configs: TConfigs) => {
           domain,
           git_ssh,
           repository_name: extractRepositoryNameFromSshString(git_ssh)!,
-          ...(category && { category }),
+          category,
           folder_path,
           local_path,
           exists_locally,

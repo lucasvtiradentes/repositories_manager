@@ -13,7 +13,7 @@ import { setupConfigsCommand } from './commands/setup_configs.js';
 import { APP_INFO } from './consts/app_consts.js';
 import { CONFIGS } from './consts/configs.js';
 import { ERRORS } from './consts/errors.js';
-import { TConfigs, zConfigs } from './consts/schema.js';
+import { TConfigs, configsSchema } from './consts/schema.js';
 import { TOptionsValues, optionSelect } from './selects/option_select.js';
 import { createUserConfigsFile } from './utils/configs_hanlder.js';
 import { getParsedRepositories } from './utils/parse_repositories.js';
@@ -48,7 +48,7 @@ function getParsedConfigsFileOrThrow() {
   if (!existsSync(configsFile.configs_path)) gracefulThrowError(ERRORS.configs_file_does_not_exists);
 
   const userConfisFile = readJson(configsFile.configs_path) as TConfigs;
-  if (!zConfigs.safeParse(userConfisFile).success) {
+  if (!configsSchema.safeParse(userConfisFile).success) {
     gracefulThrowError(ERRORS.configs_file_dont_follow_required_schema);
   }
 
