@@ -6,8 +6,12 @@ const SELECT_KEY = 'option' as const;
 
 const SELECT_OPTIONS = [
   {
-    name: 'choose repository to open',
+    name: 'choose a repository to open on your editor',
     value: 'open_repository'
+  },
+  {
+    name: 'choose a repository to open on your browser',
+    value: 'open_repository_link'
   },
   {
     name: 'pull missing repositories locally',

@@ -5,6 +5,7 @@ import { existsSync } from 'fs';
 import { platform } from 'os';
 
 import { openConfigsCommand } from './commands/open_configs.js';
+import { openRepositoryLinkCommand } from './commands/open_repository_link.js';
 import { openRepositoryCommand } from './commands/open_repository.js';
 import { pullMissingReposCommand } from './commands/pull_missing_repos.js';
 import { purgeLocalReposCommand } from './commands/purge_local_repos.js';
@@ -15,7 +16,7 @@ import { CONFIGS } from './consts/configs.js';
 import { ERRORS } from './consts/errors.js';
 import { TConfigs, configsSchema } from './consts/schema.js';
 import { TOptionsValues, optionSelect } from './selects/option_select.js';
-import { createUserConfigsFile } from './utils/configs_hanlder.js';
+import { createUserConfigsFile } from './utils/configs_handler.js';
 import { getParsedRepositories } from './utils/parse_repositories.js';
 import { readJson } from './utils/read_json.js';
 import { TNullable, gracefulThrowError } from './utils/utils.js';
@@ -26,6 +27,7 @@ type TProgramOptions = {
   pull_repos: boolean;
   purge_repos: boolean;
   open_repo: boolean;
+  open_repo_link: boolean;
   open_configs: boolean;
 };
 
@@ -37,7 +39,8 @@ function setupProgramConfigs() {
     .option('-r, --remove', 'remove the repositories configs file')
     .option('-p, --pull_repos', 'clone missing repositories locally')
     .option('-pg, --purge_repos', 'purge repositories that should not exist locally')
-    .option('-or, --open_repo', 'select repository to open')
+    .option('-or, --open_repo', 'select repository to open on your editor')
+    .option('-ol, --open_repo_link', 'select repository to open the link on your browser')
     .option('-oc, --open_configs', 'open the configs file');
 
   return program;
@@ -61,6 +64,7 @@ function parseCommanderOption(options: TProgramOptions): TNullable<TOptionsValue
   if (options.pull_repos) return 'pull_missing_repos';
   if (options.purge_repos) return 'purge_local_repos';
   if (options.open_repo) return 'open_repository';
+  if (options.open_repo_link) return 'open_repository_link';
   if (options.open_configs) return 'open_configs';
   return null;
 }
@@ -120,8 +124,13 @@ async function main() {
     return;
   }
 
+  if (parsedOption === 'open_repository_link') {
+    openRepositoryCommand({ parsedRepositories, userConfisFile });
+    return;
+  }
+
   if (parsedOption === 'open_configs') {
-    openConfigsCommand({ configsFilePath, userConfisFile });
+    openRepositoryLinkCommand({ parsedRepositories });
     return;
   }
 
@@ -134,6 +143,8 @@ async function main() {
       purgeLocalReposCommand({ parsedRepositories });
     } else if (option === 'open_repository') {
       openRepositoryCommand({ parsedRepositories, userConfisFile });
+    } else if (option === 'open_repository_link') {
+      openRepositoryLinkCommand({ parsedRepositories });
     } else if (option === 'open_configs') {
       openConfigsCommand({ configsFilePath, userConfisFile });
     }

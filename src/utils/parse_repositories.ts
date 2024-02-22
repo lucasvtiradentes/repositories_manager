@@ -32,6 +32,7 @@ export const getParsedRepositories = (configs: TConfigs) => {
           folder_path,
           local_path,
           exists_locally,
+          link: `https://github.com/${github_user}/${repo_name}`,
           ...options
         };
       });

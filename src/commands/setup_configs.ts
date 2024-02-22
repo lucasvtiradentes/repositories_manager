@@ -2,7 +2,7 @@ import { existsSync } from 'fs';
 
 import { APP_INFO } from '../consts/app_consts.js';
 import { CONFIGS } from '../consts/configs.js';
-import { setUserConfigsKeyValue } from '../utils/configs_hanlder.js';
+import { setUserConfigsKeyValue } from '../utils/configs_handler.js';
 import { successfulMessage } from '../utils/utils.js';
 
 type TSetupConfigsCommandProps = {

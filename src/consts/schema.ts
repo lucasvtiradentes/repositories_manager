@@ -5,19 +5,20 @@ const syncRepositorySchema = z.boolean().optional();
 const repositoryCategorySchema = z.string().nullable();
 
 const repositoryOptionsSchema = z.object({
+  domain: z.string().optional(),
   sync: syncRepositorySchema,
-  domain: z.string().optional()
+  link: repositoryLinkSchema
 });
 
 const githubRepositoriesSchema = z.record(z.tuple([repositoryCategorySchema]).or(z.tuple([repositoryCategorySchema, repositoryOptionsSchema])));
 
-const sshRepositorySchema = z.object({
-  domain: z.string(),
-  category: repositoryCategorySchema,
-  git_ssh: z.string(),
-  sync: syncRepositorySchema,
-  link: repositoryLinkSchema
-});
+const sshRepositorySchema = z
+  .object({
+    domain: z.string(),
+    category: repositoryCategorySchema,
+    git_ssh: z.string()
+  })
+  .merge(repositoryOptionsSchema.omit({ domain: true }));
 
 export const configsSchema = z.object({
   path: z.string(),
