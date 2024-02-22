@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 1.1.0
+
+### Minor Changes
+
+- b6a5121: add new commands and update the docs
+
 ## 1.0.1
 
 ### Patch Changes
