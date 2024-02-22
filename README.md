@@ -44,18 +44,21 @@ My primary motivation for developing this tool was to ensure that all my reposit
 
 ## :dart: Features<a href="#TOC"><img align="right" src="./.github/images/up_arrow.png" width="22"></a>
 
-&nbsp;&nbsp;&nbsp;✔️ manage all your repositories with a simple [configs json](./examples/configs.json) file (which follows [this schema](./src/consts/schema.ts)).<br>
+&nbsp;&nbsp;&nbsp;✔️ manage all your repositories with a simple [configs.json](./examples/configs_linux.json) file (which follows [this schema](./src/consts/schema.ts)).<br>
 &nbsp;&nbsp;&nbsp;✔️ shows a terminal menu to select option to perform;<br>
 &nbsp;&nbsp;&nbsp;✔️ clone missing repositories into local machine;<br>
-&nbsp;&nbsp;&nbsp;✔️ delete existing repositories that should not be present on the local machine.<br>
-&nbsp;&nbsp;&nbsp;✔️ quickly open a repository by selecting from a list.<br>
+&nbsp;&nbsp;&nbsp;✔️ delete existing repositories that should not be present on the local machine;/<br>
+&nbsp;&nbsp;&nbsp;✔️ quickly open a repository on your code editor by selecting from a list;<br>
+&nbsp;&nbsp;&nbsp;✔️ quickly open a repository link on your browser by selecting from a list;<br>
+&nbsp;&nbsp;&nbsp;✔️ works for [windows](./examples/configs_windows.json), [linux](./examples/configs_linux.json) and mac.<br>
 
 ## :warning: Requirements<a href="#TOC"><img align="right" src="./.github/images/up_arrow.png" width="22"></a>
 
 In order to use this project in your computer, you need to have the following items:
 
+- [nodejs](https://nodejs.org/en/): To actually run the package;
 - [npm](https://www.npmjs.com/): To install the package. Npm is installed alongside nodejs;
-- [nodejs](https://nodejs.org/en/): To actually run the package.
+- [git](https://git-scm.com): To clone the repositories.
 
 ## :bulb: Usage<a href="#TOC"><img align="right" src="./.github/images/up_arrow.png" width="22"></a>
 
@@ -80,14 +83,15 @@ Usage: repositories_manager [options]
 🔄 sync and manage your git repositories effortlessly.
 
 Options:
-  -s, --setup <file>   setup your repositories configs file path
-  -r, --remove         remove the repositories configs file
-  -p, --pull_repos     clone missing repositories locally
-  -pg, --purge_repos   purge repositories that should not exist locally
-  -or, --open_repo     select repository to open
-  -oc, --open_configs  open the configs file
-  -h, --help           display help for command
-  -V, --version        output the version number
+  -V, --version          output the version number
+  -s, --setup <file>     setup your repositories configs file path
+  -r, --remove           remove the repositories configs file
+  -p, --pull_repos       clone missing repositories locally
+  -pg, --purge_repos     purge repositories that should not exist locally
+  -or, --open_repo       select repository to open on your editor
+  -ol, --open_repo_link  select repository to open the link on your browser
+  -oc, --open_configs    open the configs file
+  -h, --help             display help for command
 ```
 
 or, if your prefer (as I do), simply run `rp` on your terminal and you can select the option you want!
