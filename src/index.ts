@@ -16,7 +16,7 @@ import { CONFIGS } from './consts/configs.js';
 import { ERRORS } from './consts/errors.js';
 import { TConfigs, configsSchema } from './consts/schema.js';
 import { TOptionsValues, optionSelect } from './selects/option_select.js';
-import { createUserConfigsFile } from './utils/configs_handler.js';
+import { TUserConfigs, createUserConfigsFile } from './utils/configs_handler.js';
 import { getParsedRepositories } from './utils/parse_repositories.js';
 import { readJson } from './utils/read_json.js';
 import { TNullable, gracefulThrowError } from './utils/utils.js';
@@ -46,10 +46,7 @@ function setupProgramConfigs() {
   return program;
 }
 
-function getParsedConfigsFileOrThrow() {
-  const configsFile = readJson(CONFIGS.user_configs_file) as { configs_path: string };
-  if (!existsSync(configsFile.configs_path)) gracefulThrowError(ERRORS.configs_file_does_not_exists);
-
+function getParsedConfigsFileOrThrow(configsFile: TUserConfigs) {
   const userConfisFile = readJson(configsFile.configs_path) as TConfigs;
   if (!configsSchema.safeParse(userConfisFile).success) {
     gracefulThrowError(ERRORS.configs_file_dont_follow_required_schema);
@@ -87,26 +84,24 @@ async function main() {
     return;
   }
 
-  // if it does not exists means the user has not configured their repos
-  const shouldShowHelpOrThrowError = !existsSync(CONFIGS.user_configs_file);
+  if (parsedOption === 'remove_configs') {
+    removeConfigsCommand();
+    return;
+  }
 
-  if (shouldShowHelpOrThrowError) {
+  const configsFile = readJson(CONFIGS.user_configs_file) as TUserConfigs;
+  if (!existsSync(configsFile.configs_path)) {
     const hasSpecifiedAnOption = Object.keys(options).length > 0;
-
     if (hasSpecifiedAnOption) {
-      gracefulThrowError(ERRORS.method_requires_configs);
+      removeConfigsCommand(true);
+      gracefulThrowError(ERRORS.configs_file_does_not_exists);
     } else {
       program.help();
       return;
     }
   }
 
-  if (parsedOption === 'remove_configs') {
-    removeConfigsCommand();
-    return;
-  }
-
-  const { configsFilePath, userConfisFile } = getParsedConfigsFileOrThrow();
+  const { configsFilePath, userConfisFile } = getParsedConfigsFileOrThrow(configsFile);
   const parsedRepositories = getParsedRepositories(userConfisFile);
 
   if (parsedOption === 'pull_missing_repos') {
@@ -125,12 +120,12 @@ async function main() {
   }
 
   if (parsedOption === 'open_repository_link') {
-    openRepositoryCommand({ parsedRepositories, userConfisFile });
+    openRepositoryLinkCommand({ parsedRepositories });
     return;
   }
 
   if (parsedOption === 'open_configs') {
-    openRepositoryLinkCommand({ parsedRepositories });
+    openConfigsCommand({ configsFilePath });
     return;
   }
 
@@ -146,7 +141,7 @@ async function main() {
     } else if (option === 'open_repository_link') {
       openRepositoryLinkCommand({ parsedRepositories });
     } else if (option === 'open_configs') {
-      openConfigsCommand({ configsFilePath, userConfisFile });
+      openConfigsCommand({ configsFilePath });
     }
   });
 }

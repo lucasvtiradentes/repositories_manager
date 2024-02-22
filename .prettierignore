@@ -6,7 +6,9 @@
 dist
 ignore
 node_modules
-examples/configs.json
+
+examples/configs_linux.json
+examples/configs_windows.json
 
 # FILES ========================================================================
 

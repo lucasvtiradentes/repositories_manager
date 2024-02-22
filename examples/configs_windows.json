@@ -1,8 +1,7 @@
 {
-  "path": "/home/lucasvtiradentes/repos",
+  "path": "C:\\Users\\lucas\\repos",
   "open_command": {
-    "repository": "code",
-    "configs": "gedit"
+    "repository": "code"
   },
   "github_repositories": {
     "lucasvtiradentes": {

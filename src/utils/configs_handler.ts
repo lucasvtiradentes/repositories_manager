@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { CONFIGS } from '../consts/configs.js';
 import { readJson } from './read_json.js';
 
-type TUserConfigs = {
+export type TUserConfigs = {
   configs_path: string;
 };
 

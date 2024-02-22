@@ -1,6 +1,6 @@
 import { repositorySelect } from '../selects/repository_select.js';
-import { openURL } from '../utils/open_url.js';
 import { TExtendedRepo } from '../utils/parse_repositories.js';
+import { openURL } from '../utils/utils.js';
 import { gracefulThrowError } from '../utils/utils.js';
 
 type TOpenRepositoryCommandProps = {

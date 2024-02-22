@@ -1,14 +1,9 @@
-import { spawn } from 'node:child_process';
-
-import { TConfigs } from '../consts/schema.js';
+import { openTextFile } from '../utils/utils.js';
 
 type TOpenConfigsCommandProps = {
-  userConfisFile: TConfigs;
   configsFilePath: string;
 };
 
-export const openConfigsCommand = ({ userConfisFile, configsFilePath }: TOpenConfigsCommandProps) => {
-  // const commandToOpenConfigs = `${userConfisFile.open_command.configs} ${configsFilePath}`;
-  const child = spawn(userConfisFile.open_command.configs, [configsFilePath], { detached: true, stdio: 'ignore' });
-  child.unref();
+export const openConfigsCommand = ({ configsFilePath }: TOpenConfigsCommandProps) => {
+  openTextFile(configsFilePath);
 };
