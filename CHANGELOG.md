@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 1.2.0
+
+### Minor Changes
+
+- 5c8c340: add new repo local folder config
+
 ## 1.1.0
 
 ### Minor Changes
