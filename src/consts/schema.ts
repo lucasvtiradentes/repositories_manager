@@ -3,8 +3,8 @@ import { z } from 'zod';
 const repositoryCategorySchema = z.string().nullable();
 
 const repositoryOptionsSchema = z.object({
-  domain: z.string().optional(),
   sync: z.boolean().optional(),
+  domain: z.string().optional(),
   link: z.string().optional(),
   local_path: z.string().optional()
 });
@@ -20,6 +20,7 @@ const sshRepositorySchema = z
   .merge(repositoryOptionsSchema.omit({ domain: true }));
 
 export const configsSchema = z.object({
+  $schema: z.string(),
   path: z.string(),
   open_repo_on_editor_command: z.string(),
   github_repositories: z.record(githubRepositoriesSchema),
