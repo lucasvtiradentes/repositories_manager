@@ -3,7 +3,7 @@ import { existsSync, mkdirSync } from 'node:fs';
 import { confirmationSelect } from '../selects/confirmation_select.js';
 import { logger } from '../utils/logger.js';
 import { TExtendedRepo } from '../utils/parse_repositories.js';
-import { asyncExec, standardizeStringArray, successfulMessage } from '../utils/utils.js';
+import { asyncExec, removeLastDirectory, standardizeStringArray, successfulMessage } from '../utils/utils.js';
 
 type TPullMissingReposCommandProps = {
   parsedRepositories: TExtendedRepo[];
@@ -35,8 +35,9 @@ export const pullMissingReposCommand = async ({ parsedRepositories }: TPullMissi
   confirmationSelect('are you sure you want to clone them?', async (shouldCloneRepos) => {
     if (shouldCloneRepos) {
       for (const repo of reposToClone) {
-        if (!existsSync(repo.folder_path)) {
-          mkdirSync(repo.folder_path, { recursive: true });
+        const parentFolder = removeLastDirectory(repo.local_path);
+        if (!existsSync(parentFolder)) {
+          mkdirSync(parentFolder, { recursive: true });
         }
         await asyncExec(`git clone ${repo.git_ssh} ${repo.local_path}`);
         logger.info(`clonned ${repo.repository_name}`);

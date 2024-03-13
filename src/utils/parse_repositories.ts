@@ -2,11 +2,10 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { TConfigs } from '../consts/schema.js';
-import { extractRepositoryNameFromSshString, mergeArraysOfArrays } from './utils.js';
+import { extractLinkFromSshString, extractRepositoryNameFromSshString, mergeArraysOfArrays } from './utils.js';
 
 export type TExtendedRepo = TConfigs['ssh_repositories'][number] & {
   repository_name: string;
-  folder_path: string;
   local_path: string;
   sync?: boolean;
   exists_locally: boolean;
@@ -20,7 +19,7 @@ export const getParsedRepositories = (configs: TConfigs) => {
         const [category, options] = repo_configs;
         const domain = options?.domain ?? github_user_domain;
         const folder_path = join(configs.path, domain, category ?? '');
-        const local_path = join(folder_path, repo_name);
+        const local_path = options?.local_path ?? join(folder_path, repo_name);
         const exists_locally = existsSync(local_path);
         const git_ssh = `git@github.com:${github_user}/${repo_name}.git`;
 
@@ -29,10 +28,9 @@ export const getParsedRepositories = (configs: TConfigs) => {
           git_ssh,
           repository_name: extractRepositoryNameFromSshString(git_ssh)!,
           category,
-          folder_path,
           local_path,
           exists_locally,
-          link: `https://github.com/${github_user}/${repo_name}`,
+          link: extractLinkFromSshString(git_ssh),
           ...options
         };
       });
@@ -44,15 +42,16 @@ export const getParsedRepositories = (configs: TConfigs) => {
     const repository_name = extractRepositoryNameFromSshString(repo.git_ssh)!;
 
     const folder_path = join(configs.path, repo.domain, repo.category ?? '');
-    const local_path = join(folder_path, repository_name);
+    const local_path = repo?.local_path ?? join(folder_path, repository_name);
     const exists_locally = existsSync(local_path);
 
     return {
-      ...repo,
       repository_name,
       folder_path,
       local_path,
-      exists_locally
+      exists_locally,
+      link: extractLinkFromSshString(repo.git_ssh),
+      ...repo
     };
   });
 

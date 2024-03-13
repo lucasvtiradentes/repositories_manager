@@ -78,6 +78,17 @@ export function getAllSubfolders(dir: string, subfolders: string[] = []): string
 
 // STRING UTILS ================================================================
 
+export function removeLastDirectory(path: string): string {
+  const regex = /^(.*[\\/])[^\\/]+[\\/]?$/;
+  const match = path.match(regex);
+
+  if (!match) {
+    throw new Error('Caminho inválido');
+  }
+
+  return match[1].replace(/[\\/]$/, '');
+}
+
 export function standardizeString(value: string, length: number) {
   const rowMaxLength = length;
 
@@ -92,6 +103,18 @@ export function standardizeString(value: string, length: number) {
   })();
 
   return parsedItem;
+}
+
+export function extractLinkFromSshString(sshString: string) {
+  const regex = /^(git@)([^:]+):(.+)(\.git)$/;
+  const match = sshString.match(regex);
+
+  if (!match) {
+    throw new Error('String SSH inválida');
+  }
+
+  const [, _git, domain, path, _extension] = match;
+  return `https://${domain}/${path}`;
 }
 
 export function extractRepositoryNameFromSshString(url: string) {

@@ -1,13 +1,12 @@
 import { z } from 'zod';
 
-const repositoryLinkSchema = z.string().optional();
-const syncRepositorySchema = z.boolean().optional();
 const repositoryCategorySchema = z.string().nullable();
 
 const repositoryOptionsSchema = z.object({
   domain: z.string().optional(),
-  sync: syncRepositorySchema,
-  link: repositoryLinkSchema
+  sync: z.boolean().optional(),
+  link: z.string().optional(),
+  local_path: z.string().optional()
 });
 
 const githubRepositoriesSchema = z.record(z.tuple([repositoryCategorySchema]).or(z.tuple([repositoryCategorySchema, repositoryOptionsSchema])));
