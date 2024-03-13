@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/@repositories_manager@1.2.0/schema.json",
+  "$schema": "https://unpkg.com/repositories_manager@1.2.0/schema.json",
   "path": "/home/lucasvtiradentes/repos",
   "open_repo_on_editor_command": "code",
   "github_repositories": {

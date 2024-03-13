@@ -1,19 +1,19 @@
 {
-  "$schema": "https://unpkg.com/@repositories_manager@1.2.0/schema.json",
+  "$schema": "https://unpkg.com/repositories_manager@1.2.0/schema.json",
   "path": "C:\\Users\\lucas\\repos",
   "open_repo_on_editor_command": "code",
   "github_repositories": {
     "lucasvtiradentes": {
-      "gcal-sync":                  ["open_source",  { "sync": true }],
-      "linux_reminder":             ["open_source"],
-      "ticktick-api-lvt":           ["open_source",  { "sync": true }],
-      "waiter-app-server":          ["portfolio"],
-      "waiter-app-mobile":          ["portfolio"],
-      "biacaminha.com.br":          ["freelance"]
+      "gcal-sync":         ["open_source",  { "sync": true }],
+      "linux_reminder":    ["open_source"],
+      "ticktick-api-lvt":  ["open_source",  { "sync": true }],
+      "waiter-app-server": ["portfolio"],
+      "waiter-app-mobile": ["portfolio"],
+      "biacaminha.com.br": ["freelance"]
     }
   },
   "ssh_repositories": [
-    { "domain": "tmp", "category": null,       "git_ssh": "git@github.com:rocketseat-education/pizzashop-api.git" },
-    { "domain": "tmp", "category": null,       "git_ssh": "git@github.com:rocketseat-education/pizzashop-web.git", "sync": true }
+    { "domain": "tmp", "category": null, "git_ssh": "git@github.com:rocketseat-education/pizzashop-api.git" },
+    { "domain": "tmp", "category": null, "git_ssh": "git@github.com:rocketseat-education/pizzashop-web.git", "sync": true }
   ]
 }
