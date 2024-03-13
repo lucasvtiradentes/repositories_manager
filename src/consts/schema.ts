@@ -21,9 +21,7 @@ const sshRepositorySchema = z
 
 export const configsSchema = z.object({
   path: z.string(),
-  open_command: z.object({
-    repository: z.string()
-  }),
+  open_repo_on_editor_command: z.string(),
   github_repositories: z.record(githubRepositoriesSchema),
   ssh_repositories: z.array(sshRepositorySchema)
 });

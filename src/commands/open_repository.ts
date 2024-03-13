@@ -14,7 +14,7 @@ export const openRepositoryCommand = async ({ parsedRepositories, userConfisFile
     const repoInfo = parsedRepositories.find((repo) => repo.git_ssh === repository)!;
 
     const openCurrentRepository = async () => {
-      const openRepoCommand = `${userConfisFile.open_command.repository} ${repoInfo.local_path}`;
+      const openRepoCommand = `${userConfisFile.open_repo_on_editor_command} ${repoInfo.local_path}`;
       await asyncExec(openRepoCommand);
     };
 

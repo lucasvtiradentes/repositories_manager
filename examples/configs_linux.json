@@ -1,8 +1,6 @@
 {
   "path": "/home/lucasvtiradentes/repos",
-  "open_command": {
-    "repository": "code"
-  },
+  "open_repo_on_editor_command": "code",
   "github_repositories": {
     "lucasvtiradentes": {
       "gcal-sync":                  ["open_source",  { "sync": true }],
