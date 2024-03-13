@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "repositoryOptions": {
+      "type": "object",
+      "properties": {
+        "domain": { "type": "string" },
+        "sync": { "type": "boolean" },
+        "link": { "type": "string" },
+        "local_path": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "$schema": { "type": "string" },
+    "path": { "type": "string", "description": "Path of the folder where your repositories are." },
+    "open_repo_on_editor_command": { "type": "string", "description": "Command to open the repository on the editor" },
+    "github_repositories": {
+      "type": "object",
+      "description": "Specify your github repositories.",
+      "patternProperties": {
+        ".*": {
+          "type": "object",
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "properties": {
+                  "sync": { "type": ["boolean", "null"] },
+                  "domain": { "type": ["string", "null"] },
+                  "link": { "type": ["string", "null"] },
+                  "local_path": { "type": ["string", "null"] }
+                },
+                "required": [],
+                "additionalProperties": false
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ssh_repositories": {
+      "type": "array",
+      "description": "Specify your ssh repositories.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "domain": { "type": "string" },
+          "category": { "type": ["string", "null"] },
+          "git_ssh": { "type": "string" },
+          "sync": { "type": "boolean" },
+          "link": { "type": ["string", "null"] },
+          "local_path": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false,
+        "required": ["domain", "category", "git_ssh"]
+      }
+    }
+  },
+  "required": ["path", "open_repo_on_editor_command", "github_repositories", "ssh_repositories"],
+  "additionalProperties": false
+}
