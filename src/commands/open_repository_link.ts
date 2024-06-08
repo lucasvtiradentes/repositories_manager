@@ -1,10 +1,10 @@
 import { repositorySelect } from '../selects/repository_select.js';
-import { TExtendedRepo } from '../utils/parse_repositories.js';
+import { ParsedRepository } from '../utils/parse_repositories.js';
 import { openURL } from '../utils/utils.js';
 import { gracefulThrowError } from '../utils/utils.js';
 
 type TOpenRepositoryCommandProps = {
-  parsedRepositories: TExtendedRepo[];
+  parsedRepositories: ParsedRepository[];
 };
 
 export const openRepositoryLinkCommand = async ({ parsedRepositories }: TOpenRepositoryCommandProps) => {

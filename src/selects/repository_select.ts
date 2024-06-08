@@ -2,18 +2,18 @@ import fuse from 'fuse.js';
 import inquirer from 'inquirer';
 import inquirerPrompt from 'inquirer-autocomplete-prompt';
 
-import { TExtendedRepo } from '../utils/parse_repositories.js';
+import { ParsedRepository } from '../utils/parse_repositories.js';
 import { extractRepositoryNameFromSshString, standardizeString } from '../utils/utils.js';
 
 const SELECT_KEY = 'repository' as const;
 
-export function repositorySelect(repositories: TExtendedRepo[], cbFn: (answer: TExtendedRepo['git_ssh']) => Promise<void>) {
+export function repositorySelect(repositories: ParsedRepository[], cbFn: (answer: ParsedRepository['git_ssh']) => Promise<void>) {
   const maxRepositoryNameLength = Math.max(...repositories.map((item) => extractRepositoryNameFromSshString(item.git_ssh)!.length));
-  const maxCategoryLength = Math.max(...repositories.map((item) => (item.category ?? '').length));
-  const maxDomainLength = Math.max(...repositories.map((item) => item.domain.length));
+  const maxCategoryLength = Math.max(...repositories.map((item) => (item.group ?? '').length));
+  const maxDomainLength = Math.max(...repositories.map((item) => (item.parent ?? '').length));
 
   const parsedData = repositories.map((item) => {
-    const repoInfo = [standardizeString(extractRepositoryNameFromSshString(item.git_ssh)!, maxRepositoryNameLength), standardizeString(item.category ?? '', maxCategoryLength), standardizeString(item.domain, maxDomainLength)].join(' ');
+    const repoInfo = [standardizeString(extractRepositoryNameFromSshString(item.git_ssh)!, maxRepositoryNameLength), standardizeString(item.group ?? '', maxCategoryLength), standardizeString(item.parent ?? '', maxDomainLength)].join(' ');
 
     return {
       name: repoInfo,

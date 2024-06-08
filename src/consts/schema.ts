@@ -6,14 +6,17 @@ const repoWithGroupSchema = z.object({
 });
 
 const repoWithPathSchema = z.object({
-  path: z.string()
+  local_path: z.string()
 });
 
 const commonRepositorySchema = z.object({
-  sync: z.boolean().optional()
+  sync: z.boolean().optional(),
+  link: z.string().optional()
 });
 
 const githubRepositorySchema = commonRepositorySchema.and(repoWithGroupSchema.partial({ parent: true }).or(repoWithPathSchema));
+
+export type GithubRepository = TConfigs['github_repositories'][string];
 
 const sshRepositorySchema = commonRepositorySchema
   .and(
@@ -22,6 +25,8 @@ const sshRepositorySchema = commonRepositorySchema
     })
   )
   .and(repoWithGroupSchema.or(repoWithPathSchema));
+
+export type SShRepository = TConfigs['ssh_repositories'][number];
 
 // =============================================================================
 
