@@ -30,6 +30,10 @@ const SELECT_OPTIONS = [
   {
     name: 'remove your repositories sync configs',
     value: 'remove_configs'
+  },
+  {
+    name: 'update configs based on local repositories',
+    value: 'update_configs'
   }
 ] as const;
 
