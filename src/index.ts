@@ -50,7 +50,6 @@ function setupProgramConfigs() {
 
 function getParsedConfigsFileOrThrow(configsFile: TUserConfigs) {
   const userConfisFile = readJson(configsFile.configs_path) as TConfigs;
-  configsSchema.parse(userConfisFile);
 
   if (!configsSchema.safeParse(userConfisFile).success) {
     gracefulThrowError(ERRORS.configs_file_dont_follow_required_schema);

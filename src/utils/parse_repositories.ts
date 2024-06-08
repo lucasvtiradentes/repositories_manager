@@ -5,8 +5,8 @@ import { GithubRepository, TConfigs } from '../consts/schema.js';
 import { extractLinkFromSshString, extractRepositoryNameFromSshString, mergeArraysOfArrays } from './utils.js';
 
 export type ParsedRepository = {
-  parent?: string;
-  group?: string;
+  parent: string;
+  group: string;
   sync: boolean;
   link: string;
   git_ssh: string;
@@ -31,8 +31,10 @@ export const getParsedRepositories = (configs: TConfigs) => {
           repository_name: extractRepositoryNameFromSshString(git_ssh)!,
           local_path,
           exists_locally,
-          link: link ?? extractLinkFromSshString(git_ssh)
-        };
+          link: link ?? extractLinkFromSshString(git_ssh),
+          parent: 'parent' in rest ? rest.parent! : github_user_domain,
+          group: 'group' in rest ? rest.group! : ''
+        } satisfies ParsedRepository;
       });
       return parsedGithubUserRepos;
     })
@@ -50,8 +52,10 @@ export const getParsedRepositories = (configs: TConfigs) => {
       exists_locally,
       link: repo.link ?? extractLinkFromSshString(repo.git_ssh),
       git_ssh: repo.git_ssh,
-      sync: repo.sync ?? false
-    };
+      sync: repo.sync ?? false,
+      parent: 'parent' in repo ? repo.parent! : '',
+      group: 'group' in repo ? repo.group! : ''
+    } satisfies ParsedRepository;
   });
 
   const allRepositories: ParsedRepository[] = [...parsedGithubRepositories, ...parsedSshRepositories];
