@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 2.0.0
+
+### Major Changes
+
+- 3fbb24f: add update schema automatically option
+
 ## 1.2.0
 
 ### Minor Changes
