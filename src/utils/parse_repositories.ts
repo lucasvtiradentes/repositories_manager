@@ -5,7 +5,7 @@ import { GithubRepository, TConfigs } from '../consts/schema.js';
 import { extractLinkFromSshString, extractRepositoryNameFromSshString, mergeArraysOfArrays } from './utils.js';
 
 export type ParsedRepository = {
-  parent: string;
+  domain: string;
   group: string;
   sync: boolean;
   link: string;
@@ -21,7 +21,7 @@ export const getParsedRepositories = (configs: TConfigs) => {
       const github_user_domain = `github_${github_user}`;
       const parsedGithubUserRepos = Object.entries(github_repositories).map(([repo_name, repo_configs]) => {
         const { link, sync, ...rest } = repo_configs as unknown as GithubRepository;
-        const local_path = 'local_path' in rest ? rest?.local_path : join(join(configs.path, rest?.parent ?? github_user_domain, rest.group ?? ''), repo_name);
+        const local_path = 'local_path' in rest ? rest?.local_path : join(join(configs.path, rest?.domain ?? github_user_domain, rest.group ?? ''), repo_name);
         const exists_locally = existsSync(local_path);
         const git_ssh = `git@github.com:${github_user}/${repo_name}.git`;
 
@@ -32,7 +32,7 @@ export const getParsedRepositories = (configs: TConfigs) => {
           local_path,
           exists_locally,
           link: link ?? extractLinkFromSshString(git_ssh),
-          parent: 'parent' in rest ? rest.parent! : github_user_domain,
+          domain: 'domain' in rest ? rest.domain! : github_user_domain,
           group: 'group' in rest ? rest.group! : ''
         } satisfies ParsedRepository;
       });
@@ -43,7 +43,7 @@ export const getParsedRepositories = (configs: TConfigs) => {
   const parsedSshRepositories = configs.ssh_repositories.map((repo) => {
     const repository_name = extractRepositoryNameFromSshString(repo.git_ssh)!;
 
-    const local_path = 'local_path' in repo ? repo.local_path : join(join(configs.path, repo.parent, repo.group ?? ''), repository_name);
+    const local_path = 'local_path' in repo ? repo.local_path : join(join(configs.path, repo.domain, repo.group ?? ''), repository_name);
     const exists_locally = existsSync(local_path);
 
     return {
@@ -53,7 +53,7 @@ export const getParsedRepositories = (configs: TConfigs) => {
       link: repo.link ?? extractLinkFromSshString(repo.git_ssh),
       git_ssh: repo.git_ssh,
       sync: repo.sync ?? false,
-      parent: 'parent' in repo ? repo.parent! : '',
+      domain: 'domain' in repo ? repo.domain! : '',
       group: 'group' in repo ? repo.group! : ''
     } satisfies ParsedRepository;
   });
@@ -61,7 +61,7 @@ export const getParsedRepositories = (configs: TConfigs) => {
   const allRepositories: ParsedRepository[] = [...parsedGithubRepositories, ...parsedSshRepositories];
 
   const sortedRepositories = allRepositories.sort((a, b) => {
-    const categoryComparison = (a?.parent ?? '').localeCompare(b?.parent ?? '');
+    const categoryComparison = (a?.domain ?? '').localeCompare(b?.domain ?? '');
     if (categoryComparison !== 0) {
       return categoryComparison;
     }

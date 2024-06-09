@@ -29,7 +29,7 @@
                 "sync": { "type": "boolean" },
                 "link": { "type": "string" },
 
-                "parent": { "type": "string" },
+                "domain": { "type": "string" },
                 "group": { "type": "string" },
                 "local_path": { "type": "string" }
               },
@@ -50,11 +50,11 @@
           "sync": { "type": "boolean" },
           "link": { "type": "string" },
           "git_ssh": { "type": "string" },
-
-          "parent": { "type": "string" },
+          "domain": { "type": "string" },
           "group": { "type": "string" },
           "local_path": { "type": "string" }
         },
+        "oneOf": [{ "required": ["domain", "group"] }, { "required": ["local_path"] }],
         "additionalProperties": false,
         "required": ["git_ssh"]
       }

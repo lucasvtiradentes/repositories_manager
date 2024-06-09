@@ -10,10 +10,10 @@ const SELECT_KEY = 'repository' as const;
 export function repositorySelect(repositories: ParsedRepository[], cbFn: (answer: ParsedRepository['git_ssh']) => Promise<void>) {
   const maxRepositoryNameLength = Math.max(...repositories.map((item) => extractRepositoryNameFromSshString(item.git_ssh)!.length));
   const maxCategoryLength = Math.max(...repositories.map((item) => (item.group ?? '').length));
-  const maxDomainLength = Math.max(...repositories.map((item) => (item.parent ?? '').length));
+  const maxDomainLength = Math.max(...repositories.map((item) => (item.domain ?? '').length));
 
   const parsedData = repositories.map((item) => {
-    const repoInfo = [standardizeString(extractRepositoryNameFromSshString(item.git_ssh)!, maxRepositoryNameLength), standardizeString(item.group ?? '', maxCategoryLength), standardizeString(item.parent ?? '', maxDomainLength)].join(' ');
+    const repoInfo = [standardizeString(extractRepositoryNameFromSshString(item.git_ssh)!, maxRepositoryNameLength), standardizeString(item.group ?? '', maxCategoryLength), standardizeString(item.domain ?? '', maxDomainLength)].join(' ');
 
     return {
       name: repoInfo,

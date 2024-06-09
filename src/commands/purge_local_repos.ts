@@ -10,7 +10,7 @@ type PurgeLocalReposCommandProps = {
 export const purgeLocalReposCommand = async ({ parsedRepositories }: PurgeLocalReposCommandProps) => {
   const reposToDelete = parsedRepositories.filter((repo) => repo.exists_locally && repo.sync !== true);
 
-  const maxCategoryName = Math.max(...reposToDelete.map((repo) => (repo.parent ?? '').length));
+  const maxCategoryName = Math.max(...reposToDelete.map((repo) => (repo.domain ?? '').length));
   const maxSubcategoryName = Math.max(...reposToDelete.map((repo) => (repo.group ?? '').length));
   const maxRepoName = Math.max(...reposToDelete.map((repo) => repo.repository_name.length));
   const maxColumnsArr = [maxCategoryName, maxSubcategoryName, maxRepoName];
@@ -24,7 +24,7 @@ export const purgeLocalReposCommand = async ({ parsedRepositories }: PurgeLocalR
   logger.info(standardizeStringArray(['domain', 'category', 'repository', 'action'], maxColumnsArr));
 
   for (const repo of reposToDelete) {
-    const commonString = standardizeStringArray([repo.parent ?? '', repo.group ?? '', repo.repository_name, ''], maxColumnsArr);
+    const commonString = standardizeStringArray([repo.domain ?? '', repo.group ?? '', repo.repository_name, ''], maxColumnsArr);
     logger.info(commonString);
   }
 

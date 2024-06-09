@@ -22,12 +22,12 @@
   },
   "ssh_repositories": [
     {
-      "parent": "uds",
+      "domain": "uds",
       "group": "it_works",
       "git_ssh": "git@gitlab.uds.com.br:itworks/contabilidade/application/backend-node.git"
     },
     {
-      "parent": "uds",
+      "domain": "uds",
       "group": "pdv365",
       "git_ssh": "git@gitlab.uds.com.br:pdv365/pdv365/portal-franquia/portal-dashboard.git"
     },
