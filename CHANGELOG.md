@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 2.0.1
+
+### Patch Changes
+
+- 217d553: update json schema
+
 ## 2.0.0
 
 ### Major Changes
