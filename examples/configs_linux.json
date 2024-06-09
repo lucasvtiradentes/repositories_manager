@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/repositories_manager@1.2.0/schema.json",
+  "$schema": "https://unpkg.com/repositories_manager@2.0.1/schema.json",
   "path": "/home/lucasvtiradentes/repos",
   "open_repo_on_editor_command": "code",
   "github_repositories": {
@@ -22,12 +22,12 @@
   },
   "ssh_repositories": [
     {
-      "parent": "uds",
+      "domain": "uds",
       "group": "it_works",
       "git_ssh": "git@gitlab.uds.com.br:itworks/contabilidade/application/backend-node.git"
     },
     {
-      "parent": "uds",
+      "domain": "uds",
       "group": "pdv365",
       "git_ssh": "git@gitlab.uds.com.br:pdv365/pdv365/portal-franquia/portal-dashboard.git"
     }
