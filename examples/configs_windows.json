@@ -4,16 +4,36 @@
   "open_repo_on_editor_command": "code",
   "github_repositories": {
     "lucasvtiradentes": {
-      "gcal-sync":         ["open_source",  { "sync": true }],
-      "linux_reminder":    ["open_source"],
-      "ticktick-api-lvt":  ["open_source",  { "sync": true }],
-      "waiter-app-server": ["portfolio"],
-      "waiter-app-mobile": ["portfolio"],
-      "biacaminha.com.br": ["freelance"]
+      "lucasvtiradentes": {
+        "group": "personal"
+      },
+      "ticktick-api-lvt": {
+        "group": "open-source"
+      },
+      "lvt_page_actions": {
+        "group": "personal"
+      },
+      "obsidian-notes-manager": {
+        "group": "open-source",
+        "sync": true,
+        "local_path": "/home/lucasvtiradentes/repos/github_lucasvtiradentes/personal/obsidian_vaults/NOTAS/dev_tools/.obsidian/plugins/obsidian-notes-manager"
+      }
     }
   },
   "ssh_repositories": [
-    { "domain": "tmp", "category": null, "git_ssh": "git@github.com:rocketseat-education/pizzashop-api.git" },
-    { "domain": "tmp", "category": null, "git_ssh": "git@github.com:rocketseat-education/pizzashop-web.git", "sync": true }
+    {
+      "domain": "uds",
+      "group": "it_works",
+      "git_ssh": "git@gitlab.uds.com.br:itworks/contabilidade/application/backend-node.git"
+    },
+    {
+      "domain": "uds",
+      "group": "pdv365",
+      "git_ssh": "git@gitlab.uds.com.br:pdv365/pdv365/portal-franquia/portal-dashboard.git"
+    },
+    {
+      "git_ssh": "git@gitlab.uds.com.br:pdv365/pdv365/terminal/terminal-account.git",
+      "sync": true
+    }
   ]
 }

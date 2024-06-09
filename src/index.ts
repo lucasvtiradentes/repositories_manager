@@ -11,11 +11,12 @@ import { pullMissingReposCommand } from './commands/pull_missing_repos.js';
 import { purgeLocalReposCommand } from './commands/purge_local_repos.js';
 import { removeConfigsCommand } from './commands/remove_configs.js';
 import { setupConfigsCommand } from './commands/setup_configs.js';
+import { updateConfigsCommand } from './commands/update_configs.js';
 import { APP_INFO } from './consts/app_consts.js';
 import { CONFIGS } from './consts/configs.js';
 import { ERRORS } from './consts/errors.js';
 import { TConfigs, configsSchema } from './consts/schema.js';
-import { TOptionsValues, optionSelect } from './selects/option_select.js';
+import { SELECT_OPTIONS_ENUM, TOptionsValues, optionSelect } from './selects/option_select.js';
 import { TUserConfigs, createUserConfigsFile } from './utils/configs_handler.js';
 import { getParsedRepositories } from './utils/parse_repositories.js';
 import { readJson } from './utils/read_json.js';
@@ -29,6 +30,7 @@ type TProgramOptions = {
   open_repo: boolean;
   open_repo_link: boolean;
   open_configs: boolean;
+  update_configs: boolean;
 };
 
 function setupProgramConfigs() {
@@ -41,13 +43,14 @@ function setupProgramConfigs() {
     .option('-pg, --purge_repos', 'purge repositories that should not exist locally')
     .option('-or, --open_repo', 'select repository to open on your editor')
     .option('-ol, --open_repo_link', 'select repository to open the link on your browser')
-    .option('-oc, --open_configs', 'open the configs file');
-
+    .option('-oc, --open_configs', 'open the configs file')
+    .option('-uc, --update_configs', 'update the configs file based on your local repositories');
   return program;
 }
 
 function getParsedConfigsFileOrThrow(configsFile: TUserConfigs) {
   const userConfisFile = readJson(configsFile.configs_path) as TConfigs;
+
   if (!configsSchema.safeParse(userConfisFile).success) {
     gracefulThrowError(ERRORS.configs_file_dont_follow_required_schema);
   }
@@ -56,13 +59,14 @@ function getParsedConfigsFileOrThrow(configsFile: TUserConfigs) {
 }
 
 function parseCommanderOption(options: TProgramOptions): TNullable<TOptionsValues> {
-  if (options.setup) return 'setup_configs';
-  if (options.remove) return 'remove_configs';
-  if (options.pull_repos) return 'pull_missing_repos';
-  if (options.purge_repos) return 'purge_local_repos';
-  if (options.open_repo) return 'open_repository';
-  if (options.open_repo_link) return 'open_repository_link';
-  if (options.open_configs) return 'open_configs';
+  if (options.setup) return SELECT_OPTIONS_ENUM.setup_configs;
+  if (options.remove) return SELECT_OPTIONS_ENUM.remove_configs;
+  if (options.pull_repos) return SELECT_OPTIONS_ENUM.pull_missing_repos;
+  if (options.purge_repos) return SELECT_OPTIONS_ENUM.purge_local_repos;
+  if (options.open_repo) return SELECT_OPTIONS_ENUM.open_repository;
+  if (options.open_repo_link) return SELECT_OPTIONS_ENUM.open_repository_link;
+  if (options.open_configs) return SELECT_OPTIONS_ENUM.open_configs;
+  if (options.update_configs) return SELECT_OPTIONS_ENUM.update_configs;
   return null;
 }
 
@@ -79,12 +83,12 @@ async function main() {
   const options = program.opts() satisfies TProgramOptions;
   const parsedOption = parseCommanderOption(options);
 
-  if (parsedOption === 'setup_configs') {
+  if (parsedOption === SELECT_OPTIONS_ENUM.setup_configs) {
     setupConfigsCommand({ configs_path: options.setup });
     return;
   }
 
-  if (parsedOption === 'remove_configs') {
+  if (parsedOption === SELECT_OPTIONS_ENUM.remove_configs) {
     removeConfigsCommand();
     return;
   }
@@ -104,44 +108,51 @@ async function main() {
   const { configsFilePath, userConfisFile } = getParsedConfigsFileOrThrow(configsFile);
   const parsedRepositories = getParsedRepositories(userConfisFile);
 
-  if (parsedOption === 'pull_missing_repos') {
+  if (parsedOption === SELECT_OPTIONS_ENUM.update_configs) {
+    updateConfigsCommand({ configs: userConfisFile, repositories: parsedRepositories, configs_path: configsFilePath });
+    return;
+  }
+
+  if (parsedOption === SELECT_OPTIONS_ENUM.pull_missing_repos) {
     pullMissingReposCommand({ parsedRepositories });
     return;
   }
 
-  if (parsedOption === 'purge_local_repos') {
+  if (parsedOption === SELECT_OPTIONS_ENUM.purge_local_repos) {
     purgeLocalReposCommand({ parsedRepositories });
     return;
   }
 
-  if (parsedOption === 'open_repository') {
+  if (parsedOption === SELECT_OPTIONS_ENUM.open_repository) {
     openRepositoryCommand({ parsedRepositories, userConfisFile });
     return;
   }
 
-  if (parsedOption === 'open_repository_link') {
+  if (parsedOption === SELECT_OPTIONS_ENUM.open_repository_link) {
     openRepositoryLinkCommand({ parsedRepositories });
     return;
   }
 
-  if (parsedOption === 'open_configs') {
+  if (parsedOption === SELECT_OPTIONS_ENUM.open_configs) {
     openConfigsCommand({ configsFilePath });
     return;
   }
 
   optionSelect(async (option) => {
-    if (option === 'remove_configs') {
+    if (option === SELECT_OPTIONS_ENUM.remove_configs) {
       removeConfigsCommand();
-    } else if (option === 'pull_missing_repos') {
+    } else if (option === SELECT_OPTIONS_ENUM.pull_missing_repos) {
       pullMissingReposCommand({ parsedRepositories });
-    } else if (option === 'purge_local_repos') {
+    } else if (option === SELECT_OPTIONS_ENUM.purge_local_repos) {
       purgeLocalReposCommand({ parsedRepositories });
-    } else if (option === 'open_repository') {
+    } else if (option === SELECT_OPTIONS_ENUM.open_repository) {
       openRepositoryCommand({ parsedRepositories, userConfisFile });
-    } else if (option === 'open_repository_link') {
+    } else if (option === SELECT_OPTIONS_ENUM.open_repository_link) {
       openRepositoryLinkCommand({ parsedRepositories });
-    } else if (option === 'open_configs') {
+    } else if (option === SELECT_OPTIONS_ENUM.open_configs) {
       openConfigsCommand({ configsFilePath });
+    } else if (option === SELECT_OPTIONS_ENUM.update_configs) {
+      updateConfigsCommand({ configs: userConfisFile, repositories: parsedRepositories, configs_path: configsFilePath });
     }
   });
 }

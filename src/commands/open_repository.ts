@@ -1,12 +1,12 @@
 import { TConfigs } from '../consts/schema.js';
 import { confirmationSelect } from '../selects/confirmation_select.js';
 import { repositorySelect } from '../selects/repository_select.js';
-import { TExtendedRepo } from '../utils/parse_repositories.js';
+import { ParsedRepository } from '../utils/parse_repositories.js';
 import { asyncExec, successfulMessage } from '../utils/utils.js';
 
 type TOpenRepositoryCommandProps = {
   userConfisFile: TConfigs;
-  parsedRepositories: TExtendedRepo[];
+  parsedRepositories: ParsedRepository[];
 };
 
 export const openRepositoryCommand = async ({ parsedRepositories, userConfisFile }: TOpenRepositoryCommandProps) => {

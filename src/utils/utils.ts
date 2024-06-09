@@ -1,36 +1,8 @@
 import { exec } from 'node:child_process';
-import { execSync } from 'node:child_process';
 import { readdirSync } from 'node:fs';
-import { platform } from 'node:os';
 import { resolve } from 'node:path';
 
 import { logger } from './logger.js';
-
-// MULTI OS UTILS ==============================================================
-
-export function openURL(url: string) {
-  const openCommandMapper = {
-    darwin: 'open',
-    win32: 'start',
-    linux: 'xdg-open'
-  } as const;
-  type TSupportedOs = keyof typeof openCommandMapper;
-
-  const oppenLinkCommand = openCommandMapper[platform() as TSupportedOs];
-  execSync(`${oppenLinkCommand} ${url}`);
-}
-
-export function openTextFile(path: string) {
-  const openCommandMapper = {
-    darwin: 'open -t',
-    win32: 'start notepad',
-    linux: 'xdg-open'
-  } as const;
-  type TSupportedOs = keyof typeof openCommandMapper;
-
-  const openFileCommand = openCommandMapper[platform() as TSupportedOs];
-  execSync(`${openFileCommand} ${path}`);
-}
 
 // SYSTEM UTILS ================================================================
 

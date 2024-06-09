@@ -2,15 +2,17 @@ import fuse from 'fuse.js';
 import inquirer from 'inquirer';
 import inquirerPrompt from 'inquirer-autocomplete-prompt';
 
+import { EnumHelper } from '../utils/enum-helper.js';
+
 const SELECT_KEY = 'option' as const;
 
 const SELECT_OPTIONS = [
   {
-    name: 'choose a repository to open on your editor',
+    name: 'open repository on editor',
     value: 'open_repository'
   },
   {
-    name: 'choose a repository to open on your browser',
+    name: 'open repository on browser',
     value: 'open_repository_link'
   },
   {
@@ -18,7 +20,7 @@ const SELECT_OPTIONS = [
     value: 'pull_missing_repos'
   },
   {
-    name: 'purge repositories that should not be locally',
+    name: 'purge repositories that should not exist locally',
     value: 'purge_local_repos'
   },
   {
@@ -26,10 +28,19 @@ const SELECT_OPTIONS = [
     value: 'open_configs'
   },
   {
+    name: 'update configs based on local repositories',
+    value: 'update_configs'
+  },
+  {
     name: 'remove your repositories sync configs',
     value: 'remove_configs'
   }
 ] as const;
+
+export const SELECT_OPTIONS_ENUM = {
+  ...EnumHelper.createEnumFromObjectArray(SELECT_OPTIONS, 'value'),
+  setup_configs: 'setup_configs'
+} as const;
 
 export type TOptionsValues = (typeof SELECT_OPTIONS)[number]['value'] | 'setup_configs';
 

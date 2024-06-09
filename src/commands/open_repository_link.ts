@@ -1,10 +1,12 @@
+import { execSync } from 'node:child_process';
+import { platform } from 'node:os';
+
 import { repositorySelect } from '../selects/repository_select.js';
-import { TExtendedRepo } from '../utils/parse_repositories.js';
-import { openURL } from '../utils/utils.js';
+import { ParsedRepository } from '../utils/parse_repositories.js';
 import { gracefulThrowError } from '../utils/utils.js';
 
 type TOpenRepositoryCommandProps = {
-  parsedRepositories: TExtendedRepo[];
+  parsedRepositories: ParsedRepository[];
 };
 
 export const openRepositoryLinkCommand = async ({ parsedRepositories }: TOpenRepositoryCommandProps) => {
@@ -18,3 +20,15 @@ export const openRepositoryLinkCommand = async ({ parsedRepositories }: TOpenRep
     }
   });
 };
+
+function openURL(url: string) {
+  const openCommandMapper = {
+    darwin: 'open',
+    win32: 'start',
+    linux: 'xdg-open'
+  } as const;
+  type TSupportedOs = keyof typeof openCommandMapper;
+
+  const oppenLinkCommand = openCommandMapper[platform() as TSupportedOs];
+  execSync(`${oppenLinkCommand} ${url}`);
+}

@@ -1,29 +1,40 @@
 import { z } from 'zod';
 
-const repositoryCategorySchema = z.string().nullable();
-
-const repositoryOptionsSchema = z.object({
-  sync: z.boolean().optional(),
-  domain: z.string().optional(),
-  link: z.string().optional(),
-  local_path: z.string().optional()
+const repoWithGroupSchema = z.object({
+  domain: z.string(),
+  group: z.string().optional()
 });
 
-const githubRepositoriesSchema = z.record(z.tuple([repositoryCategorySchema]).or(z.tuple([repositoryCategorySchema, repositoryOptionsSchema])));
+const repoWithPathSchema = z.object({
+  local_path: z.string()
+});
 
-const sshRepositorySchema = z
-  .object({
-    domain: z.string(),
-    category: repositoryCategorySchema,
-    git_ssh: z.string()
-  })
-  .merge(repositoryOptionsSchema.omit({ domain: true }));
+const commonRepositorySchema = z.object({
+  sync: z.boolean().optional(),
+  link: z.string().optional()
+});
+
+const githubRepositorySchema = commonRepositorySchema.and(repoWithGroupSchema.partial({ domain: true }).or(repoWithPathSchema));
+
+export type GithubRepository = TConfigs['github_repositories'][string];
+
+const sshRepositorySchema = commonRepositorySchema
+  .and(
+    z.object({
+      git_ssh: z.string()
+    })
+  )
+  .and(repoWithGroupSchema.or(repoWithPathSchema));
+
+export type SShRepository = TConfigs['ssh_repositories'][number];
+
+// =============================================================================
 
 export const configsSchema = z.object({
   $schema: z.string(),
   path: z.string(),
   open_repo_on_editor_command: z.string(),
-  github_repositories: z.record(githubRepositoriesSchema),
+  github_repositories: z.record(githubRepositorySchema),
   ssh_repositories: z.array(sshRepositorySchema)
 });
 

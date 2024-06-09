@@ -2,18 +2,18 @@ import { existsSync, mkdirSync } from 'node:fs';
 
 import { confirmationSelect } from '../selects/confirmation_select.js';
 import { logger } from '../utils/logger.js';
-import { TExtendedRepo } from '../utils/parse_repositories.js';
+import { ParsedRepository } from '../utils/parse_repositories.js';
 import { asyncExec, removeLastDirectory, standardizeStringArray, successfulMessage } from '../utils/utils.js';
 
 type TPullMissingReposCommandProps = {
-  parsedRepositories: TExtendedRepo[];
+  parsedRepositories: ParsedRepository[];
 };
 
 export const pullMissingReposCommand = async ({ parsedRepositories }: TPullMissingReposCommandProps) => {
   const reposToClone = parsedRepositories.filter((repo) => repo.exists_locally === false && repo.sync === true);
 
-  const maxCategoryName = Math.max(...reposToClone.map((repo) => repo.domain.length));
-  const maxSubCategoryName = Math.max(...reposToClone.map((repo) => (repo.category ?? '').length));
+  const maxCategoryName = Math.max(...reposToClone.map((repo) => (repo.domain ?? '').length));
+  const maxSubCategoryName = Math.max(...reposToClone.map((repo) => (repo.group ?? '').length));
   const maxRepoName = Math.max(...reposToClone.map((repo) => repo.repository_name.length));
   const maxColumnsArr = [maxCategoryName, maxSubCategoryName, maxRepoName];
 
@@ -26,7 +26,7 @@ export const pullMissingReposCommand = async ({ parsedRepositories }: TPullMissi
   logger.info(standardizeStringArray(['domain', 'category', 'repository'], maxColumnsArr));
 
   for (const item of reposToClone) {
-    const commonString = standardizeStringArray([item.domain, item.category ?? '-', item.repository_name, ''], maxColumnsArr);
+    const commonString = standardizeStringArray([item.domain ?? '', item.group ?? '-', item.repository_name, ''], maxColumnsArr);
     logger.info(commonString);
   }
 

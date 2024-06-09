@@ -1,68 +1,71 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { TConfigs } from '../consts/schema.js';
+import { GithubRepository, TConfigs } from '../consts/schema.js';
 import { extractLinkFromSshString, extractRepositoryNameFromSshString, mergeArraysOfArrays } from './utils.js';
 
-export type TExtendedRepo = TConfigs['ssh_repositories'][number] & {
+export type ParsedRepository = {
+  domain: string;
+  group: string;
+  sync: boolean;
+  link: string;
+  git_ssh: string;
   repository_name: string;
   local_path: string;
-  sync?: boolean;
   exists_locally: boolean;
 };
 
 export const getParsedRepositories = (configs: TConfigs) => {
-  const parsedGithubRepositories: TExtendedRepo[] = mergeArraysOfArrays(
+  const parsedGithubRepositories = mergeArraysOfArrays(
     Object.entries(configs.github_repositories).map(([github_user, github_repositories]) => {
       const github_user_domain = `github_${github_user}`;
       const parsedGithubUserRepos = Object.entries(github_repositories).map(([repo_name, repo_configs]) => {
-        const [category, options] = repo_configs;
-        const domain = options?.domain ?? github_user_domain;
-        const folder_path = join(configs.path, domain, category ?? '');
-        const local_path = options?.local_path ?? join(folder_path, repo_name);
+        const { link, sync, ...rest } = repo_configs as unknown as GithubRepository;
+        const local_path = 'local_path' in rest ? rest?.local_path : join(join(configs.path, rest?.domain ?? github_user_domain, rest.group ?? ''), repo_name);
         const exists_locally = existsSync(local_path);
         const git_ssh = `git@github.com:${github_user}/${repo_name}.git`;
 
         return {
-          domain,
+          sync: sync ?? false,
           git_ssh,
           repository_name: extractRepositoryNameFromSshString(git_ssh)!,
-          category,
           local_path,
           exists_locally,
-          link: extractLinkFromSshString(git_ssh),
-          ...options
-        };
+          link: link ?? extractLinkFromSshString(git_ssh),
+          domain: 'domain' in rest ? rest.domain! : github_user_domain,
+          group: 'group' in rest ? rest.group! : ''
+        } satisfies ParsedRepository;
       });
       return parsedGithubUserRepos;
     })
   );
 
-  const parsedSshRepositories: TExtendedRepo[] = configs.ssh_repositories.map((repo) => {
+  const parsedSshRepositories = configs.ssh_repositories.map((repo) => {
     const repository_name = extractRepositoryNameFromSshString(repo.git_ssh)!;
 
-    const folder_path = join(configs.path, repo.domain, repo.category ?? '');
-    const local_path = repo?.local_path ?? join(folder_path, repository_name);
+    const local_path = 'local_path' in repo ? repo.local_path : join(join(configs.path, repo.domain, repo.group ?? ''), repository_name);
     const exists_locally = existsSync(local_path);
 
     return {
       repository_name,
-      folder_path,
       local_path,
       exists_locally,
-      link: extractLinkFromSshString(repo.git_ssh),
-      ...repo
-    };
+      link: repo.link ?? extractLinkFromSshString(repo.git_ssh),
+      git_ssh: repo.git_ssh,
+      sync: repo.sync ?? false,
+      domain: 'domain' in repo ? repo.domain! : '',
+      group: 'group' in repo ? repo.group! : ''
+    } satisfies ParsedRepository;
   });
 
-  const allRepositories = [...parsedGithubRepositories, ...parsedSshRepositories];
+  const allRepositories: ParsedRepository[] = [...parsedGithubRepositories, ...parsedSshRepositories];
 
   const sortedRepositories = allRepositories.sort((a, b) => {
-    const categoryComparison = a.domain.localeCompare(b.domain);
+    const categoryComparison = (a?.domain ?? '').localeCompare(b?.domain ?? '');
     if (categoryComparison !== 0) {
       return categoryComparison;
     }
-    return (a.category ?? '').localeCompare(b.category ?? '');
+    return (a.group ?? '').localeCompare(b.group ?? '');
   });
 
   return sortedRepositories;
