@@ -43,7 +43,7 @@ export const getParsedRepositories = (configs: TConfigs) => {
   const parsedSshRepositories = configs.ssh_repositories.map((repo) => {
     const repository_name = extractRepositoryNameFromSshString(repo.git_ssh)!;
 
-    const local_path = 'local_path' in repo ? repo?.local_path : join(join(configs.path, repo.parent, repo.group ?? ''), repository_name);
+    const local_path = 'local_path' in repo ? repo.local_path : join(join(configs.path, repo.parent, repo.group ?? ''), repository_name);
     const exists_locally = existsSync(local_path);
 
     return {

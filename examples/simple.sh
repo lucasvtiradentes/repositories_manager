@@ -1,5 +1,7 @@
 #! /usr/bin/env bin
 
+# REMMEMBER: if it does not work, chmod +x ./examples/simple.sh
+
 tsxPath="$(pwd)/node_modules/.bin/tsx"
 mainFile="$(pwd)/src/index.ts"
 configsFile="$(pwd)/examples/configs_linux.json"
@@ -11,6 +13,7 @@ configsFile="$(pwd)/examples/configs_linux.json"
 # "$tsxPath" "$mainFile" -pg
 # "$tsxPath" "$mainFile" -or
 # "$tsxPath" "$mainFile" -oc
+# "$tsxPath" "$mainFile" -uc
 
 # "$tsxPath" "$mainFile" -h
 # "$tsxPath" "$mainFile" -V

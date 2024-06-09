@@ -22,22 +22,20 @@
       "description": "Specify your github repositories.",
       "patternProperties": {
         ".*": {
-          "type": "object",
-          "items": {
-            "oneOf": [
-              { "type": "string" },
-              {
-                "type": "object",
-                "properties": {
-                  "sync": { "type": ["boolean", "null"] },
-                  "domain": { "type": ["string", "null"] },
-                  "link": { "type": ["string", "null"] },
-                  "local_path": { "type": ["string", "null"] }
-                },
-                "required": [],
-                "additionalProperties": false
-              }
-            ]
+          "patternProperties": {
+            ".*": {
+              "type": "object",
+              "properties": {
+                "sync": { "type": "boolean" },
+                "link": { "type": "string" },
+
+                "parent": { "type": "string" },
+                "group": { "type": "string" },
+                "local_path": { "type": "string" }
+              },
+              "required": [],
+              "additionalProperties": false
+            }
           }
         }
       },
@@ -49,15 +47,16 @@
       "items": {
         "type": "object",
         "properties": {
-          "domain": { "type": "string" },
-          "category": { "type": ["string", "null"] },
-          "git_ssh": { "type": "string" },
           "sync": { "type": "boolean" },
-          "link": { "type": ["string", "null"] },
-          "local_path": { "type": ["string", "null"] }
+          "link": { "type": "string" },
+          "git_ssh": { "type": "string" },
+
+          "parent": { "type": "string" },
+          "group": { "type": "string" },
+          "local_path": { "type": "string" }
         },
         "additionalProperties": false,
-        "required": ["domain", "category", "git_ssh"]
+        "required": ["git_ssh"]
       }
     }
   },
