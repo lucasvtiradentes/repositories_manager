@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 2.0.2
+
+### Patch Changes
+
+- 53c58e3: add try catch to prevent errors
+
 ## 2.0.1
 
 ### Patch Changes
