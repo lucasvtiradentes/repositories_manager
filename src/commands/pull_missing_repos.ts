@@ -39,8 +39,13 @@ export const pullMissingReposCommand = async ({ parsedRepositories }: TPullMissi
         if (!existsSync(parentFolder)) {
           mkdirSync(parentFolder, { recursive: true });
         }
-        await asyncExec(`git clone ${repo.git_ssh} ${repo.local_path}`);
-        logger.info(`clonned ${repo.repository_name}`);
+
+        try {
+          await asyncExec(`git clone ${repo.git_ssh} ${repo.local_path}`);
+          logger.info(`${repo.repository_name} - clonned`);
+        } catch (e) {
+          logger.info(`${repo.repository_name} - error`);
+        }
       }
 
       successfulMessage('all repositories were cloned!\n');
