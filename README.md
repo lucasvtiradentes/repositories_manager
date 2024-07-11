@@ -44,13 +44,13 @@ My primary motivation for developing this tool was to ensure that all my reposit
 
 ## :dart: Features<a href="#TOC"><img align="right" src="./.github/images/up_arrow.png" width="22"></a>
 
-&nbsp;&nbsp;&nbsp;✔️ manage all your repositories with a simple [configs.json](./examples/configs_linux.json) file (which follows [this schema](./src/consts/schema.ts)).<br>
+&nbsp;&nbsp;&nbsp;✔️ manage all your repositories with a simple [configs.json](./examples/configs.jsonc) file (which follows [this schema](./src/consts/schema.ts)).<br>
 &nbsp;&nbsp;&nbsp;✔️ shows a terminal menu to select option to perform;<br>
 &nbsp;&nbsp;&nbsp;✔️ clone missing repositories into local machine;<br>
 &nbsp;&nbsp;&nbsp;✔️ delete existing repositories that should not be present on the local machine;/<br>
 &nbsp;&nbsp;&nbsp;✔️ quickly open a repository on your code editor by selecting from a list;<br>
 &nbsp;&nbsp;&nbsp;✔️ quickly open a repository link on your browser by selecting from a list;<br>
-&nbsp;&nbsp;&nbsp;✔️ works for [windows](./examples/configs_windows.json), [linux](./examples/configs_linux.json) and mac.<br>
+&nbsp;&nbsp;&nbsp;✔️ works for windows, linux and mac.<br>
 
 ## :warning: Requirements<a href="#TOC"><img align="right" src="./.github/images/up_arrow.png" width="22"></a>
 
@@ -69,8 +69,11 @@ To setup this project in your computer, download it in this link or run the foll
 # install the package
 $ npm install repositories_manager -g
 
-# setup the package with your configs
-$ rpu -s "/path/to/your_configs_file.json"
+# setup the package with your configs (on linux and mac)
+$ rp -s "/path/to/your_configs_file.json"
+
+# setup the package with your configs (on windows)
+$ rp -s "C:\\users\\lucas\\path\\to\\your_configs_file.json"
 
 # tip: you can use it on your terminal as: rp, rpm or repositories_manager
 ```

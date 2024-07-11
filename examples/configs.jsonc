@@ -1,5 +1,6 @@
 {
-  "$schema": "https://unpkg.com/repositories_manager@2.0.1/schema.json",
+  "$schema": "https://unpkg.com/repositories_manager@2.0.2/schema.json",
+  // the bellow path is for linux and mac, for windows, set like this the path: C:\\Users\\lucas\\repos
   "path": "/home/lucasvtiradentes/repos",
   "open_repo_on_editor_command": "code",
   "github_repositories": {
@@ -22,14 +23,9 @@
   },
   "ssh_repositories": [
     {
-      "domain": "uds",
-      "group": "it_works",
-      "git_ssh": "git@gitlab.uds.com.br:itworks/contabilidade/application/backend-node.git"
-    },
-    {
-      "domain": "uds",
-      "group": "pdv365",
-      "git_ssh": "git@gitlab.uds.com.br:pdv365/pdv365/portal-franquia/portal-dashboard.git"
+      "domain": "other-domain",
+      "group": "other-group",
+      "git_ssh": "git@github.com:lucasvtiradentes/repositories_manager.git"
     }
   ]
 }

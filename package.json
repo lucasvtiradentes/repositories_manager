@@ -42,6 +42,7 @@
     "fuse.js": "7.0.0",
     "inquirer": "9.2.14",
     "inquirer-autocomplete-prompt": "3.0.1",
+    "json5": "^2.2.3",
     "zod": "3.22.4"
   },
   "devDependencies": {

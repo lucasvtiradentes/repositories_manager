@@ -23,6 +23,9 @@ importers:
       inquirer-autocomplete-prompt:
         specifier: 3.0.1
         version: 3.0.1(inquirer@9.2.14)
+      json5:
+        specifier: ^2.2.3
+        version: 2.2.3
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -47,7 +50,7 @@ importers:
         version: 20.11.19
       '@typescript-eslint/eslint-plugin':
         specifier: 7.0.1
-        version: 7.0.1(@typescript-eslint/parser@7.0.1)(eslint@8.56.0)(typescript@5.3.3)
+        version: 7.0.1(@typescript-eslint/parser@7.0.1(eslint@8.56.0)(typescript@5.3.3))(eslint@8.56.0)(typescript@5.3.3)
       '@typescript-eslint/parser':
         specifier: 7.0.1
         version: 7.0.1(eslint@8.56.0)(typescript@5.3.3)
@@ -62,7 +65,7 @@ importers:
         version: 1.3.1(eslint@8.56.0)
       eslint-plugin-prettier:
         specifier: 5.1.3
-        version: 5.1.3(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.2.5)
+        version: 5.1.3(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.2.5)
       husky:
         specifier: 9.0.11
         version: 9.0.11
@@ -1469,6 +1472,11 @@ packages:
   json-stable-stringify-without-jsonify@1.0.1:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
 
+  json5@2.2.3:
+    resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
+    engines: {node: '>=6'}
+    hasBin: true
+
   jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
 
@@ -2569,7 +2577,7 @@ snapshots:
       '@commitlint/types': 18.6.1
       chalk: 4.1.2
       cosmiconfig: 8.3.6(typescript@5.3.3)
-      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.11.19)(cosmiconfig@8.3.6)(typescript@5.3.3)
+      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.11.19)(cosmiconfig@8.3.6(typescript@5.3.3))(typescript@5.3.3)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -2797,7 +2805,7 @@ snapshots:
     dependencies:
       '@types/node': 20.11.19
 
-  '@typescript-eslint/eslint-plugin@7.0.1(@typescript-eslint/parser@7.0.1)(eslint@8.56.0)(typescript@5.3.3)':
+  '@typescript-eslint/eslint-plugin@7.0.1(@typescript-eslint/parser@7.0.1(eslint@8.56.0)(typescript@5.3.3))(eslint@8.56.0)(typescript@5.3.3)':
     dependencies:
       '@eslint-community/regexpp': 4.10.0
       '@typescript-eslint/parser': 7.0.1(eslint@8.56.0)(typescript@5.3.3)
@@ -2812,6 +2820,7 @@ snapshots:
       natural-compare: 1.4.0
       semver: 7.6.0
       ts-api-utils: 1.2.1(typescript@5.3.3)
+    optionalDependencies:
       typescript: 5.3.3
     transitivePeerDependencies:
       - supports-color
@@ -2824,6 +2833,7 @@ snapshots:
       '@typescript-eslint/visitor-keys': 7.0.1
       debug: 4.3.4
       eslint: 8.56.0
+    optionalDependencies:
       typescript: 5.3.3
     transitivePeerDependencies:
       - supports-color
@@ -2840,6 +2850,7 @@ snapshots:
       debug: 4.3.4
       eslint: 8.56.0
       ts-api-utils: 1.2.1(typescript@5.3.3)
+    optionalDependencies:
       typescript: 5.3.3
     transitivePeerDependencies:
       - supports-color
@@ -2856,6 +2867,7 @@ snapshots:
       minimatch: 9.0.3
       semver: 7.6.0
       ts-api-utils: 1.2.1(typescript@5.3.3)
+    optionalDependencies:
       typescript: 5.3.3
     transitivePeerDependencies:
       - supports-color
@@ -3137,7 +3149,7 @@ snapshots:
       meow: 12.1.1
       split2: 4.2.0
 
-  cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.19)(cosmiconfig@8.3.6)(typescript@5.3.3):
+  cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.19)(cosmiconfig@8.3.6(typescript@5.3.3))(typescript@5.3.3):
     dependencies:
       '@types/node': 20.11.19
       cosmiconfig: 8.3.6(typescript@5.3.3)
@@ -3150,6 +3162,7 @@ snapshots:
       js-yaml: 4.1.0
       parse-json: 5.2.0
       path-type: 4.0.0
+    optionalDependencies:
       typescript: 5.3.3
 
   cross-spawn@5.1.0:
@@ -3365,13 +3378,14 @@ snapshots:
     dependencies:
       eslint: 8.56.0
 
-  eslint-plugin-prettier@5.1.3(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.2.5):
+  eslint-plugin-prettier@5.1.3(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.2.5):
     dependencies:
       eslint: 8.56.0
-      eslint-config-prettier: 9.1.0(eslint@8.56.0)
       prettier: 3.2.5
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.8
+    optionalDependencies:
+      eslint-config-prettier: 9.1.0(eslint@8.56.0)
 
   eslint-scope@7.2.2:
     dependencies:
@@ -3957,6 +3971,8 @@ snapshots:
   json-schema-traverse@1.0.0: {}
 
   json-stable-stringify-without-jsonify@1.0.1: {}
+
+  json5@2.2.3: {}
 
   jsonfile@4.0.0:
     optionalDependencies:

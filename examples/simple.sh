@@ -4,7 +4,7 @@
 
 tsxPath="$(pwd)/node_modules/.bin/tsx"
 mainFile="$(pwd)/src/index.ts"
-configsFile="$(pwd)/examples/configs_linux.json"
+configsFile="$(pwd)/examples/configs.jsonc"
 
 "$tsxPath" "$mainFile"
 # "$tsxPath" "$mainFile" -s "$configsFile"
