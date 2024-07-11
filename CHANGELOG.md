@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 2.0.4
+
+### Patch Changes
+
+- 784047a: fix update error
+
 ## 2.0.3
 
 ### Patch Changes
