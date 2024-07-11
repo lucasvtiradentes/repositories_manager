@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/repositories_manager@2.0.2/schema.json",
+  "$schema": "https://unpkg.com/repositories_manager@2.0.3/schema.json",
   // the bellow path is for linux and mac, for windows, set like this the path: C:\\Users\\lucas\\repos
   "path": "/home/lucasvtiradentes/repos",
   "open_repo_on_editor_command": "code",
