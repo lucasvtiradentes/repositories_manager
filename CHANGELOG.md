@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 2.0.3
+
+### Patch Changes
+
+- 01ccb6b: add support to json commnets
+
 ## 2.0.2
 
 ### Patch Changes
