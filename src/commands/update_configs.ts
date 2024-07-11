@@ -1,9 +1,10 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { writeFileSync } from 'fs';
 
 import { TConfigs } from '../consts/schema.js';
 import { confirmationSelect } from '../selects/confirmation_select.js';
 import { logger } from '../utils/logger.js';
 import { ParsedRepository } from '../utils/parse_repositories.js';
+import { readJson } from '../utils/read_json.js';
 import { asyncExec, getAllSubfolders, successfulMessage } from '../utils/utils.js';
 
 type updateConfigsCommandProps = {
@@ -28,7 +29,7 @@ export const updateConfigsCommand = async (props: updateConfigsCommandProps) => 
     });
   }
 
-  const oldConfigsContent = JSON.parse(readFileSync(props.configs_path, 'utf8')) as unknown as TConfigs;
+  const oldConfigsContent = readJson(props.configs_path) as unknown as TConfigs;
   const oldSshReposContent = oldConfigsContent.ssh_repositories;
 
   if (parsedRepos.length === 0) {

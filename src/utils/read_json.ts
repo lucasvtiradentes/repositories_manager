@@ -1,5 +1,6 @@
-import { existsSync, readFileSync } from 'node:fs';
 import JSON5 from 'json5';
+import { existsSync, readFileSync } from 'node:fs';
+
 import { ERRORS } from '../consts/errors.js';
 import { gracefulThrowError } from './utils.js';
 
