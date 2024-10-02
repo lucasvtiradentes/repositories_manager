@@ -2,7 +2,6 @@
 
 import { program } from 'commander';
 import { existsSync } from 'fs';
-import { platform } from 'os';
 
 import { openConfigsCommand } from './commands/open_configs.js';
 import { openRepositoryLinkCommand } from './commands/open_repository_link.js';
@@ -71,7 +70,7 @@ function parseCommanderOption(options: ProgramOptions): Nullable<TOptionsValues>
 }
 
 async function main() {
-  if (!CONFIGS.supported_os.includes(platform() as (typeof CONFIGS.supported_os)[number])) {
+  if (!CONFIGS.supported_os.includes(CONFIGS.user_os)) {
     gracefulThrowError(ERRORS.system_not_supported);
   }
 

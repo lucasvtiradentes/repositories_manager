@@ -1,6 +1,6 @@
 import { execSync } from 'node:child_process';
-import { platform } from 'node:os';
 
+import { CONFIGS, SupportedOS } from '../consts/configs.js';
 import { repositorySelect } from '../selects/repository_select.js';
 import { ParsedRepository } from '../utils/parse_repositories.js';
 import { gracefulThrowError } from '../utils/utils.js';
@@ -24,11 +24,11 @@ export const openRepositoryLinkCommand = async ({ parsedRepositories }: TOpenRep
 function openURL(url: string) {
   const openCommandMapper = {
     darwin: 'open',
-    win32: 'start',
-    linux: 'xdg-open'
-  } as const;
-  type TSupportedOs = keyof typeof openCommandMapper;
+    windows: 'start',
+    linux: 'xdg-open',
+    wsl: 'cmd.exe /c start'
+  } as const satisfies Record<SupportedOS, string>;
 
-  const oppenLinkCommand = openCommandMapper[platform() as TSupportedOs];
-  execSync(`${oppenLinkCommand} ${url}`);
+  const oppenLinkCommand = openCommandMapper[CONFIGS.user_os];
+  execSync(`${oppenLinkCommand} "${url}" > /dev/null 2>&1`);
 }

@@ -21,7 +21,8 @@ const getUserConfigsFile = () => {
   return userConfigsFile;
 };
 
-type SupportedOS = keyof Configs['repos_root_path'];
+const supported_os = ['linux', 'darwin', 'windows', 'wsl'] as const;
+export type SupportedOS = keyof Configs['repos_root_path'];
 
 const getUserOs = (): SupportedOS => {
   const os = platform();
@@ -43,5 +44,5 @@ export const CONFIGS = {
   user_os: getUserOs(),
   user_configs_folder: getUserConfigsFile(),
   user_configs_file: join(getUserConfigsFile(), 'user_data.json'),
-  supported_os: ['darwin', 'win32', 'linux'] satisfies NodeJS.Platform[]
+  supported_os
 } as const;

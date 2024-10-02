@@ -1,5 +1,6 @@
 import { execSync } from 'node:child_process';
-import { platform } from 'node:os';
+
+import { CONFIGS, SupportedOS } from '../consts/configs.js';
 
 type TOpenConfigsCommandProps = {
   configsFilePath: string;
@@ -11,12 +12,12 @@ export const openConfigsCommand = ({ configsFilePath }: TOpenConfigsCommandProps
 
 function openTextFile(path: string) {
   const openCommandMapper = {
+    linux: 'xdg-open',
     darwin: 'open -t',
-    win32: 'start notepad',
-    linux: 'xdg-open'
-  } as const;
-  type TSupportedOs = keyof typeof openCommandMapper;
+    windows: 'start notepad',
+    wsl: 'notepad.exe'
+  } as const satisfies Record<SupportedOS, string>;
 
-  const openFileCommand = openCommandMapper[platform() as TSupportedOs];
-  execSync(`${openFileCommand} ${path}`);
+  const openFileCommand = openCommandMapper[CONFIGS.user_os];
+  execSync(`${openFileCommand} "${path}" > /dev/null 2>&1`);
 }
