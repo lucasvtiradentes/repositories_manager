@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 2.0.6
+
+### Patch Changes
+
+- dd09c0e: fix configs schema
+
 ## 2.0.5
 
 ### Patch Changes
