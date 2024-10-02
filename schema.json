@@ -65,7 +65,7 @@
           "group": { "type": "string" },
           "local_path": { "type": "string" }
         },
-        "oneOf": [{ "required": ["domain"] }, { "required": ["local_path"] }],
+        "oneOf": [{ "required": [] }, { "required": ["local_path"] }],
         "additionalProperties": false,
         "required": ["git_ssh"]
       }

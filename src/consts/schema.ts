@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const repoWithGroupSchema = z.object({
-  domain: z.string(),
+  domain: z.string().optional(),
   group: z.string().optional()
 });
 
@@ -14,7 +14,7 @@ const commonRepositorySchema = z.object({
   link: z.string().optional()
 });
 
-const githubRepositorySchema = commonRepositorySchema.and(repoWithGroupSchema.partial({ domain: true }).or(repoWithPathSchema));
+const githubRepositorySchema = commonRepositorySchema.and(repoWithGroupSchema.or(repoWithPathSchema));
 
 export type GithubRepository = Configs['github_repositories'][string];
 
