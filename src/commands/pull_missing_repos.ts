@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, renameSync } from 'node:fs';
+import { existsSync, mkdirSync } from 'node:fs';
 
 import { confirmationSelect } from '../selects/confirmation_select.js';
 import { logger } from '../utils/logger.js';
@@ -40,16 +40,13 @@ export const pullMissingReposCommand = async ({ parsedRepositories }: TPullMissi
           mkdirSync(parentFolder, { recursive: true });
         }
 
+        const repoLoggerName = `${repo.repository_name}${repo.custom_name ? `/${repo.custom_name}` : ''}`;
+
         try {
-          await asyncExec(`git clone ${repo.git_ssh} ${repo.local_path}`);
-          if (repo.custom_name) {
-            renameSync(repo.local_path, repo.local_path.replace(repo.repository_name, repo.custom_name));
-            logger.info(`${repo.repository_name}/${repo.custom_name} - clonned`);
-          } else {
-            logger.info(`${repo.repository_name} - clonned`);
-          }
+          await asyncExec(`git clone ${repo.git_ssh} "${repo.local_path}"`);
+          logger.info(`${repoLoggerName}  - clonned`);
         } catch (e) {
-          logger.info(`${repo.repository_name} - error`);
+          logger.info(`${repoLoggerName} - error`);
         }
       }
 
