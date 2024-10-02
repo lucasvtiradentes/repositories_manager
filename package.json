@@ -24,7 +24,7 @@
   "bin": {
     "rp": "./dist/index.js",
     "rpm": "./dist/index.js",
-    "repository_manager": "./dist/index.js"
+    "repositories_manager": "./dist/index.js"
   },
   "scripts": {
     "prepare": "husky",

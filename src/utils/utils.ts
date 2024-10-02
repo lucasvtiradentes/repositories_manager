@@ -6,12 +6,12 @@ import { logger } from './logger.js';
 
 // SYSTEM UTILS ================================================================
 
-type TAsyncExec = {
+type AsyncExecResponse = {
   stderr: string;
   stdout: string;
 };
 
-export function asyncExec(command: string): Promise<TAsyncExec> {
+export function asyncExec(command: string): Promise<AsyncExecResponse> {
   return new Promise(function (resolve, reject) {
     exec(command, (error, stdout, stderr) => {
       if (error) {
@@ -123,9 +123,9 @@ export function customConsoleLog(message: string, isUpdatingLine?: boolean) {
   }
 }
 
-export const gracefulThrowError = (message: string): never => {
+export const gracefulThrowError = (message: string) => {
   logger.info(`\x1b[31mERROR: ${message}\x1b[0m`);
-  process.exit();
+  process.exit(1);
 };
 
 export const successfulMessage = (message: string) => {
@@ -137,4 +137,4 @@ export const successfulMessage = (message: string) => {
 
 export const mergeArraysOfArrays = <T>(arr: T[][]): T[] => arr.reduce((acc, val) => acc.concat(val), []);
 
-export type TNullable<TData> = TData | null;
+export type Nullable<TData> = TData | null;

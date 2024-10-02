@@ -15,7 +15,18 @@
   "type": "object",
   "properties": {
     "$schema": { "type": "string" },
-    "path": { "type": "string", "description": "Path of the folder where your repositories are." },
+    "repos_root_path": {
+      "type": "object",
+      "description": "Root path for repositories based on the operating system.",
+      "properties": {
+        "linux": { "type": "string" },
+        "darwin": { "type": "string" },
+        "windows": { "type": "string" },
+        "wsl": { "type": "string" }
+      },
+      "additionalProperties": false,
+      "required": []
+    },
     "open_repo_on_editor_command": { "type": "string", "description": "Command to open the repository on the editor" },
     "github_repositories": {
       "type": "object",

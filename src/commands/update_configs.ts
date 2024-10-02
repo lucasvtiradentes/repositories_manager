@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs';
 
-import { TConfigs } from '../consts/schema.js';
+import { Configs } from '../consts/schema.js';
 import { confirmationSelect } from '../selects/confirmation_select.js';
 import { logger } from '../utils/logger.js';
 import { ParsedRepository } from '../utils/parse_repositories.js';
@@ -9,18 +9,19 @@ import { asyncExec, getAllSubfolders, successfulMessage } from '../utils/utils.j
 
 type updateConfigsCommandProps = {
   repositories: ParsedRepository[];
-  configs: TConfigs;
+  configs: Configs;
   configs_path: string;
+  parsedReposPath: string;
 };
 
 export const updateConfigsCommand = async (props: updateConfigsCommandProps) => {
-  const gitFolders = getAllSubfolders(props.configs.path)
+  const gitFolders = getAllSubfolders(props.parsedReposPath)
     .filter((folder) => folder.endsWith('.git'))
     .map((folder) => folder.replace('/.git', '').replace('\\.git', ''));
 
   const newRepos = gitFolders.filter((folder) => !props.repositories.some((repo) => repo.local_path === folder));
 
-  const parsedRepos = [] as Extract<TConfigs['ssh_repositories'][number], { local_path: string }>[];
+  const parsedRepos = [] as Extract<Configs['ssh_repositories'][number], { local_path: string }>[];
   for (const repo of newRepos) {
     parsedRepos.push({
       local_path: repo,
@@ -29,7 +30,7 @@ export const updateConfigsCommand = async (props: updateConfigsCommandProps) => 
     });
   }
 
-  const oldConfigsContent = readJson(props.configs_path) as unknown as TConfigs;
+  const oldConfigsContent = readJson(props.configs_path) as unknown as Configs;
   const oldSshReposContent = oldConfigsContent.ssh_repositories;
 
   if (parsedRepos.length === 0) {

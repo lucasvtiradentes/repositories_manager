@@ -1,7 +1,11 @@
 {
-  "$schema": "https://unpkg.com/repositories_manager@2.0.4/schema.json",
-  // the bellow path is for linux and mac, for windows, set like this the path: C:\\Users\\lucas\\repos
+  "$schema": "https://unpkg.com/repositories_manager@2.0.5/schema.json",
   "path": "/home/lucasvtiradentes/repos",
+  "repos_root_path": {
+    "windows": "C:\\Users\\lucas\\repos",
+    "wsl": "/home/lucas/repos",
+    "linux": "/home/lucasvtiradentes/repos"
+  },
   "open_repo_on_editor_command": "code",
   "github_repositories": {
     "lucasvtiradentes": {
@@ -16,8 +20,7 @@
       },
       "obsidian-notes-manager": {
         "group": "open-source",
-        "sync": true,
-        "local_path": "/home/lucasvtiradentes/repos/github_lucasvtiradentes/personal/obsidian_vaults/NOTAS/dev_tools/.obsidian/plugins/obsidian-notes-manager"
+        "sync": true
       }
     }
   },

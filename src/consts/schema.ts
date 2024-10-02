@@ -16,7 +16,7 @@ const commonRepositorySchema = z.object({
 
 const githubRepositorySchema = commonRepositorySchema.and(repoWithGroupSchema.partial({ domain: true }).or(repoWithPathSchema));
 
-export type GithubRepository = TConfigs['github_repositories'][string];
+export type GithubRepository = Configs['github_repositories'][string];
 
 const sshRepositorySchema = commonRepositorySchema
   .and(
@@ -26,16 +26,23 @@ const sshRepositorySchema = commonRepositorySchema
   )
   .and(repoWithGroupSchema.or(repoWithPathSchema));
 
-export type SShRepository = TConfigs['ssh_repositories'][number];
+export type SShRepository = Configs['ssh_repositories'][number];
 
 // =============================================================================
 
 export const configsSchema = z.object({
   $schema: z.string(),
-  path: z.string(),
+  repos_root_path: z
+    .object({
+      linux: z.string(),
+      darwin: z.string(),
+      windows: z.string(),
+      wsl: z.string()
+    })
+    .partial(),
   open_repo_on_editor_command: z.string(),
   github_repositories: z.record(githubRepositorySchema),
   ssh_repositories: z.array(sshRepositorySchema)
 });
 
-export type TConfigs = z.infer<typeof configsSchema>;
+export type Configs = z.infer<typeof configsSchema>;

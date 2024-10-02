@@ -15,14 +15,14 @@ import { updateConfigsCommand } from './commands/update_configs.js';
 import { APP_INFO } from './consts/app_consts.js';
 import { CONFIGS } from './consts/configs.js';
 import { ERRORS } from './consts/errors.js';
-import { TConfigs, configsSchema } from './consts/schema.js';
+import { Configs, configsSchema } from './consts/schema.js';
 import { SELECT_OPTIONS_ENUM, TOptionsValues, optionSelect } from './selects/option_select.js';
-import { TUserConfigs, createUserConfigsFile } from './utils/configs_handler.js';
+import { UserConfigs, createUserConfigsFile } from './utils/configs_handler.js';
 import { getParsedRepositories } from './utils/parse_repositories.js';
 import { readJson } from './utils/read_json.js';
-import { TNullable, gracefulThrowError } from './utils/utils.js';
+import { Nullable, gracefulThrowError } from './utils/utils.js';
 
-type TProgramOptions = {
+type ProgramOptions = {
   setup: string;
   remove: boolean;
   pull_repos: boolean;
@@ -48,8 +48,8 @@ function setupProgramConfigs() {
   return program;
 }
 
-function getParsedConfigsFileOrThrow(configsFile: TUserConfigs) {
-  const userConfisFile = readJson(configsFile.configs_path) as TConfigs;
+function getParsedConfigsFileOrThrow(configsFile: UserConfigs) {
+  const userConfisFile = readJson(configsFile.configs_path) as Configs;
 
   if (!configsSchema.safeParse(userConfisFile).success) {
     gracefulThrowError(ERRORS.configs_file_dont_follow_required_schema);
@@ -58,7 +58,7 @@ function getParsedConfigsFileOrThrow(configsFile: TUserConfigs) {
   return { configsFilePath: configsFile.configs_path, userConfisFile };
 }
 
-function parseCommanderOption(options: TProgramOptions): TNullable<TOptionsValues> {
+function parseCommanderOption(options: ProgramOptions): Nullable<TOptionsValues> {
   if (options.setup) return SELECT_OPTIONS_ENUM.setup_configs;
   if (options.remove) return SELECT_OPTIONS_ENUM.remove_configs;
   if (options.pull_repos) return SELECT_OPTIONS_ENUM.pull_missing_repos;
@@ -80,7 +80,7 @@ async function main() {
   }
 
   const program = setupProgramConfigs().parse();
-  const options = program.opts() satisfies TProgramOptions;
+  const options = program.opts() satisfies ProgramOptions;
   const parsedOption = parseCommanderOption(options);
 
   if (parsedOption === SELECT_OPTIONS_ENUM.setup_configs) {
@@ -93,7 +93,7 @@ async function main() {
     return;
   }
 
-  const configsFile = readJson(CONFIGS.user_configs_file) as TUserConfigs;
+  const configsFile = readJson(CONFIGS.user_configs_file) as UserConfigs;
   if (!existsSync(configsFile.configs_path)) {
     const hasSpecifiedAnOption = Object.keys(options).length > 0;
     if (hasSpecifiedAnOption) {
@@ -106,10 +106,16 @@ async function main() {
   }
 
   const { configsFilePath, userConfisFile } = getParsedConfigsFileOrThrow(configsFile);
-  const parsedRepositories = getParsedRepositories(userConfisFile);
+  const parsedReposPath = userConfisFile.repos_root_path[CONFIGS.user_os];
+  if (!parsedReposPath) {
+    gracefulThrowError(ERRORS.missing_os_repos_folder);
+    return;
+  }
+
+  const parsedRepositories = getParsedRepositories(userConfisFile, parsedReposPath);
 
   if (parsedOption === SELECT_OPTIONS_ENUM.update_configs) {
-    updateConfigsCommand({ configs: userConfisFile, repositories: parsedRepositories, configs_path: configsFilePath });
+    updateConfigsCommand({ configs: userConfisFile, repositories: parsedRepositories, configs_path: configsFilePath, parsedReposPath });
     return;
   }
 
@@ -152,7 +158,7 @@ async function main() {
     } else if (option === SELECT_OPTIONS_ENUM.open_configs) {
       openConfigsCommand({ configsFilePath });
     } else if (option === SELECT_OPTIONS_ENUM.update_configs) {
-      updateConfigsCommand({ configs: userConfisFile, repositories: parsedRepositories, configs_path: configsFilePath });
+      updateConfigsCommand({ configs: userConfisFile, repositories: parsedRepositories, configs_path: configsFilePath, parsedReposPath });
     }
   });
 }
