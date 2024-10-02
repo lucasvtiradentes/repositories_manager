@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 2.0.5
+
+### Patch Changes
+
+- 3dfbb86: add wsl support
+
 ## 2.0.4
 
 ### Patch Changes
