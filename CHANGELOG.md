@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 2.0.7
+
+### Patch Changes
+
+- f3b68c2: add custom repo name support
+
 ## 2.0.6
 
 ### Patch Changes
