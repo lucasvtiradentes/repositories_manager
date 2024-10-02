@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 2.0.8
+
+### Patch Changes
+
+- e13e7f3: update wsl open commands
+
 ## 2.0.7
 
 ### Patch Changes
