@@ -1,7 +1,7 @@
 {
   "name": "repositories_manager",
   "type": "module",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "🔄 sync and manage your git repositories effortlessly.",
   "license": "MIT",
   "keywords": [
