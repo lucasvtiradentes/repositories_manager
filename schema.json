@@ -71,6 +71,6 @@
       }
     }
   },
-  "required": ["path", "open_repo_on_editor_command", "github_repositories", "ssh_repositories"],
+  "required": ["repos_root_path", "open_repo_on_editor_command", "github_repositories", "ssh_repositories"],
   "additionalProperties": false
 }
