@@ -2,7 +2,8 @@ import { z } from 'zod';
 
 const repoWithGroupSchema = z.object({
   domain: z.string().optional(),
-  group: z.string().optional()
+  group: z.string().optional(),
+  custom_name: z.string().optional()
 });
 
 const repoWithPathSchema = z.object({

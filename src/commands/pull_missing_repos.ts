@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync, renameSync } from 'node:fs';
 
 import { confirmationSelect } from '../selects/confirmation_select.js';
 import { logger } from '../utils/logger.js';
@@ -42,7 +42,12 @@ export const pullMissingReposCommand = async ({ parsedRepositories }: TPullMissi
 
         try {
           await asyncExec(`git clone ${repo.git_ssh} ${repo.local_path}`);
-          logger.info(`${repo.repository_name} - clonned`);
+          if (repo.custom_name) {
+            renameSync(repo.local_path, repo.local_path.replace(repo.repository_name, repo.custom_name));
+            logger.info(`${repo.repository_name}/${repo.custom_name} - clonned`);
+          } else {
+            logger.info(`${repo.repository_name} - clonned`);
+          }
         } catch (e) {
           logger.info(`${repo.repository_name} - error`);
         }

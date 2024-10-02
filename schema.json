@@ -39,9 +39,9 @@
               "properties": {
                 "sync": { "type": "boolean" },
                 "link": { "type": "string" },
-
                 "domain": { "type": "string" },
                 "group": { "type": "string" },
+                "custom_name": { "type": "string" },
                 "local_path": { "type": "string" }
               },
               "required": [],
@@ -63,6 +63,7 @@
           "git_ssh": { "type": "string" },
           "domain": { "type": "string" },
           "group": { "type": "string" },
+          "custom_name": { "type": "string" },
           "local_path": { "type": "string" }
         },
         "oneOf": [{ "required": [] }, { "required": ["local_path"] }],

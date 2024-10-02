@@ -13,6 +13,7 @@ export type ParsedRepository = {
   repository_name: string;
   local_path: string;
   exists_locally: boolean;
+  custom_name?: string;
 };
 
 export const getParsedRepositories = (configs: Configs, parsedReposPath: string) => {
@@ -21,7 +22,7 @@ export const getParsedRepositories = (configs: Configs, parsedReposPath: string)
       const github_user_domain = `github_${github_user}`;
       const parsedGithubUserRepos = Object.entries(github_repositories).map(([repo_name, repo_configs]) => {
         const { link, sync, ...rest } = repo_configs as unknown as GithubRepository;
-        const local_path = 'local_path' in rest ? rest?.local_path : join(join(parsedReposPath, rest?.domain ?? github_user_domain, rest.group ?? ''), repo_name);
+        const local_path = 'local_path' in rest ? rest?.local_path : join(join(parsedReposPath, rest?.domain ?? github_user_domain, rest.group ?? ''), rest.custom_name ?? repo_name);
         const exists_locally = existsSync(local_path);
         const git_ssh = `git@github.com:${github_user}/${repo_name}.git`;
 
@@ -43,7 +44,7 @@ export const getParsedRepositories = (configs: Configs, parsedReposPath: string)
   const parsedSshRepositories = configs.ssh_repositories.map((repo) => {
     const repository_name = extractRepositoryNameFromSshString(repo.git_ssh)!;
 
-    const local_path = 'local_path' in repo ? repo.local_path : join(join(parsedReposPath, repo?.domain ?? '', repo.group ?? ''), repository_name);
+    const local_path = 'local_path' in repo ? repo.local_path : join(join(parsedReposPath, repo?.domain ?? '', repo.group ?? ''), repo.custom_name ?? repository_name);
     const exists_locally = existsSync(local_path);
 
     return {
@@ -54,7 +55,8 @@ export const getParsedRepositories = (configs: Configs, parsedReposPath: string)
       git_ssh: repo.git_ssh,
       sync: repo.sync ?? false,
       domain: 'domain' in repo ? repo.domain! : '',
-      group: 'group' in repo ? repo.group! : ''
+      group: 'group' in repo ? repo.group! : '',
+      ...('custom_name' in repo ? { custom_name: repo.custom_name } : {})
     } satisfies ParsedRepository;
   });
 
