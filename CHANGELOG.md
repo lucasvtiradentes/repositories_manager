@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 2.0.9
+
+### Patch Changes
+
+- 506bbe5: feat: add support to sync only in some os
+
 ## 2.0.8
 
 ### Patch Changes
