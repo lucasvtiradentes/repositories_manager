@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/repositories_manager@2.0.8/schema.json",
+  "$schema": "https://unpkg.com/repositories_manager@2.0.9/schema.json",
   "repos_root_path": {
     "windows": "C:\\Users\\lucas\\repos",
     "wsl": "/home/lucas/repos",

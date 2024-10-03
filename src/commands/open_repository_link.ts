@@ -23,7 +23,7 @@ export const openRepositoryLinkCommand = async ({ parsedRepositories }: TOpenRep
 
 function openURL(url: string) {
   const openCommandMapper = {
-    darwin: 'open',
+    mac: 'open',
     windows: 'start',
     linux: 'xdg-open',
     wsl: 'cmd.exe /c start'

@@ -13,7 +13,7 @@ export const openConfigsCommand = ({ configsFilePath }: TOpenConfigsCommandProps
 function openTextFile(path: string) {
   const openCommandMapper = {
     linux: 'xdg-open',
-    darwin: 'open -t',
+    mac: 'open -t',
     windows: 'start notepad',
     wsl: 'notepad.exe'
   } as const satisfies Record<SupportedOS, string>;

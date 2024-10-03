@@ -93,7 +93,6 @@ Options:
   -pg, --purge_repos     purge repositories that should not exist locally
   -or, --open_repo       select repository to open on your editor
   -ol, --open_repo_link  select repository to open the link on your
-  -uc, --update_configs  update configs based on local repositories
   -oc, --open_configs    open the configs file
   -h, --help             display help for command
 ```

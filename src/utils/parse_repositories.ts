@@ -1,7 +1,8 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { GithubRepository, Configs } from '../consts/schema.js';
+import { CONFIGS } from '../consts/configs.js';
+import { Configs, GithubRepository } from '../consts/schema.js';
 import { extractLinkFromSshString, extractRepositoryNameFromSshString, mergeArraysOfArrays } from './utils.js';
 
 export type ParsedRepository = {
@@ -27,7 +28,7 @@ export const getParsedRepositories = (configs: Configs, parsedReposPath: string)
         const git_ssh = `git@github.com:${github_user}/${repo_name}.git`;
 
         return {
-          sync: sync ?? false,
+          sync: parseSync(sync),
           git_ssh,
           repository_name: extractRepositoryNameFromSshString(git_ssh)!,
           local_path,
@@ -53,7 +54,7 @@ export const getParsedRepositories = (configs: Configs, parsedReposPath: string)
       exists_locally,
       link: repo.link ?? extractLinkFromSshString(repo.git_ssh),
       git_ssh: repo.git_ssh,
-      sync: repo.sync ?? false,
+      sync: parseSync(repo.sync),
       domain: 'domain' in repo ? repo.domain! : '',
       group: 'group' in repo ? repo.group! : '',
       ...('custom_name' in repo ? { custom_name: repo.custom_name } : {})
@@ -72,3 +73,13 @@ export const getParsedRepositories = (configs: Configs, parsedReposPath: string)
 
   return sortedRepositories;
 };
+
+function parseSync(sync: unknown) {
+  if (typeof sync === 'boolean') {
+    return sync;
+  } else if (Array.isArray(sync)) {
+    return sync.includes(CONFIGS.user_os);
+  }
+
+  return false;
+}

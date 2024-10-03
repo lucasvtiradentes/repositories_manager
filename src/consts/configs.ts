@@ -12,7 +12,7 @@ const getUserConfigsFile = () => {
 
   if (os === 'linux' || os === 'wsl') {
     userConfigsFile = join(homedir(), '.config', APP_INFO.name);
-  } else if (os === 'darwin') {
+  } else if (os === 'mac') {
     userConfigsFile = join(homedir(), 'Library', 'Preferences', APP_INFO.name);
   } else if (os === 'windows') {
     userConfigsFile = join(homedir(), 'AppData', 'Roaming', APP_INFO.name);
@@ -21,7 +21,7 @@ const getUserConfigsFile = () => {
   return userConfigsFile;
 };
 
-const supported_os = ['linux', 'darwin', 'windows', 'wsl'] as const;
+const supported_os = ['linux', 'mac', 'windows', 'wsl'] as const;
 export type SupportedOS = keyof Configs['repos_root_path'];
 
 const getUserOs = (): SupportedOS => {
@@ -32,7 +32,7 @@ const getUserOs = (): SupportedOS => {
   } else if (os === 'win32') {
     return 'windows';
   } else if (os === 'darwin') {
-    return 'darwin';
+    return 'mac';
   } else if (os === 'linux') {
     return 'linux';
   }

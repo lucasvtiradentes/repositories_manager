@@ -11,7 +11,7 @@ const repoWithPathSchema = z.object({
 });
 
 const commonRepositorySchema = z.object({
-  sync: z.boolean().optional(),
+  sync: z.union([z.boolean(), z.array(z.enum(['windows', 'linux', 'wsl', 'mac']))]).optional(),
   link: z.string().optional()
 });
 
@@ -36,7 +36,7 @@ export const configsSchema = z.object({
   repos_root_path: z
     .object({
       linux: z.string(),
-      darwin: z.string(),
+      mac: z.string(),
       windows: z.string(),
       wsl: z.string()
     })
