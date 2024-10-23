@@ -13,7 +13,7 @@ export function repositorySelect(repositories: ParsedRepository[], cbFn: (answer
   const maxDomainLength = Math.max(...repositories.map((item) => (item.domain ?? '').length));
 
   const parsedData = repositories.map((item) => {
-    const repoInfo = [standardizeString(extractRepositoryNameFromSshString(item.git_ssh)!, maxRepositoryNameLength), standardizeString(item.group ?? '', maxCategoryLength), standardizeString(item.domain ?? '', maxDomainLength)].join(' ');
+    const repoInfo = [standardizeString(item?.custom_name ?? extractRepositoryNameFromSshString(item.git_ssh)!, maxRepositoryNameLength), standardizeString(item?.group || '---', maxCategoryLength), standardizeString(item?.domain || '---', maxDomainLength)].join(' ');
 
     return {
       name: repoInfo,
