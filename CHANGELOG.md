@@ -1,5 +1,11 @@
 # repositories_manager
 
+## 2.0.10
+
+### Patch Changes
+
+- f4ce224: add custom name
+
 ## 2.0.9
 
 ### Patch Changes
