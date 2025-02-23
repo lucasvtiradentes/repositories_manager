@@ -7,7 +7,7 @@
 <div align="center">
   <a href="https://www.npmjs.com/package/repositories_manager"><img src="https://img.shields.io/npm/v/repositories_manager.svg?style=flat" alt="npm version"></a>
   <a href="https://nodejs.org/en/"><img src="https://img.shields.io/badge/made%20with-node-1f425f?logo=node.js&.svg" /></a>
-  <a href="https://github.com/lucasvtiradentes/repositories_manager#contributing"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="contributions" /></a>
+  <a href="https://github.com/lucasvtiradentes/repositories-manager#contributing"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="contributions" /></a>
 </div>
 
 <p align="center">
@@ -107,10 +107,10 @@ To setup this project in your computer, download it in this link or run the foll
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/lucasvtiradentes/repositories_manager
+$ git clone https://github.com/lucasvtiradentes/repositories-manager
 
 # Go into the repository
-$ cd repositories_manager
+$ cd repositories-manager
 ```
 
 After download it, go to the project folder and run these commands:

@@ -27,7 +27,7 @@
     {
       "domain": "other-domain",
       "group": "other-group",
-      "git_ssh": "git@github.com:lucasvtiradentes/repositories_manager.git"
+      "git_ssh": "git@github.com:lucasvtiradentes/repositories-manager.git"
     }
   ]
 }
